@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A1B2C3D4-E5F6-4A1B-C2D3-E4F5A6B7C8D9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ConviAppWeb.DataAccess</RootNamespace>
+    <AssemblyName>Library</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Data.SQLite"><HintPath>..\lib\SQLite\System.Data.SQLite.dll</HintPath></Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+<ItemGroup>
+    <Compile Include="CAD\CADCategoriaGasto.cs" />
+    <Compile Include="CAD\CADContrato.cs" />
+    <Compile Include="CAD\CADDocumento.cs" />
+    <Compile Include="CAD\CADFavorito.cs" />
+    <Compile Include="CAD\CADGasto.cs" />
+    <Compile Include="CAD\CADHabitacion.cs" />
+    <Compile Include="CAD\CADImagen.cs" />
+    <Compile Include="CAD\CADIncidencia.cs" />
+    <Compile Include="CAD\CADMensaje.cs" />
+    <Compile Include="CAD\CADNotificacion.cs" />
+    <Compile Include="CAD\CADPago.cs" />
+    <Compile Include="CAD\CADPiso.cs" />
+    <Compile Include="CAD\CADReserva.cs" />
+    <Compile Include="CAD\CADRol.cs" />
+    <Compile Include="CAD\CADSuscripcion.cs" />
+    <Compile Include="CAD\CADTarea.cs" />
+    <Compile Include="CAD\CADUsuario.cs" />
+    <Compile Include="CAD\CADZonaComun.cs" />
+    <Compile Include="CAD\DbConfig.cs" />
+    <Compile Include="EN\ENCategoriaGasto.cs" />
+    <Compile Include="EN\ENContrato.cs" />
+    <Compile Include="EN\ENDocumento.cs" />
+    <Compile Include="EN\ENFavorito.cs" />
+    <Compile Include="EN\ENGasto.cs" />
+    <Compile Include="EN\ENHabitacion.cs" />
+    <Compile Include="EN\ENImagen.cs" />
+    <Compile Include="EN\ENIncidencia.cs" />
+    <Compile Include="EN\ENMensaje.cs" />
+    <Compile Include="EN\ENNotificacion.cs" />
+    <Compile Include="EN\ENPago.cs" />
+    <Compile Include="EN\ENPiso.cs" />
+    <Compile Include="EN\ENReserva.cs" />
+    <Compile Include="EN\ENRol.cs" />
+    <Compile Include="EN\ENSuscripcion.cs" />
+    <Compile Include="EN\ENTarea.cs" />
+    <Compile Include="EN\ENUsuario.cs" />
+    <Compile Include="EN\ENZonaComun.cs" />
+  </ItemGroup>
+</Project>
+
+
+
+
+

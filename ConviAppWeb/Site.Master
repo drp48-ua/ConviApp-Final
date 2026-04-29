@@ -1,0 +1,39 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="ConviAppWeb.SiteMaster" %>
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server"></asp:ContentPlaceHolder></title>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <header class="header">
+            <div class="header-inner">
+                <a href="Index.aspx" class="logo" style="color:white; text-decoration:none; font-weight:bold; font-size:1.5rem;">🏠 ConviApp</a>
+                <nav>
+                    <% if (Session["UserEmail"] != null) { %>
+                        <a href="Pisos.aspx" class="btn btn-outline" style="border-color:white; color:white;">Pisos</a>
+                        <a href="Gastos.aspx" class="btn btn-outline" style="border-color:white; color:white;">Gastos</a>
+                        <a href="Perfil.aspx" class="btn btn-outline" style="border-color:white; color:white;">Mi Perfil</a>
+                        <asp:LinkButton ID="btnLogout" runat="server" CssClass="btn btn-primary" OnClick="BtnLogout_Click" CausesValidation="false">Cerrar Sesión</asp:LinkButton>
+                    <% } else { %>
+                        <a href="Login.aspx" class="btn btn-primary">Iniciar Sesión</a>
+                    <% } %>
+                </nav>
+            </div>
+        </header>
+
+        <main style="max-width: 1200px; margin: 40px auto; padding: 0 24px;">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+        </main>
+
+        <footer class="footer">
+            <div style="text-align:center;">© 2026 ConviApp - Proyecto Académico HADA</div>
+        </footer>
+    </form>
+</body>
+</html>
+
