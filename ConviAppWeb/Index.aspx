@@ -1,15 +1,15 @@
-﻿<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Index.aspx.cs" Inherits="ConviAppWeb.Index" %>
+<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Index.aspx.cs" Inherits="ConviAppWeb.Index" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div style="text-align:center; padding: 40px;">
         <h1 style="color:#1e3a8a;">Bienvenido a ConviApp HADA</h1>
-        <p>Tu plataforma acadÃ©mica de gestiÃ³n de pisos compartidos.</p>
+        <p>Tu plataforma académica de gestión de pisos compartidos.</p>
 
         <%-- Panel para usuarios NO autenticados --%>
         <asp:Panel ID="pnlPublico" runat="server" Visible="false">
             <div style="margin-top:20px; padding: 20px; background:#e0e7ff; border-radius:8px;">
-                <h3>DemostraciÃ³n de capacidades pÃºblicas</h3>
+                <h3>Demostración de capacidades públicas</h3>
                 <p>Navega a la zona de registro o explora nuestras landing pages simuladas.</p>
-                <a href="Registro.aspx" class="btn btn-primary">RegÃ­strate gratis</a>
+                <a href="Registro.aspx" class="btn btn-primary">Regístrate gratis</a>
             </div>
         </asp:Panel>
 
@@ -32,4 +32,3 @@
         </asp:Panel>
     </div>
 </asp:Content>
-

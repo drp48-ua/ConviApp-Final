@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ConviAppWeb.DataAccess;
 
 namespace ConviAppWeb
@@ -20,7 +20,7 @@ namespace ConviAppWeb
                     var cadGasto = new CADGasto();
                     decimal total = 0m;
                     foreach (var g in cadGasto.ListarTodos()) total += g.Importe;
-                    lblTotalGastos.Text = total.ToString("0.00") + " â‚¬";
+                    lblTotalGastos.Text = total.ToString("0.00") + " €";
 
                     var cadTarea = new CADTarea();
                     lblNumTareas.Text = cadTarea.ListarTodas().Count.ToString();
@@ -34,4 +34,3 @@ namespace ConviAppWeb
         }
     }
 }
-
