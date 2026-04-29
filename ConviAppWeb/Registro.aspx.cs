@@ -12,7 +12,12 @@ namespace ConviAppWeb
         {
             var en = new ENUsuario { Nombre = txtNombre.Text, Email = txtEmail.Text, PasswordHash = txtPassword.Text, FechaRegistro = DateTime.Today };
             var cad = new CADUsuario();
-            if(cad.CrearUsuario(en)) Response.Redirect("Login.aspx");
+            if (cad.CrearUsuario(en))
+            {
+                Session["UserEmail"] = en.Email;
+                Response.Redirect("Index.aspx");
+            }
         }
     }
 }
+

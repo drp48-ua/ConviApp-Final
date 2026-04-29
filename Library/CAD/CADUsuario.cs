@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SQLite;
 using System.Collections.Generic;
@@ -31,7 +31,7 @@ namespace ConviAppWeb.DataAccess
                 nueva["telefono"]       = en.Telefono ?? (object)DBNull.Value;
                 nueva["fecha_registro"] = en.FechaRegistro.ToString("o");
                 nueva["activo"]         = en.Activo ? 1 : 0;
-                nueva["rol"]            = en.Rol.Nombre ?? "Basico";
+                nueva["rol"]            = en.Rol != null ? (en.Rol.Nombre ?? "Basico") : "Basico";
                 t.Rows.Add(nueva);
 
                 SQLiteCommandBuilder cb = new SQLiteCommandBuilder(da);

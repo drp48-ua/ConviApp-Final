@@ -9,3 +9,4 @@
     <asp:GridView ID="gvGastos" runat="server" AutoGenerateColumns="true" CssClass="grid" style="width:100%;" />
 </asp:Content>
 
+
