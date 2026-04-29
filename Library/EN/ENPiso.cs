@@ -5,12 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ConviAppWeb.Models
 {
     /// <summary>
-    /// ENPiso â€” Entidad de Negocio para pisos gestionados por la inmobiliaria.
+    /// ENPiso — Entidad de Negocio para pisos gestionados por la inmobiliaria.
     /// Un piso puede contener varias habitaciones (Marina).
     /// </summary>
     public class ENPiso
     {
-        // â”€â”€â”€ Atributos privados â”€â”€â”€
+        // ─── Atributos privados ───
         private int _id;
         private string _direccion;
         private string _ciudad;
@@ -22,7 +22,7 @@ namespace ConviAppWeb.Models
         private bool _disponible;
         private string _caracteristicas; // JSON o CSV de extras (parking, ascensor, etc.)
 
-        // â”€â”€â”€ Propiedades pÃºblicas â”€â”€â”€
+        // ─── Propiedades pÃºblicas ───
         [Key]
         public int Id { get { return _id; } set { _id = value; } }
 
@@ -53,10 +53,10 @@ namespace ConviAppWeb.Models
 
         public string Caracteristicas { get { return _caracteristicas; } set { _caracteristicas = value; } }
 
-        // â”€â”€â”€ NavegaciÃ³n â”€â”€â”€
+        // ─── NavegaciÃ³n ───
         public ICollection<ENHabitacion> Habitaciones { get; set; }
 
-        // â”€â”€â”€ MÃ©todos de negocio â”€â”€â”€
+        // ─── Métodos de negocio ───
         public bool TieneHabitacionesLibres() { return _disponible; }
         public string DireccionCompleta() { return "{_direccion}, {_codigoPostal} " + _ciudad.Trim(); }
 

@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 namespace ConviAppWeb.Models
 {
     /// <summary>
-    /// ENImagen â€” Entidad de Negocio para imÃ¡genes de habitaciones y pisos.
+    /// ENImagen — Entidad de Negocio para imágenes de habitaciones y pisos.
     /// Permite mostrar fotos del alojamiento (Marina).
     /// </summary>
     public class ENImagen
     {
-        // â”€â”€â”€ Atributos privados â”€â”€â”€
+        // ─── Atributos privados ───
         private int _id;
         private string _url;
         private string _descripcion;
@@ -18,7 +18,7 @@ namespace ConviAppWeb.Models
         private int? _habitacionId;
         private int? _pisoId;
 
-        // â”€â”€â”€ Propiedades pÃºblicas â”€â”€â”€
+        // ─── Propiedades pÃºblicas ───
         [Key]
         public int Id { get { return _id; } set { _id = value; } }
 
@@ -33,11 +33,11 @@ namespace ConviAppWeb.Models
 
         public DateTime FechaSubida { get { return _fechaSubida; } set { _fechaSubida = value; } }
 
-        // â”€â”€â”€ Claves forÃ¡neas â”€â”€â”€
+        // ─── Claves forÃ¡neas ───
         public int? HabitacionId { get { return _habitacionId; } set { _habitacionId = value; } }
         public int? PisoId { get { return _pisoId; } set { _pisoId = value; } }
 
-        // â”€â”€â”€ MÃ©todos de negocio â”€â”€â”€
+        // ─── Métodos de negocio ───
         public bool EsImagenPrincipal() { return _esPrincipal; }
 
         public ENImagen() { _fechaSubida = DateTime.Now; }

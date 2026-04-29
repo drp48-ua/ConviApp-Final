@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 namespace ConviAppWeb.Models
 {
     /// <summary>
-    /// ENTarea â€” Entidad de Negocio para tareas domÃ©sticas compartidas.
+    /// ENTarea — Entidad de Negocio para tareas domésticas compartidas.
     /// Organiza responsabilidades entre inquilinos (Maca).
     /// </summary>
     public class ENTarea
     {
-        // â”€â”€â”€ Atributos privados â”€â”€â”€
+        // ─── Atributos privados ───
         private int _id;
         private string _titulo;
         private string _descripcion;
@@ -21,7 +21,7 @@ namespace ConviAppWeb.Models
         private int? _asignadaAId;
         private int? _pisoId;
 
-        // â”€â”€â”€ Propiedades pÃºblicas â”€â”€â”€
+        // ─── Propiedades pÃºblicas ───
         [Key]
         public int Id { get { return _id; } set { _id = value; } }
 
@@ -42,7 +42,7 @@ namespace ConviAppWeb.Models
         [MaxLength(20)]
         public string Prioridad { get { return _prioridad; } set { _prioridad = value; } } // baja, media, alta
 
-        // â”€â”€â”€ Claves forÃ¡neas â”€â”€â”€
+        // ─── Claves forÃ¡neas ───
         public int CreadaPorId { get { return _creadaPorId; } set { _creadaPorId = value; } }
         public ENUsuario CreadaPor { get; set; }
 
@@ -52,7 +52,7 @@ namespace ConviAppWeb.Models
         public int? PisoId { get { return _pisoId; } set { _pisoId = value; } }
         public ENPiso Piso { get; set; }
 
-        // â”€â”€â”€ MÃ©todos de negocio â”€â”€â”€
+        // ─── Métodos de negocio ───
         public bool EstaCompletada() { return _estado == "completada"; }
         public bool EstaVencida() { return _fechaLimite.HasValue && _fechaLimite.Value < DateTime.Now && !EstaCompletada(); }
 

@@ -5,12 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ConviAppWeb.Models
 {
     /// <summary>
-    /// ENPago â€” Entidad de Negocio para pagos de alquiler.
+    /// ENPago — Entidad de Negocio para pagos de alquiler.
     /// Capa de lÃ³gica de negocio (Entrega 3 - Dani).
     /// </summary>
     public class ENPago
     {
-        // â”€â”€â”€ Atributos privados â”€â”€â”€
+        // ─── Atributos privados ───
         private int _id;
         private decimal _amount;
         private DateTime _date;
@@ -21,7 +21,7 @@ namespace ConviAppWeb.Models
         private int _contratoId;
         private int _userId;
 
-        // â”€â”€â”€ Propiedades pÃºblicas â”€â”€â”€
+        // ─── Propiedades pÃºblicas ───
         [Key]
         public int Id
         {
@@ -42,7 +42,7 @@ namespace ConviAppWeb.Models
             get { return _date; } set { _date = value; }
         }
 
-        [Required(ErrorMessage = "El mÃ©todo de pago es obligatorio")]
+        [Required(ErrorMessage = "El método de pago es obligatorio")]
         public string Method
         {
             get { return _method; } set { _method = value; }
@@ -64,7 +64,7 @@ namespace ConviAppWeb.Models
             get { return _reference; } set { _reference = value; }
         } // Referencia bancaria
 
-        // â”€â”€â”€ Claves forÃ¡neas â”€â”€â”€
+        // ─── Claves forÃ¡neas ───
         public int ContratoId
         {
             get { return _contratoId; } set { _contratoId = value; }
@@ -77,7 +77,7 @@ namespace ConviAppWeb.Models
         }
         // User nav eliminada (sin EF)
 
-        // â”€â”€â”€ MÃ©todos de negocio â”€â”€â”€
+        // ─── Métodos de negocio ───
         public bool IsPaid() { return _status == "pagado"; }
         public bool IsOverdue() { return _status == "pendiente" && _date < DateTime.Now; }
         public bool IsRejected() { return _status == "rechazado"; }

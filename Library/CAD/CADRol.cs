@@ -10,7 +10,7 @@ namespace ConviAppWeb.DataAccess
     {
         private string constring { get { return DbConfig.ConnectionString; } }
 
-        // CREATE â€” metodo desconectado
+        // CREATE — metodo desconectado
         public bool CrearRol(ENRol en)
         {
             bool creado = false;
@@ -43,7 +43,7 @@ namespace ConviAppWeb.DataAccess
             return creado;
         }
 
-        // READ â€” metodo conectado
+        // READ — metodo conectado
         public ENRol LeerRol(int id)
         {
             ENRol en = null;
@@ -76,7 +76,7 @@ namespace ConviAppWeb.DataAccess
             return en;
         }
 
-        // UPDATE â€” metodo desconectado
+        // UPDATE — metodo desconectado
         public bool ActualizarRol(ENRol en)
         {
             bool actualizado = false;
@@ -111,7 +111,7 @@ namespace ConviAppWeb.DataAccess
             return actualizado;
         }
 
-        // DELETE â€” metodo desconectado
+        // DELETE — metodo desconectado
         public bool BorrarRol(ENRol en)
         {
             bool borrado = false;

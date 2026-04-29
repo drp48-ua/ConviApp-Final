@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 namespace ConviAppWeb.Models
 {
     /// <summary>
-    /// ENMensaje â€” Entidad de Negocio para mensajes entre usuarios del piso.
+    /// ENMensaje — Entidad de Negocio para mensajes entre usuarios del piso.
     /// Facilita la comunicaciÃ³n interna (Maca).
     /// </summary>
     public class ENMensaje
     {
-        // â”€â”€â”€ Atributos privados â”€â”€â”€
+        // ─── Atributos privados ───
         private int _id;
         private string _contenido;
         private DateTime _fechaEnvio;
@@ -18,7 +18,7 @@ namespace ConviAppWeb.Models
         private int? _receptorId;
         private int? _pisoId; // mensajes de grupo del piso
 
-        // â”€â”€â”€ Propiedades pÃºblicas â”€â”€â”€
+        // ─── Propiedades pÃºblicas ───
         [Key]
         public int Id { get { return _id; } set { _id = value; } }
 
@@ -30,7 +30,7 @@ namespace ConviAppWeb.Models
 
         public bool Leido { get { return _leido; } set { _leido = value; } }
 
-        // â”€â”€â”€ Claves forÃ¡neas â”€â”€â”€
+        // ─── Claves forÃ¡neas ───
         public int EmisorId { get { return _emisorId; } set { _emisorId = value; } }
         public ENUsuario Emisor { get; set; }
 
@@ -40,7 +40,7 @@ namespace ConviAppWeb.Models
         public int? PisoId { get { return _pisoId; } set { _pisoId = value; } }
         public ENPiso Piso { get; set; }
 
-        // â”€â”€â”€ MÃ©todos de negocio â”€â”€â”€
+        // ─── Métodos de negocio ───
         public bool EsMensajeGrupal() { return _pisoId.HasValue && !_receptorId.HasValue; }
         public bool EsMensajePrivado() { return _receptorId.HasValue; }
         public void MarcarComoLeido() { _leido = true; }

@@ -10,7 +10,7 @@ namespace ConviAppWeb.DataAccess
     {
         private string constring { get { return DbConfig.ConnectionString; } }
 
-        // CREATE â€” metodo desconectado
+        // CREATE — metodo desconectado
         public bool CrearFavorito(ENFavorito en)
         {
             bool creado = false;
@@ -42,7 +42,7 @@ namespace ConviAppWeb.DataAccess
             return creado;
         }
 
-        // READ â€” metodo conectado
+        // READ — metodo conectado
         public ENFavorito LeerFavorito(int id)
         {
             ENFavorito en = null;
@@ -74,7 +74,7 @@ namespace ConviAppWeb.DataAccess
             return en;
         }
 
-        // UPDATE â€” metodo desconectado
+        // UPDATE — metodo desconectado
         public bool ActualizarFavorito(ENFavorito en)
         {
             bool actualizado = false;
@@ -108,7 +108,7 @@ namespace ConviAppWeb.DataAccess
             return actualizado;
         }
 
-        // DELETE â€” metodo desconectado
+        // DELETE — metodo desconectado
         public bool BorrarFavorito(ENFavorito en)
         {
             bool borrado = false;

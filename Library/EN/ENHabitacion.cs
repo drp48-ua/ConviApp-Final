@@ -5,12 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ConviAppWeb.Models
 {
     /// <summary>
-    /// ENHabitacion â€” Entidad de Negocio para habitaciones dentro de un piso.
+    /// ENHabitacion — Entidad de Negocio para habitaciones dentro de un piso.
     /// Es la unidad principal de alquiler (Marina).
     /// </summary>
     public class ENHabitacion
     {
-        // â”€â”€â”€ Atributos privados â”€â”€â”€
+        // ─── Atributos privados ───
         private int _id;
         private string _numero;
         private decimal _precio;
@@ -20,7 +20,7 @@ namespace ConviAppWeb.Models
         private string _descripcion;
         private int _pisoId;
 
-        // â”€â”€â”€ Propiedades pÃºblicas â”€â”€â”€
+        // ─── Propiedades pÃºblicas ───
         [Key]
         public int Id { get { return _id; } set { _id = value; } }
 
@@ -42,12 +42,12 @@ namespace ConviAppWeb.Models
         [MaxLength(1000)]
         public string Descripcion { get { return _descripcion; } set { _descripcion = value; } }
 
-        // â”€â”€â”€ Clave forÃ¡nea â”€â”€â”€
+        // ─── Clave forÃ¡nea ───
         public int PisoId { get { return _pisoId; } set { _pisoId = value; } }
 
-        // â”€â”€â”€ MÃ©todos de negocio â”€â”€â”€
+        // ─── Métodos de negocio ───
         public bool EstaLibre() { return _disponible; }
-        public string DescripcionCorta() { return "Hab. {_numero} â€” {_precio:C}/mes â€” " + _metros + "mÂ²"; }
+        public string DescripcionCorta() { return "Hab. {_numero} — {_precio:C}/mes — " + _metros + "mÂ²"; }
     }
 }
 

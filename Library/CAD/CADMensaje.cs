@@ -10,7 +10,7 @@ namespace ConviAppWeb.DataAccess
     {
         private string constring { get { return DbConfig.ConnectionString; } }
 
-        // CREATE â€” mÃ©todo desconectado
+        // CREATE — método desconectado
         public bool CrearMensaje(ENMensaje en)
         {
             bool creado = false;
@@ -37,7 +37,7 @@ namespace ConviAppWeb.DataAccess
             return creado;
         }
 
-        // READ ALL â€” mÃ©todo conectado
+        // READ ALL — método conectado
         public List<ENMensaje> ListarTodos(int? pisoId = null)
         {
             var lista = new List<ENMensaje>();

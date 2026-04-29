@@ -5,12 +5,12 @@ using System.ComponentModel.DataAnnotations;
 namespace ConviAppWeb.Models
 {
     /// <summary>
-    /// ENUsuario â€” Entidad de Negocio para usuarios de la plataforma.
+    /// ENUsuario — Entidad de Negocio para usuarios de la plataforma.
     /// Representa a inquilinos y administradores (Moni).
     /// </summary>
     public class ENUsuario
     {
-        // â”€â”€â”€ Atributos privados â”€â”€â”€
+        // ─── Atributos privados ───
         private int _id;
         private string _nombre;
         private string _apellidos;
@@ -22,7 +22,7 @@ namespace ConviAppWeb.Models
         private int _rolId;
         private int? _suscripcionId;
 
-        // â”€â”€â”€ Propiedades pÃºblicas â”€â”€â”€
+        // ─── Propiedades pÃºblicas ───
         [Key]
         public int Id { get { return _id; } set { _id = value; } }
 
@@ -49,18 +49,18 @@ namespace ConviAppWeb.Models
 
         public bool Activo { get { return _activo; } set { _activo = value; } }
 
-        // â”€â”€â”€ Claves forÃ¡neas â”€â”€â”€
+        // ─── Claves forÃ¡neas ───
         public int RolId { get { return _rolId; } set { _rolId = value; } }
         public ENRol Rol { get; set; }
 
         public int? SuscripcionId { get { return _suscripcionId; } set { _suscripcionId = value; } }
         public ENSuscripcion Suscripcion { get; set; }
 
-        // â”€â”€â”€ NavegaciÃ³n â”€â”€â”€
+        // ─── NavegaciÃ³n ───
         public ICollection<ENContrato> Contratos { get; set; }
         public ICollection<ENPago> Pagos { get; set; }
 
-        // â”€â”€â”€ MÃ©todos de negocio â”€â”€â”€
+        // ─── Métodos de negocio ───
         public string NombreCompleto() { return "{_nombre} " + _apellidos.Trim(); }
         public bool TieneSuscripcionActiva() { return _suscripcionId.HasValue && _activo; }
 

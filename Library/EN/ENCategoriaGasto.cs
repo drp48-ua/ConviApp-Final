@@ -5,18 +5,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ConviAppWeb.Models
 {
     /// <summary>
-    /// ENCategoriaGasto â€” CategorÃ­as para clasificar los gastos comunes (Nazim).
+    /// ENCategoriaGasto — CategorÃ­as para clasificar los gastos comunes (Nazim).
     /// Ejemplos: Luz, Agua, Internet, Comunidad.
     /// </summary>
     public class ENCategoriaGasto
     {
-        // â”€â”€â”€ Atributos privados â”€â”€â”€
+        // ─── Atributos privados ───
         private int _id;
         private string _nombre;
         private string _descripcion;
         private string _icono; // nombre de icono (FontAwesome, etc.)
 
-        // â”€â”€â”€ Propiedades pÃºblicas â”€â”€â”€
+        // ─── Propiedades pÃºblicas ───
         [Key]
         public int Id { get { return _id; } set { _id = value; } }
 
@@ -30,10 +30,10 @@ namespace ConviAppWeb.Models
         [MaxLength(50)]
         public string Icono { get { return _icono; } set { _icono = value; } }
 
-        // â”€â”€â”€ NavegaciÃ³n â”€â”€â”€
+        // ─── NavegaciÃ³n ───
         public ICollection<ENGasto> Gastos { get; set; }
 
-        // â”€â”€â”€ MÃ©todos de negocio â”€â”€â”€
+        // ─── Métodos de negocio ───
         public int TotalGastos() { return Gastos != null ? Gastos.Count : 0; }
     }
 }

@@ -5,12 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ConviAppWeb.Models
 {
     /// <summary>
-    /// ENSuscripcion â€” Entidad de Negocio para planes de suscripciÃ³n.
+    /// ENSuscripcion — Entidad de Negocio para planes de suscripciÃ³n.
     /// Modelo de monetizaciÃ³n: BÃ¡sico, Profesional, Enterprise (Moni).
     /// </summary>
     public class ENSuscripcion
     {
-        // â”€â”€â”€ Atributos privados â”€â”€â”€
+        // ─── Atributos privados ───
         private int _id;
         private string _plan;
         private decimal _precioMensual;
@@ -19,7 +19,7 @@ namespace ConviAppWeb.Models
         private bool _activa;
         private int _usuarioId;
 
-        // â”€â”€â”€ Propiedades pÃºblicas â”€â”€â”€
+        // ─── Propiedades pÃºblicas ───
         [Key]
         public int Id { get { return _id; } set { _id = value; } }
 
@@ -39,10 +39,10 @@ namespace ConviAppWeb.Models
 
         public bool Activa { get { return _activa; } set { _activa = value; } }
 
-        // â”€â”€â”€ Clave forÃ¡nea â”€â”€â”€
+        // ─── Clave forÃ¡nea ───
         public int UsuarioId { get { return _usuarioId; } set { _usuarioId = value; } }
 
-        // â”€â”€â”€ MÃ©todos de negocio â”€â”€â”€
+        // ─── Métodos de negocio ───
         public bool EsValida() { return _activa && _fechaFin >= DateTime.Now; }
         public int DiasRestantes() { return EsValida() ? (int)(_fechaFin - DateTime.Now).TotalDays : 0; }
         public bool EsPremium() { return _plan.ToLower() == "profesional" || _plan.ToLower() == "enterprise"; }

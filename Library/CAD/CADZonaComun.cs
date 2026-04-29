@@ -10,7 +10,7 @@ namespace ConviAppWeb.DataAccess
     {
         private string constring { get { return DbConfig.ConnectionString; } }
 
-        // CREATE â€” metodo desconectado
+        // CREATE — metodo desconectado
         public bool CrearZonaComun(ENZonaComun en)
         {
             bool creado = false;
@@ -43,7 +43,7 @@ namespace ConviAppWeb.DataAccess
             return creado;
         }
 
-        // READ â€” metodo conectado
+        // READ — metodo conectado
         public ENZonaComun LeerZonaComun(int id)
         {
             ENZonaComun en = null;
@@ -76,7 +76,7 @@ namespace ConviAppWeb.DataAccess
             return en;
         }
 
-        // UPDATE â€” metodo desconectado
+        // UPDATE — metodo desconectado
         public bool ActualizarZonaComun(ENZonaComun en)
         {
             bool actualizado = false;
@@ -111,7 +111,7 @@ namespace ConviAppWeb.DataAccess
             return actualizado;
         }
 
-        // DELETE â€” metodo desconectado
+        // DELETE — metodo desconectado
         public bool BorrarZonaComun(ENZonaComun en)
         {
             bool borrado = false;

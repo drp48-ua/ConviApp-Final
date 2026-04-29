@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 namespace ConviAppWeb.Models
 {
     /// <summary>
-    /// ENNotificacion â€” Entidad de Negocio para notificaciones automÃ¡ticas.
+    /// ENNotificacion — Entidad de Negocio para notificaciones automáticas.
     /// EnvÃ­a avisos sobre pagos pendientes, tareas sin realizar, incidencias (Lidia).
     /// </summary>
     public class ENNotificacion
     {
-        // â”€â”€â”€ Atributos privados â”€â”€â”€
+        // ─── Atributos privados ───
         private int _id;
         private string _titulo;
         private string _mensaje;
@@ -19,7 +19,7 @@ namespace ConviAppWeb.Models
         private DateTime? _fechaLectura;
         private int _usuarioId;
 
-        // â”€â”€â”€ Propiedades pÃºblicas â”€â”€â”€
+        // ─── Propiedades pÃºblicas ───
         [Key]
         public int Id { get { return _id; } set { _id = value; } }
 
@@ -41,10 +41,10 @@ namespace ConviAppWeb.Models
 
         public DateTime? FechaLectura { get { return _fechaLectura; } set { _fechaLectura = value; } }
 
-        // â”€â”€â”€ Clave forÃ¡nea â”€â”€â”€
+        // ─── Clave forÃ¡nea ───
         public int UsuarioId { get { return _usuarioId; } set { _usuarioId = value; } }
 
-        // â”€â”€â”€ MÃ©todos de negocio â”€â”€â”€
+        // ─── Métodos de negocio ───
         public bool EsLeida() { return _leida; }
         public void MarcarComoLeida() { _leida = true; _fechaLectura = DateTime.Now; }
         public bool EsReciente() { return (DateTime.Now - _fechaCreacion).TotalHours < 24; }

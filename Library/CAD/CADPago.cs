@@ -10,7 +10,7 @@ namespace ConviAppWeb.DataAccess
     {
         private string constring { get { return DbConfig.ConnectionString; } }
 
-        // CREATE â€” mÃ©todo desconectado
+        // CREATE — método desconectado
         public bool CrearPago(ENPago en)
         {
             bool creado = false;
@@ -40,7 +40,7 @@ namespace ConviAppWeb.DataAccess
             return creado;
         }
 
-        // READ por id â€” mÃ©todo conectado
+        // READ por id — método conectado
         public ENPago LeerPago(int id)
         {
             ENPago en = null;
@@ -59,7 +59,7 @@ namespace ConviAppWeb.DataAccess
             return en;
         }
 
-        // READ ALL â€” mÃ©todo conectado
+        // READ ALL — método conectado
         public List<ENPago> ListarTodos(int? contratoId = null)
         {
             var lista = new List<ENPago>();
@@ -79,7 +79,7 @@ namespace ConviAppWeb.DataAccess
             return lista;
         }
 
-        // DELETE â€” mÃ©todo desconectado
+        // DELETE — método desconectado
         public bool BorrarPago(ENPago en)
         {
             bool borrado = false;

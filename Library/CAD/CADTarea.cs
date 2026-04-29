@@ -10,7 +10,7 @@ namespace ConviAppWeb.DataAccess
     {
         private string constring { get { return DbConfig.ConnectionString; } }
 
-        // CREATE â€” mÃ©todo desconectado
+        // CREATE — método desconectado
         public bool CrearTarea(ENTarea en)
         {
             bool creado = false;
@@ -39,7 +39,7 @@ namespace ConviAppWeb.DataAccess
             return creado;
         }
 
-        // READ ALL â€” mÃ©todo conectado
+        // READ ALL — método conectado
         public List<ENTarea> ListarTodas(int? pisoId = null)
         {
             var lista = new List<ENTarea>();
@@ -59,7 +59,7 @@ namespace ConviAppWeb.DataAccess
             return lista;
         }
 
-        // UPDATE estado â€” mÃ©todo conectado
+        // UPDATE estado — método conectado
         public bool ToggleEstado(int id)
         {
             bool ok = false;
@@ -77,7 +77,7 @@ namespace ConviAppWeb.DataAccess
             return ok;
         }
 
-        // DELETE â€” mÃ©todo desconectado
+        // DELETE — método desconectado
         public bool BorrarTarea(ENTarea en)
         {
             bool borrado = false;

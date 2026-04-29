@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 namespace ConviAppWeb.Models
 {
     /// <summary>
-    /// ENZonaComun â€” Entidad de Negocio para zonas comunes del piso.
+    /// ENZonaComun — Entidad de Negocio para zonas comunes del piso.
     /// Ejemplos: lavanderÃ­a, cocina, sala de estudio (Lidia).
     /// </summary>
     public class ENZonaComun
     {
-        // â”€â”€â”€ Atributos privados â”€â”€â”€
+        // ─── Atributos privados ───
         private int _id;
         private string _nombre;
         private string _descripcion;
@@ -17,7 +17,7 @@ namespace ConviAppWeb.Models
         private bool _disponible;
         private int? _pisoId;
 
-        // â”€â”€â”€ Propiedades pÃºblicas â”€â”€â”€
+        // ─── Propiedades pÃºblicas ───
         [Key]
         public int Id { get { return _id; } set { _id = value; } }
 
@@ -33,10 +33,10 @@ namespace ConviAppWeb.Models
 
         public bool Disponible { get { return _disponible; } set { _disponible = value; } }
 
-        // â”€â”€â”€ Clave forÃ¡nea â”€â”€â”€
+        // ─── Clave forÃ¡nea ───
         public int? PisoId { get { return _pisoId; } set { _pisoId = value; } }
 
-        // â”€â”€â”€ MÃ©todos de negocio â”€â”€â”€
+        // ─── Métodos de negocio ───
         public bool EstaDisponible() { return _disponible; }
         public int TotalReservas() { return 0; } // Se calcularÃ­a con una consulta ADO.NET
 

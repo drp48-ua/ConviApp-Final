@@ -6,12 +6,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ConviAppWeb.Models
 {
     /// <summary>
-    /// ENGasto â€” Entidad de Negocio para gastos compartidos del piso.
+    /// ENGasto — Entidad de Negocio para gastos compartidos del piso.
     /// Registra costes comunes: luz, agua, internet, etc. (Nazim).
     /// </summary>
     public class ENGasto
     {
-        // â”€â”€â”€ Atributos privados â”€â”€â”€
+        // ─── Atributos privados ───
         private int _id;
         private string _concepto;
         private decimal _importe;
@@ -22,7 +22,7 @@ namespace ConviAppWeb.Models
         private int? _pisoId;
         private int? _categoriaId;
 
-        // â”€â”€â”€ Propiedades pÃºblicas â”€â”€â”€
+        // ─── Propiedades pÃºblicas ───
         [Key]
         public int Id { get { return _id; } set { _id = value; } }
 
@@ -41,7 +41,7 @@ namespace ConviAppWeb.Models
         [MaxLength(500)]
         public string Descripcion { get { return _descripcion; } set { _descripcion = value; } }
 
-        // â”€â”€â”€ Claves forÃ¡neas â”€â”€â”€
+        // ─── Claves forÃ¡neas ───
         public int RegistradoPorId { get { return _registradoPorId; } set { _registradoPorId = value; } }
         public ENUsuario RegistradoPor { get; set; }
 
@@ -51,7 +51,7 @@ namespace ConviAppWeb.Models
         public int? CategoriaId { get { return _categoriaId; } set { _categoriaId = value; } }
         public ENCategoriaGasto Categoria { get; set; }
 
-        // â”€â”€â”€ MÃ©todos de negocio â”€â”€â”€
+        // ─── Métodos de negocio ───
         public bool EstaPagado() { return _pagado; }
         public decimal ImportePorPersona(int numPersonas) { return numPersonas > 0 ? _importe / numPersonas : _importe; }
 

@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 namespace ConviAppWeb.Models
 {
     /// <summary>
-    /// ENDocumento â€” Entidad de Negocio para documentos adjuntos.
+    /// ENDocumento — Entidad de Negocio para documentos adjuntos.
     /// Capa de lÃ³gica de negocio (Entrega 3 - Dani).
     /// </summary>
     public class ENDocumento
     {
-        // â”€â”€â”€ Atributos privados â”€â”€â”€
+        // ─── Atributos privados ───
         private int _id;
         private string _fileName;
         private byte[] _fileData;
@@ -22,7 +22,7 @@ namespace ConviAppWeb.Models
         private int? _propertyId;
         private int _userId;
 
-        // â”€â”€â”€ Propiedades pÃºblicas â”€â”€â”€
+        // ─── Propiedades pÃºblicas ───
         [Key]
         public int Id
         {
@@ -68,7 +68,7 @@ namespace ConviAppWeb.Models
             get { return _description; } set { _description = value; }
         }
 
-        // â”€â”€â”€ Claves forÃ¡neas â”€â”€â”€
+        // ─── Claves forÃ¡neas ───
         public int? ContratoId
         {
             get { return _contratoId; } set { _contratoId = value; }
@@ -87,7 +87,7 @@ namespace ConviAppWeb.Models
         }
         // User nav eliminada (sin EF)
 
-        // â”€â”€â”€ MÃ©todos de negocio â”€â”€â”€
+        // ─── Métodos de negocio ───
         public string FileSizeFormatted()
         {
             if (_fileSize < 1024) return _fileSize + " B";

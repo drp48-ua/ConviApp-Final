@@ -10,7 +10,7 @@ namespace ConviAppWeb.DataAccess
     {
         private string constring { get { return DbConfig.ConnectionString; } }
 
-        // CREATE â€” metodo desconectado
+        // CREATE — metodo desconectado
         public bool CrearHabitacion(ENHabitacion en)
         {
             bool creado = false;
@@ -45,7 +45,7 @@ namespace ConviAppWeb.DataAccess
             return creado;
         }
 
-        // READ â€” metodo conectado
+        // READ — metodo conectado
         public ENHabitacion LeerHabitacion(int id)
         {
             ENHabitacion en = null;
@@ -80,7 +80,7 @@ namespace ConviAppWeb.DataAccess
             return en;
         }
 
-        // UPDATE â€” metodo desconectado
+        // UPDATE — metodo desconectado
         public bool ActualizarHabitacion(ENHabitacion en)
         {
             bool actualizado = false;
@@ -117,7 +117,7 @@ namespace ConviAppWeb.DataAccess
             return actualizado;
         }
 
-        // DELETE â€” metodo desconectado
+        // DELETE — metodo desconectado
         public bool BorrarHabitacion(ENHabitacion en)
         {
             bool borrado = false;

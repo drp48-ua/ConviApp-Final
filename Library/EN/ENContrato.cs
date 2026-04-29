@@ -6,13 +6,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ConviAppWeb.Models
 {
     /// <summary>
-    /// ENContrato â€” Entidad de Negocio para contratos de arrendamiento.
+    /// ENContrato — Entidad de Negocio para contratos de arrendamiento.
     /// Capa de lÃ³gica de negocio (Entrega 3 - Dani).
     /// Incluye atributos privados, propiedades pÃºblicas y estructura de comisiones.
     /// </summary>
     public class ENContrato
     {
-        // â”€â”€â”€ Atributos privados â”€â”€â”€
+        // ─── Atributos privados ───
         private int _id;
         private string _type;
         private DateTime _startDate;
@@ -25,7 +25,7 @@ namespace ConviAppWeb.Models
         private int _userId;
         private decimal _commissionRate; // % comisiÃ³n sobre renta mensual (ej. 5 = 5%)
 
-        // â”€â”€â”€ Propiedades pÃºblicas â”€â”€â”€
+        // ─── Propiedades pÃºblicas ───
         [Key]
         public int Id
         {
@@ -82,7 +82,7 @@ namespace ConviAppWeb.Models
             get { return _commissionRate; } set { _commissionRate = value; }
         }
 
-        // â”€â”€â”€ Claves forÃ¡neas â”€â”€â”€
+        // ─── Claves forÃ¡neas ───
         public int PropertyId
         {
             get { return _propertyId; } set { _propertyId = value; }
@@ -95,11 +95,11 @@ namespace ConviAppWeb.Models
         }
         // User nav eliminada (sin EF)
 
-        // â”€â”€â”€ NavegaciÃ³n â”€â”€â”€
+        // ─── NavegaciÃ³n ───
         public ICollection<ENPago> Pagos { get; set; }
         public ICollection<ENDocumento> Documentos { get; set; }
 
-        // â”€â”€â”€ MÃ©todos de negocio â”€â”€â”€
+        // ─── Métodos de negocio ───
         public bool IsActive() { return _status == "activo" && _endDate >= DateTime.Now; }
 
         public int RemainingMonths() { return IsActive() ? (int)((_endDate - DateTime.Now).TotalDays / 30) : 0; }
@@ -112,7 +112,7 @@ namespace ConviAppWeb.Models
         /// <summary>Calcula la comisiÃ³n total durante toda la vigencia del contrato.</summary>
         public decimal CalculateTotalCommission() { return TotalContractValue() * (_commissionRate / 100m); }
 
-        /// <summary>Constructor por defecto â€” valores iniciales.</summary>
+        /// <summary>Constructor por defecto — valores iniciales.</summary>
         public ENContrato()
         {
             _status = "activo";

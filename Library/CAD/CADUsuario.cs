@@ -10,7 +10,7 @@ namespace ConviAppWeb.DataAccess
     {
         private string constring { get { return DbConfig.ConnectionString; } }
 
-        // CREATE â€” mÃ©todo desconectado (DataSet + SqlDataAdapter)
+        // CREATE — método desconectado (DataSet + SqlDataAdapter)
         public bool CrearUsuario(ENUsuario en)
         {
             bool creado = false;
@@ -44,7 +44,7 @@ namespace ConviAppWeb.DataAccess
             return creado;
         }
 
-        // READ por id â€” mÃ©todo conectado (SqlCommand + SqlDataReader)
+        // READ por id — método conectado (SqlCommand + SqlDataReader)
         public ENUsuario LeerUsuario(int id)
         {
             ENUsuario en = null;
@@ -66,7 +66,7 @@ namespace ConviAppWeb.DataAccess
             return en;
         }
 
-        // READ por email â€” mÃ©todo conectado
+        // READ por email — método conectado
         public ENUsuario BuscarPorEmail(string email)
         {
             ENUsuario en = null;
@@ -88,7 +88,7 @@ namespace ConviAppWeb.DataAccess
             return en;
         }
 
-        // EXISTS por email â€” mÃ©todo conectado
+        // EXISTS por email — método conectado
         public bool ExisteEmail(string email)
         {
             bool existe = false;
@@ -107,7 +107,7 @@ namespace ConviAppWeb.DataAccess
             return existe;
         }
 
-        // UPDATE â€” mÃ©todo desconectado
+        // UPDATE — método desconectado
         public bool ActualizarUsuario(ENUsuario en)
         {
             bool actualizado = false;
@@ -132,7 +132,7 @@ namespace ConviAppWeb.DataAccess
             return actualizado;
         }
 
-        // DELETE â€” mÃ©todo desconectado
+        // DELETE — método desconectado
         public bool BorrarUsuario(ENUsuario en)
         {
             bool borrado = false;
