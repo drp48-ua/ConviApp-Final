@@ -1,0 +1,44 @@
+Microsoft (R) Build Engine, versi¢n 4.8.9221.0
+[Microsoft .NET Framework, versi¢n 4.0.30319.42000]
+Copyright (C) Microsoft Corporation. Todos los derechos reservados.
+
+Los proyectos de esta soluci¢n se van a compilar de uno en uno. Para habilitar la compilaci¢n en paralelo, agregue el modificador "/m".
+Compilaci¢n iniciada a las 30/04/2026 13:27:55.
+Proyecto "C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\ConviApp.sln" en el nodo 1 (Rebuild destinos).
+ValidateSolutionConfiguration:
+  Compilando la configuraci¢n de soluciones "Debug|Any CPU".
+El proyecto "C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\ConviApp.sln" (1) est  compilando "C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\Library\Library.csproj" (2) en el nodo 1 (Rebuild destinos).
+El archivo del proyecto contiene ToolsVersion="15.0". Este conjunto de herramientas falta o es desconocido, en cuyo caso es posible que pueda resolver este problema instalando la versi¢n apropiada de MSBuild. Tambi‚n es posible que, por motivos de directiva, se haya exigido a la compilaci¢n que use un valor determinado para ToolsVersion. Se tratar  el proyecto como si contuviera ToolsVersion="4.0". Para obtener m s informaci¢n, vea http://go.microsoft.com/fwlink/?LinkId=291333.
+CoreClean:
+  Se eliminar  el archivo "C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\Library\bin\Debug\Library.dll".
+  Se eliminar  el archivo "C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\Library\bin\Debug\Library.pdb".
+  Se eliminar  el archivo "C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\Library\bin\Debug\System.Data.SQLite.dll".
+  Se eliminar  el archivo "C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\Library\obj\Debug\Library.dll".
+  Se eliminar  el archivo "C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\Library\obj\Debug\Library.pdb".
+  Se eliminar  el archivo "C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\Library\obj\Debug\Library.csprojResolveAssemblyReference.cache".
+GenerateTargetFrameworkMonikerAttribute:
+Se omitir  el destino "GenerateTargetFrameworkMonikerAttribute" porque todos los archivos de salida est n actualizados respecto a los archivos de entrada.
+CoreCompile:
+  C:\Windows\Microsoft.NET\Framework\v4.0.30319\Csc.exe /noconfig /nowarn:1701,1702 /nostdlib+ /errorreport:prompt /warn:4 /define:DEBUG;TRACE /highentropyva+ /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\mscorlib.dll" /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.ComponentModel.DataAnnotations.dll" /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Core.dll" /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Data.dll" /reference:C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\lib\SQLite\System.Data.SQLite.dll /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll" /reference:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Xml.dll" /debug+ /debug:full /filealign:512 /optimize- /out:obj\Debug\Library.dll /subsystemversion:6.00 /target:library /utf8output CAD\CADCategoriaGasto.cs CAD\CADContrato.cs CAD\CADDocumento.cs CAD\CADFavorito.cs CAD\CADGasto.cs CAD\CADHabitacion.cs CAD\CADImagen.cs CAD\CADIncidencia.cs CAD\CADMensaje.cs CAD\CADNotificacion.cs CAD\CADPago.cs CAD\CADPiso.cs CAD\CADReserva.cs CAD\CADRol.cs CAD\CADSuscripcion.cs CAD\CADTarea.cs CAD\CADUsuario.cs CAD\CADZonaComun.cs CAD\DbConfig.cs EN\ENCategoriaGasto.cs EN\ENContrato.cs EN\ENDocumento.cs EN\ENFavorito.cs EN\ENGasto.cs EN\ENHabitacion.cs EN\ENImagen.cs EN\ENIncidencia.cs EN\ENMensaje.cs EN\ENNotificacion.cs EN\ENPago.cs EN\ENPiso.cs EN\ENReserva.cs EN\ENRol.cs EN\ENSuscripcion.cs EN\ENTarea.cs EN\ENUsuario.cs EN\ENZonaComun.cs "C:\Users\danir\AppData\Local\Temp\.NETFramework,Version=v4.8.AssemblyAttributes.cs"
+_CopyFilesMarkedCopyLocal:
+  Copiando el archivo de "C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\lib\SQLite\System.Data.SQLite.dll" en "bin\Debug\System.Data.SQLite.dll".
+CopyFilesToOutputDirectory:
+  Copiando el archivo de "obj\Debug\Library.dll" en "bin\Debug\Library.dll".
+  Library -> C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\Library\bin\Debug\Library.dll
+  Copiando el archivo de "obj\Debug\Library.pdb" en "bin\Debug\Library.pdb".
+Compilaci¢n del proyecto terminada "C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\Library\Library.csproj" (Rebuild destinos).
+El proyecto "C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\ConviApp.sln" (1) est  compilando "C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\ConviAppWeb\ConviAppWeb.csproj" (3) en el nodo 1 (Rebuild destinos).
+C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\ConviAppWeb\ConviAppWeb.csproj(70,3): error MSB4019: No se encuentra el proyecto importado "C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v11.0\WebApplications\Microsoft.WebApplication.targets". Aseg£rese de que la ruta de acceso de la declaraci¢n <Import> es correcta y de que el archivo se encuentra en el disco.
+Compilaci¢n del proyecto terminada "C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\ConviAppWeb\ConviAppWeb.csproj" (Rebuild destinos) -- ERROR.
+Compilaci¢n del proyecto terminada "C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\ConviApp.sln" (Rebuild destinos) -- ERROR.
+
+ERROR al compilar.
+
+"C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\ConviApp.sln" (Rebuild destino) (1) ->
+"C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\ConviAppWeb\ConviAppWeb.csproj" (Rebuild destino) (3) ->
+  C:\Users\danir\.gemini\antigravity\scratch\ConviApp-Final\ConviAppWeb\ConviAppWeb.csproj(70,3): error MSB4019: No se encuentra el proyecto importado "C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v11.0\WebApplications\Microsoft.WebApplication.targets". Aseg£rese de que la ruta de acceso de la declaraci¢n <Import> es correcta y de que el archivo se encuentra en el disco.
+
+    0 Advertencia(s)
+    1 Errores
+
+Tiempo transcurrido 00:00:00.69

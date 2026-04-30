@@ -4,7 +4,7 @@
 <head runat="server">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server"></asp:ContentPlaceHolder></title>
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server"></asp:ContentPlaceHolder> — ConviApp</title>
     <link rel="stylesheet" href="css/estilos.css" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
 </head>
@@ -15,11 +15,15 @@
                 <a href="Index.aspx" class="logo" style="color:white; text-decoration:none; font-weight:bold; font-size:1.5rem;">🏠 ConviApp</a>
                 <nav>
                     <% if (Session["UserEmail"] != null) { %>
+                        <a href="Index.aspx" class="btn btn-outline" style="border-color:white; color:white;">Dashboard</a>
                         <a href="Pisos.aspx" class="btn btn-outline" style="border-color:white; color:white;">Pisos</a>
-                        <a href="Gastos.aspx" class="btn btn-outline" style="border-color:white; color:white;">Gastos</a>
-                        <a href="Perfil.aspx" class="btn btn-outline" style="border-color:white; color:white;">Mi Perfil</a>
+                        <a href="MisPisos.aspx" class="btn btn-outline" style="border-color:white; color:white;">Mis Pisos</a>
+                        <a href="Perfil.aspx" class="btn btn-outline" style="border-color:white; color:white;">Perfil</a>
+                        <a href="Upgrade.aspx" class="btn btn-outline" style="border-color:#a78bfa; color:#a78bfa;">⭐ Upgrade</a>
                         <asp:LinkButton ID="btnLogout" runat="server" CssClass="btn btn-primary" OnClick="BtnLogout_Click" CausesValidation="false">Cerrar Sesión</asp:LinkButton>
                     <% } else { %>
+                        <a href="Pisos.aspx" class="btn btn-outline" style="border-color:white; color:white;">Ver Pisos</a>
+                        <a href="Registro.aspx" class="btn btn-outline" style="border-color:white; color:white;">Registrarse</a>
                         <a href="Login.aspx" class="btn btn-primary">Iniciar Sesión</a>
                     <% } %>
                 </nav>
@@ -31,9 +35,16 @@
         </main>
 
         <footer class="footer">
-            <div style="text-align:center;">© 2026 ConviApp - Proyecto Académico HADA</div>
+            <div style="text-align:center; padding:24px 0;">
+                <div style="margin-bottom:12px;">
+                    <a href="Privacidad.aspx" style="color:var(--text-muted); text-decoration:none; margin:0 12px;">Privacidad</a>
+                    <a href="Terminos.aspx" style="color:var(--text-muted); text-decoration:none; margin:0 12px;">Términos</a>
+                    <a href="Cookies.aspx" style="color:var(--text-muted); text-decoration:none; margin:0 12px;">Cookies</a>
+                    <a href="Contacto.aspx" style="color:var(--text-muted); text-decoration:none; margin:0 12px;">Contacto Enterprise</a>
+                </div>
+                <div style="color:var(--text-muted); font-size:0.85rem;">© 2026 ConviApp — Proyecto Académico HADA</div>
+            </div>
         </footer>
     </form>
 </body>
 </html>
-
