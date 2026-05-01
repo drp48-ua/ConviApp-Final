@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Registro" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+<%@ Page Title="Registro" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeFile="Registro.aspx.cs" Inherits="ConviAppWeb.Registro" %>
     <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div style="display:flex; justify-content:center; align-items:center; min-height:80vh; padding:20px;">
@@ -17,6 +17,14 @@
                     <h2 style="color:var(--text-primary); font-size:1.8rem; margin:0 0 8px;">Crea tu cuenta</h2>
                     <p style="color:var(--text-secondary); margin:0;">Únete a miles de pisos organizados</p>
                 </div>
+
+                <asp:Panel ID="pnlError" runat="server" Visible="false"
+                    style="background:#fef2f2; border:1px solid #fee2e2; border-radius:8px; padding:12px; margin-bottom:24px;">
+                    <div style="display:flex; gap:8px; align-items:center;">
+                        <span style="color:#ef4444; font-size:1.2rem;">⚠️</span>
+                        <asp:Label ID="lblError" runat="server" style="color:#b91c1c; font-size:0.9rem;" />
+                    </div>
+                </asp:Panel>
 
                 <!-- Selector de Plan Simulado con Radios -->
                 <div style="margin-bottom:24px;">

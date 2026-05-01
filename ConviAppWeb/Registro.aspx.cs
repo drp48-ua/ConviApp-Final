@@ -26,6 +26,11 @@ namespace ConviAppWeb
                     Response.Redirect("Index.aspx");
                 }
             }
+            else
+            {
+                pnlError.Visible = true;
+                lblError.Text = "No se pudo crear la cuenta. Es posible que el correo ya esté registrado o haya un problema con la base de datos.";
+            }
         }
     }
 }
