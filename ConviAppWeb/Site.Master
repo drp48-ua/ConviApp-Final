@@ -2,49 +2,247 @@
 <!DOCTYPE html>
 <html lang="es">
 <head runat="server">
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ConviApp — Gestión inteligente de piso compartido. Tareas, gastos, reservas y comunicación en una sola plataforma." />
     <title><asp:ContentPlaceHolder ID="TitleContent" runat="server"></asp:ContentPlaceHolder> — ConviApp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/estilos.css" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
+        <!-- ═══ FIXED HEADER ═══ -->
         <header class="header">
-            <div class="header-inner">
-                <a href="Index.aspx" class="logo" style="color:white; text-decoration:none; font-weight:bold; font-size:1.5rem;">🏠 ConviApp</a>
-                <nav>
+            <div class="header-top container" style="max-width:100%; width:100%">
+                <a href="Index.aspx" class="logo" style="color: white;">
+                    <div class="logo-icon" style="background:white; color:var(--primary); font-size:1.5rem">🏠</div>
+                    ConviApp
+                </a>
+                
+                <div style="flex:1; max-width:600px; margin: 0 40px; display:flex; align-items:center; background:rgba(255,255,255,0.9); border-radius:100px; padding:8px 16px;">
+                    <span style="color:#6b7280; margin-right:8px">🔍</span>
+                    <input type="text" placeholder="Buscar pisos, gastos, tareas..." style="border:none; background:transparent; width:100%; outline:none; color:#111827">
+                </div>
+
+                <div class="header-actions">
                     <% if (Session["UserEmail"] != null) { %>
-                        <a href="Index.aspx" class="btn btn-outline" style="border-color:white; color:white;">Dashboard</a>
-                        <a href="Pisos.aspx" class="btn btn-outline" style="border-color:white; color:white;">Pisos</a>
-                        <a href="MisPisos.aspx" class="btn btn-outline" style="border-color:white; color:white;">Mis Pisos</a>
-                        <a href="Perfil.aspx" class="btn btn-outline" style="border-color:white; color:white;">Perfil</a>
-                        <a href="Upgrade.aspx" class="btn btn-outline" style="border-color:#a78bfa; color:#a78bfa;">⭐ Upgrade</a>
-                        <asp:LinkButton ID="btnLogout" runat="server" CssClass="btn btn-primary" OnClick="BtnLogout_Click" CausesValidation="false">Cerrar Sesión</asp:LinkButton>
+                        <div style="display:flex; align-items:center; gap:16px;">
+                            <!-- NOTIFICATIONS BELL -->
+                            <div style="position:relative;">
+                                <a href="javascript:void(0)" onclick="toggleNotifications()" style="text-decoration:none; position:relative; display:inline-block; margin-right:10px;">
+                                    <span style="font-size:1.5rem;">🔔</span>
+                                    <span style="position:absolute; top:-2px; right:-2px; background:var(--danger); color:white; font-size:0.6rem; font-weight:bold; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center;">3</span>
+                                </a>
+                                <!-- DROPDOWN -->
+                                <div id="notifications-dropdown" class="glass-card" style="display:none; position:absolute; top:40px; right:0; width:300px; z-index:100; padding:16px; border:1px solid #e5e7eb; box-shadow:0 10px 15px -3px rgba(0,0,0,0.1);">
+                                    <h4 style="margin:0 0 12px 0; color:var(--text-primary); font-size:1rem; border-bottom:1px solid #e5e7eb; padding-bottom:8px;">Notificaciones</h4>
+                                    <div style="display:flex; flex-direction:column; gap:12px;">
+                                        <div style="display:flex; gap:12px; align-items:flex-start;">
+                                            <div style="font-size:1.5rem; line-height:1;">✅</div>
+                                            <div>
+                                                <div style="font-size:0.85rem; font-weight:600; color:var(--text-primary); margin-bottom:2px;">Tarea completada</div>
+                                                <div style="font-size:0.75rem; color:var(--text-secondary);">María completó 'Limpiar cocina'.</div>
+                                            </div>
+                                        </div>
+                                        <div style="display:flex; gap:12px; align-items:flex-start;">
+                                            <div style="font-size:1.5rem; line-height:1;">💸</div>
+                                            <div>
+                                                <div style="font-size:0.85rem; font-weight:600; color:var(--text-primary); margin-bottom:2px;">Nuevo gasto añadido</div>
+                                                <div style="font-size:0.75rem; color:var(--text-secondary);">Carlos añadió 'Internet Fibra'.</div>
+                                            </div>
+                                        </div>
+                                        <div style="display:flex; gap:12px; align-items:flex-start;">
+                                            <div style="font-size:1.5rem; line-height:1;">📅</div>
+                                            <div>
+                                                <div style="font-size:0.85rem; font-weight:600; color:var(--text-primary); margin-bottom:2px;">Reserva confirmada</div>
+                                                <div style="font-size:0.75rem; color:var(--text-secondary);">Tienes la lavadora hoy a las 18:00.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="Javascript:void(0)" onclick="toggleNotifications()" style="display:block; text-align:center; margin-top:12px; font-size:0.8rem; color:var(--primary); text-decoration:none; font-weight:600;">Cerrar</a>
+                                </div>
+                            </div>
+
+                            <!-- PROFILE AVATAR -->
+                            <svg width="36" height="36" viewBox="0 0 64 64" style="border-radius:50%;background:#c7d2fe;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="26" r="12" fill="#a5b4fc"/><ellipse cx="32" cy="50" rx="20" ry="14" fill="#818cf8"/></svg>
+                            
+                            <div style="color:white; font-size:0.9rem; line-height:1.2;">
+                                <div style="font-weight:600;"><%= Session["UserName"] != null ? Session["UserName"].ToString() : Session["UserEmail"].ToString() %></div>
+                                <asp:LinkButton ID="btnLogout" runat="server" OnClick="BtnLogout_Click" CausesValidation="false" style="color:var(--accent-light); font-size:0.8rem; text-decoration:none;">Cerrar sesión</asp:LinkButton>
+                            </div>
+                        </div>
                     <% } else { %>
-                        <a href="Pisos.aspx" class="btn btn-outline" style="border-color:white; color:white;">Ver Pisos</a>
-                        <a href="Registro.aspx" class="btn btn-outline" style="border-color:white; color:white;">Registrarse</a>
-                        <a href="Login.aspx" class="btn btn-primary">Iniciar Sesión</a>
+                        <a href="Registro.aspx" class="btn btn-outline btn-sm" style="color:white; border-color:rgba(255,255,255,0.3);">Registrarse</a>
+                        <a href="Login.aspx" class="btn btn-sm" style="background:white; color:var(--primary); font-weight:600;">Acceder →</a>
                     <% } %>
-                </nav>
+                </div>
+            </div>
+            <div class="header-bottom">
+                <div class="container" style="display:flex; gap:8px; width:100%; max-width:100%;">
+                    <% bool isAdmin = Session["UserEmail"] != null && Session["UserEmail"].ToString().ToLower().Trim() == "admin@conviapp.com"; %>
+                    <% if (isAdmin) { %>
+                        <a href="AdminDashboard.aspx" class="nav-link" id="navAdminPanel">⚙️ Panel Admin</a>
+                        <a href="AdminUsuarios.aspx" class="nav-link" id="navAdminUsuarios">👥 Usuarios</a>
+                        <a href="AdminPisos.aspx" class="nav-link" id="navAdminPisos">🏢 Pisos</a>
+                        <a href="AdminPagos.aspx" class="nav-link" id="navAdminPagos">💳 Pagos</a>
+                        <a href="AdminIncidencias.aspx" class="nav-link" id="navAdminIncidencias">🔧 Incidencias</a>
+                        <a href="AdminPublicidad.aspx" class="nav-link" id="navAdminPublicidad">📢 Publicidad</a>
+                        <a href="AdminInformes.aspx" class="nav-link" id="navAdminInformes">📊 Informes</a>
+                        <a href="Perfil.aspx" class="nav-link" id="navPerfil">👤 Perfil</a>
+                    <% } else { %>
+                        <a href="Index.aspx" class="nav-link" id="navInicio">🏠 Inicio</a>
+                        <a href="Pisos.aspx" class="nav-link">🏢 Pisos</a>
+                        <a href="ContratosYPagos.aspx" class="nav-link" id="navContratos">📄 Contratos</a>
+                        <a href="Tareas.aspx" class="nav-link" id="navTareas">✅ Tareas</a>
+                        <a href="Gastos.aspx" class="nav-link" id="navGastos">💶 Gastos</a>
+                        <a href="Reservas.aspx" class="nav-link" id="navReservas">📅 Reservas</a>
+                        <a href="Mensajes.aspx" class="nav-link" id="navMensajes">✉️ Mensajes</a>
+                        <% if (Session["UserEmail"] != null) { %>
+                            <a href="Perfil.aspx" class="nav-link" id="navPerfil">👤 Perfil</a>
+                        <% } %>
+                    <% } %>
+                </div>
             </div>
         </header>
 
-        <main style="max-width: 1200px; margin: 100px auto 40px auto; padding: 0 24px;">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
-        </main>
+        <!-- ═══ PAGE CONTENT ═══ -->
+        <div class="page-wrapper container" style="display:flex; gap:24px; max-width:1400px; padding-top:calc(112px + 24px);">
+            <div class="main-global-content" style="flex:1; width:100%; min-width:0;">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+            </div>
 
-        <footer class="footer">
-            <div style="text-align:center; padding:24px 0;">
-                <div style="margin-bottom:12px;">
-                    <a href="Privacidad.aspx" style="color:var(--text-muted); text-decoration:none; margin:0 12px;">Privacidad</a>
-                    <a href="Terminos.aspx" style="color:var(--text-muted); text-decoration:none; margin:0 12px;">Términos</a>
-                    <a href="Cookies.aspx" style="color:var(--text-muted); text-decoration:none; margin:0 12px;">Cookies</a>
-                    <a href="Contacto.aspx" style="color:var(--text-muted); text-decoration:none; margin:0 12px;">Contacto Enterprise</a>
+            <%
+                var _layoutRole = Session["UserRole"] as string ?? "";
+                var _isLoggedInAd = Session["UserEmail"] != null;
+                bool _isAdminUser = _isLoggedInAd && Session["UserEmail"].ToString().ToLower().Trim() == "admin@conviapp.com";
+                var _showAds = (!_isLoggedInAd || _layoutRole == "Basico") && !_isAdminUser;
+                var _showSugerencias = _isLoggedInAd && (_layoutRole == "Profesional" || _layoutRole == "Enterprise") && !_isAdminUser;
+                // Rotate ads by page path
+                int _adSeed = Math.Abs(Request.Url.AbsolutePath.GetHashCode()) % 6;
+            %>
+            
+            <% if (_showAds || _showSugerencias) { %>
+                <div class="sidebar-right-global" style="width:300px; flex-shrink:0; display:flex; flex-direction:column; align-self:flex-start;">
+                    <% if (_showAds) {
+                           // 6 ads pool, pick 2 per page based on _adSeed
+                           var _ads = new[] {
+                               new { Bg="linear-gradient(135deg,#1e3a8a,#3b82f6)", Color="white", Img="photo-1581578731548-c64695cc6952", Title="Limpieza a domicilio", Desc="Primera limpieza al 50% con código CONVI50.", Btn="Ver ofertas", BtnCls="btn-outline", BtnStyle="color:white;border-color:rgba(255,255,255,0.4);" },
+                               new { Bg="#ecfdf5", Color="#065f46", Img="photo-1555041469-a586c61ea9bc", Title="Muebles para el piso", Desc="15% en camas y escritorios. Código CONVI15.", Btn="Descubrir", BtnCls="btn-primary", BtnStyle="background:#10b981;" },
+                               new { Bg="#fffbeb", Color="#92400e", Img="photo-1473341304170-971dccb5ac1e", Title="Tarifa de luz", Desc="Octopus Energy: renovable desde 0.09€/kWh.", Btn="Comparar", BtnCls="btn-sm", BtnStyle="background:#fbbf24;color:#fff;" },
+                               new { Bg="linear-gradient(135deg,#7c3aed,#4f46e5)", Color="white", Img="photo-1544197150-b99a580bb7a8", Title="Fibra 600Mb", Desc="Internet ultra-rápido desde 24.90€/mes.", Btn="Ver oferta", BtnCls="btn-outline", BtnStyle="color:white;border-color:rgba(255,255,255,0.4);" },
+                               new { Bg="#eff6ff", Color="#1e3a8a", Img="photo-1450101499163-c8848c66ca85", Title="Seguro de hogar", Desc="Protege tus pertenencias desde solo 5€/mes.", Btn="Más info", BtnCls="btn-primary", BtnStyle="background:#3b82f6;" },
+                               new { Bg="linear-gradient(135deg,#ef4444,#f97316)", Color="white", Img="photo-1416879595882-3373a0480b5b", Title="Plantas para tu piso", Desc="Dale vida a tu hogar. Envío gratis en pedidos +20€.", Btn="Ver tienda", BtnCls="btn-outline", BtnStyle="color:white;border-color:rgba(255,255,255,0.4);" }
+                           };
+                           int _a1 = _adSeed % 6;
+                           int _a2 = (_adSeed + 2) % 6;
+                           var _ad1 = _ads[_a1];
+                           var _ad2 = _ads[_a2];
+                    %> 
+                        <div class="glass-card" style="background: <%= _ad1.Bg %>; color: <%= _ad1.Color %>; padding: 0; text-align: center; margin-bottom: 24px; overflow: hidden; border-radius:12px;">
+                            <img src="https://images.unsplash.com/<%= _ad1.Img %>?auto=format&fit=crop&w=300&q=80" style="width:100%; height:120px; object-fit:cover;" />
+                            <div style="padding: 16px;">
+                                <div style="font-size:0.6rem;letter-spacing:2px;margin-bottom:6px;opacity:0.7;">PUBLICIDAD</div>
+                                <h3 style="font-size:1.05rem; margin-bottom:8px;"><%= _ad1.Title %></h3>
+                                <p style="font-size:0.82rem; margin-bottom:14px; opacity:0.9;"><%= _ad1.Desc %></p>
+                                <a href="Upgrade.aspx" class="btn <%= _ad1.BtnCls %> btn-sm" style="<%= _ad1.BtnStyle %>"><%= _ad1.Btn %></a>
+                            </div>
+                        </div>
+
+                        <div class="glass-card" style="background: <%= _ad2.Bg %>; color: <%= _ad2.Color %>; padding: 0; text-align: center; margin-bottom: 16px; overflow: hidden; border-radius:12px;">
+                            <img src="https://images.unsplash.com/<%= _ad2.Img %>?auto=format&fit=crop&w=300&q=80" style="width:100%; height:120px; object-fit:cover;" />
+                            <div style="padding: 16px;">
+                                <div style="font-size:0.6rem;letter-spacing:2px;margin-bottom:6px;opacity:0.7;">PUBLICIDAD</div>
+                                <h3 style="font-size:1.05rem; margin-bottom:8px;"><%= _ad2.Title %></h3>
+                                <p style="font-size:0.82rem; margin-bottom:14px; opacity:0.9;"><%= _ad2.Desc %></p>
+                                <a href="Upgrade.aspx" class="btn <%= _ad2.BtnCls %> btn-sm" style="<%= _ad2.BtnStyle %>"><%= _ad2.Btn %></a>
+                            </div>
+                        </div>
+
+                        <div style="text-align:center;margin-top:4px;">
+                            <a href="Upgrade.aspx?plan=Profesional" style="font-size:0.75rem;color:#6b7280;text-decoration:underline;">&#x1F48E; Actualizar a Pro para eliminar anuncios</a>
+                        </div>
+                    <% } %>
+
+                    <% if (_showSugerencias) { %>
+                        <div class="glass-card" style="padding: 20px; border-radius:12px;">
+                            <h4 style="margin-bottom: 16px; color: #1e3a8a;">✨ Sugerencias Pro</h4>
+                            <p style="font-size: 0.85rem; color: #4b5563; margin-bottom: 16px;">Aprovecha al máximo tu suscripción ad-free revisando estos atajos útiles.</p>
+
+                            <a href="MisPisos.aspx" class="btn" style="background:#ef4444; color:white; justify-content:center; margin-bottom:12px; display:flex; align-items:center; gap:8px; padding:10px; border-radius:6px; text-decoration:none; width: 100%;">+ Añadir piso rápido</a>
+                            <a href="ContratosYPagos.aspx" class="btn" style="background:#3b82f6; color:white; justify-content:center; margin-bottom:12px; display:flex; align-items:center; gap:8px; padding:10px; border-radius:6px; text-decoration:none; width: 100%;">📑 Subir contrato nuevo</a>
+                            <a href="Reservas.aspx" class="btn" style="background:#10b981; color:white; justify-content:center; margin-bottom:12px; display:flex; align-items:center; gap:8px; padding:10px; border-radius:6px; text-decoration:none; width: 100%;">📅 Hacer una reserva</a>
+
+                            <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #e5e7eb;">
+                                <div style="display:flex; align-items:center; gap:8px;">
+                                    <span style="font-size:2rem;">🎧</span>
+                                    <div>
+                                        <strong style="display:block; font-size:0.9rem;">Soporte Premium</strong>
+                                        <span style="font-size:0.75rem; color:#6b7280;">Te respondemos en &lt; 1h</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
                 </div>
-                <div style="color:var(--text-muted); font-size:0.85rem;">© 2026 ConviApp — Proyecto Académico HADA</div>
+            <% } %>
+        </div>
+
+        <!-- ═══ FOOTER ═══ -->
+        <footer class="footer" style="background:white; border-top:1px solid #e5e7eb; padding:60px 0 24px; margin-top:40px;">
+            <div class="container">
+                <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;">
+                    <div>
+                        <a href="Index.aspx" class="logo" style="font-size:1.2rem; color:var(--text-primary); text-decoration:none; font-weight:800; display:flex; align-items:center; gap:8px; margin-bottom:16px;">
+                            <div class="logo-icon" style="width:32px;height:32px;font-size:1rem;background:linear-gradient(135deg,var(--primary),var(--accent));color:white;border-radius:6px;display:flex;align-items:center;justify-content:center;">🏠</div>
+                            ConviApp
+                        </a>
+                        <p style="color:var(--text-secondary);font-size:0.95rem;">La plataforma definitiva para gestionar tu piso compartido. Tareas, gastos, reservas y comunicación en un solo lugar.</p>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom:16px;color:var(--text-primary);">Plataforma</h4>
+                        <ul style="list-style:none;padding:0;">
+                            <li style="margin-bottom:12px;"><a href="Index.aspx" style="color:var(--text-secondary);text-decoration:none;">Inicio</a></li>
+                            <li style="margin-bottom:12px;"><a href="Pisos.aspx" style="color:var(--text-secondary);text-decoration:none;">Catálogo de Pisos</a></li>
+                            <li style="margin-bottom:12px;"><a href="Upgrade.aspx" style="color:var(--text-secondary);text-decoration:none;">Planes y Precios</a></li>
+                            <li style="margin-bottom:12px;"><a href="Login.aspx" style="color:var(--text-secondary);text-decoration:none;">Acceder</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom:16px;color:var(--text-primary);">Legal</h4>
+                        <ul style="list-style:none;padding:0;">
+                            <li style="margin-bottom:12px;"><a href="Privacidad.aspx" style="color:var(--text-secondary);text-decoration:none;">Privacidad</a></li>
+                            <li style="margin-bottom:12px;"><a href="Terminos.aspx" style="color:var(--text-secondary);text-decoration:none;">Términos de Uso</a></li>
+                            <li style="margin-bottom:12px;"><a href="Cookies.aspx" style="color:var(--text-secondary);text-decoration:none;">Política de Cookies</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom:16px;color:var(--text-primary);">Contacto</h4>
+                        <ul style="list-style:none;padding:0;">
+                            <li style="margin-bottom:12px;"><a href="Contacto.aspx" style="color:var(--text-secondary);text-decoration:none;">Soporte Técnico</a></li>
+                            <li style="margin-bottom:12px;"><a href="Contacto.aspx" style="color:var(--text-secondary);text-decoration:none;">Ventas Enterprise</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="border-top:1px solid #e5e7eb;padding-top:24px;display:flex;justify-content:space-between;color:var(--text-muted);font-size:0.9rem;">
+                    <span>© 2026 ConviApp. Todos los derechos reservados.</span>
+                    <span>Hecho con ❤️ para convivir mejor</span>
+                </div>
             </div>
         </footer>
     </form>
+
+    <script>
+        function toggleNotifications() {
+            var el = document.getElementById('notifications-dropdown');
+            if (el.style.display === 'none' || el.style.display === '') {
+                el.style.display = 'block';
+            } else {
+                el.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>

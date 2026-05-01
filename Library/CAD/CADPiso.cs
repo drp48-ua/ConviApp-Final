@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SQLite;
 using System.Collections.Generic;
@@ -75,6 +75,22 @@ namespace ConviAppWeb.DataAccess
             catch (Exception) { lista = new List<ENPiso>(); }
             finally { c.Close(); }
             return lista;
+        }
+
+        // COUNT — método conectado
+        public int ObtenerTotal()
+        {
+            int total = 0;
+            SQLiteConnection c = new SQLiteConnection(constring);
+            try
+            {
+                c.Open();
+                SQLiteCommand com = new SQLiteCommand("SELECT COUNT(*) FROM Piso", c);
+                total = Convert.ToInt32(com.ExecuteScalar());
+            }
+            catch (Exception) { }
+            finally { c.Close(); }
+            return total;
         }
 
         private ENPiso MapRow(SQLiteDataReader dr) { return new ENPiso

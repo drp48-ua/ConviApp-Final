@@ -7,7 +7,7 @@ namespace ConviAppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["UserId"] == null) { Response.Redirect("Login.aspx"); return; }
+            if(Session["UserEmail"] == null) { Response.Redirect("Login.aspx"); return; }
             if(!IsPostBack) {
                 txtNombre.Text = Session["UserName"] != null ? Session["UserName"].ToString() : "";
                 txtEmail.Text = Session["UserEmail"] != null ? Session["UserEmail"].ToString() : "";

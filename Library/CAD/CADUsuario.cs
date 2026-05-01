@@ -160,6 +160,48 @@ namespace ConviAppWeb.DataAccess
             return borrado;
         }
 
+        // READ ALL — método conectado
+        public List<ENUsuario> ObtenerTodos()
+        {
+            List<ENUsuario> lista = new List<ENUsuario>();
+            SQLiteConnection c = new SQLiteConnection(constring);
+
+            try
+            {
+                c.Open();
+                SQLiteCommand com = new SQLiteCommand("SELECT * FROM Usuario ORDER BY id DESC", c);
+                SQLiteDataReader dr = com.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    lista.Add(MapRow(dr));
+                }
+                dr.Close();
+            }
+            catch (Exception) { }
+            finally { c.Close(); }
+
+            return lista;
+        }
+
+        // COUNT — método conectado
+        public int ObtenerTotal()
+        {
+            int total = 0;
+            SQLiteConnection c = new SQLiteConnection(constring);
+
+            try
+            {
+                c.Open();
+                SQLiteCommand com = new SQLiteCommand("SELECT COUNT(*) FROM Usuario", c);
+                total = Convert.ToInt32(com.ExecuteScalar());
+            }
+            catch (Exception) { }
+            finally { c.Close(); }
+
+            return total;
+        }
+
         private ENUsuario MapRow(SQLiteDataReader dr)
         {
             var en = new ENUsuario();

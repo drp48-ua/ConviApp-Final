@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SQLite;
 using System.Collections.Generic;
@@ -75,6 +75,22 @@ namespace ConviAppWeb.DataAccess
             catch (Exception) { ok = false; }
             finally { c.Close(); }
             return ok;
+        }
+
+        // COUNT abiertas — método conectado
+        public int ObtenerTotalAbiertas()
+        {
+            int total = 0;
+            SQLiteConnection c = new SQLiteConnection(constring);
+            try
+            {
+                c.Open();
+                SQLiteCommand com = new SQLiteCommand("SELECT COUNT(*) FROM Incidencia WHERE estado='abierta'", c);
+                total = Convert.ToInt32(com.ExecuteScalar());
+            }
+            catch (Exception) { }
+            finally { c.Close(); }
+            return total;
         }
 
         private ENIncidencia MapRow(SQLiteDataReader dr) { return new ENIncidencia

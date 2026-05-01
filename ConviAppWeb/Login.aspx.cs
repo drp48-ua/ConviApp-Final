@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ConviAppWeb.DataAccess;
 
 namespace ConviAppWeb
@@ -18,7 +18,15 @@ namespace ConviAppWeb
                     Session["UserId"] = user.Id;
                     Session["UserEmail"] = user.Email;
                     Session["UserName"] = user.Nombre;
-                    Response.Redirect("Index.aspx");
+                    Session["UserRole"] = "Basico";
+                    if (user.Email.ToLower().Trim() == "admin@conviapp.com")
+                    {
+                        Response.Redirect("AdminDashboard.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("Index.aspx");
+                    }
                 }
                 else
                 {

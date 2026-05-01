@@ -6,5 +6,7 @@ namespace ConviAppWeb {
         protected global::System.Web.UI.WebControls.TextBox txtFechaInicio;
         protected global::System.Web.UI.WebControls.TextBox txtFechaFin;
         protected global::System.Web.UI.WebControls.Label lblError;
+        protected global::System.Web.UI.WebControls.Panel pnlApp;
+        protected global::System.Web.UI.WebControls.Panel pnlDemo;
     }
 }

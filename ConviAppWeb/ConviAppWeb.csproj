@@ -61,6 +61,13 @@
     <Content Include="Terminos.aspx" />
     <Content Include="Cookies.aspx" />
     <Content Include="PisoDetail.aspx" />
+    <Content Include="AdminDashboard.aspx" />
+    <Content Include="AdminUsuarios.aspx" />
+    <Content Include="AdminPisos.aspx" />
+    <Content Include="AdminPagos.aspx" />
+    <Content Include="AdminIncidencias.aspx" />
+    <Content Include="AdminPublicidad.aspx" />
+    <Content Include="AdminInformes.aspx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">17.0</VisualStudioVersion>
@@ -226,6 +233,34 @@
     </Compile>
     <Compile Include="PisoDetail.aspx.designer.cs">
       <DependentUpon>PisoDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard.aspx.cs">
+      <DependentUpon>AdminDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminUsuarios.aspx.cs">
+      <DependentUpon>AdminUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPisos.aspx.cs">
+      <DependentUpon>AdminPisos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPagos.aspx.cs">
+      <DependentUpon>AdminPagos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminIncidencias.aspx.cs">
+      <DependentUpon>AdminIncidencias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPublicidad.aspx.cs">
+      <DependentUpon>AdminPublicidad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminInformes.aspx.cs">
+      <DependentUpon>AdminInformes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>

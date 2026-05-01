@@ -41,6 +41,10 @@ bld/
 
 # Keep sqlite binaries in lib
 !lib/SQLite/*.dll
+!lib/SQLite/x86/
+!lib/SQLite/x86/*.dll
+!lib/SQLite/x64/
+!lib/SQLite/x64/*.dll
 
 # Visual Studio profiler
 *.psess

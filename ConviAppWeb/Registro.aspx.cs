@@ -15,7 +15,16 @@ namespace ConviAppWeb
             if (cad.CrearUsuario(en))
             {
                 Session["UserEmail"] = en.Email;
-                Response.Redirect("Index.aspx");
+                Session["UserName"] = en.Nombre;
+                Session["UserRole"] = Request.Form["planSelected"] ?? "Basico";
+                if (en.Email.ToLower().Trim() == "admin@conviapp.com")
+                {
+                    Response.Redirect("AdminDashboard.aspx");
+                }
+                else
+                {
+                    Response.Redirect("Index.aspx");
+                }
             }
         }
     }

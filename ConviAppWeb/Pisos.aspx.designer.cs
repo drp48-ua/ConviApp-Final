@@ -6,12 +6,18 @@
 
 namespace ConviAppWeb {
     public partial class Pisos {
+        protected global::System.Web.UI.WebControls.Label lblSumaPisos;
         protected global::System.Web.UI.WebControls.Button btnNuevo;
         protected global::System.Web.UI.WebControls.Panel pnlForm;
         protected global::System.Web.UI.WebControls.TextBox txtDir;
         protected global::System.Web.UI.WebControls.TextBox txtCiudad;
         protected global::System.Web.UI.WebControls.Button btnGuardar;
         protected global::System.Web.UI.WebControls.Button btnCancelar;
-        protected global::System.Web.UI.WebControls.GridView gvPisos;
+        protected global::System.Web.UI.WebControls.TextBox txtFiltroCiudad;
+        protected global::System.Web.UI.WebControls.TextBox txtFiltroMin;
+        protected global::System.Web.UI.WebControls.TextBox txtFiltroMax;
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
+        protected global::System.Web.UI.WebControls.Panel pnlVacio;
+        protected global::System.Web.UI.WebControls.Repeater rptPisos;
     }
 }

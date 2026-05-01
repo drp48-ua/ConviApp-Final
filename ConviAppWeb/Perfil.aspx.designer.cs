@@ -6,8 +6,14 @@
 
 namespace ConviAppWeb {
     public partial class Perfil {
+        protected global::System.Web.UI.WebControls.Panel pnlSuccess;
+        protected global::System.Web.UI.WebControls.Label lblMensaje;
+        protected global::System.Web.UI.WebControls.TextBox txtPhotoUrl;
         protected global::System.Web.UI.WebControls.TextBox txtNombre;
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
+        protected global::System.Web.UI.WebControls.TextBox txtOldPassword;
+        protected global::System.Web.UI.WebControls.TextBox txtNewPassword;
+        protected global::System.Web.UI.WebControls.TextBox txtConfirmPassword;
         protected global::System.Web.UI.WebControls.Button btnGuardar;
     }
 }

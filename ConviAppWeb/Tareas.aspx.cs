@@ -10,7 +10,9 @@ namespace ConviAppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserEmail"] == null) { Response.Redirect("Login.aspx"); return; }
+            if (Session["UserEmail"] == null) { pnlApp.Visible = false; pnlDemo.Visible = true; return; }
+            pnlApp.Visible = true; pnlDemo.Visible = false;
+            
             if (!IsPostBack) CargarTareas();
         }
 

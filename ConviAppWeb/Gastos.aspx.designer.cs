@@ -6,9 +6,14 @@
 
 namespace ConviAppWeb {
     public partial class Gastos {
+        protected global::System.Web.UI.WebControls.Label lblTotal;
         protected global::System.Web.UI.WebControls.TextBox txtConcepto;
         protected global::System.Web.UI.WebControls.TextBox txtImporte;
         protected global::System.Web.UI.WebControls.Button btnGuardar;
-        protected global::System.Web.UI.WebControls.GridView gvGastos;
+        protected global::System.Web.UI.WebControls.Panel pnlApp;
+        protected global::System.Web.UI.WebControls.Panel pnlDemo;
+        protected global::System.Web.UI.WebControls.Panel pnlVacio;
+        protected global::System.Web.UI.WebControls.Panel pnlTabla;
+        protected global::System.Web.UI.WebControls.Repeater rptGastos;
     }
 }

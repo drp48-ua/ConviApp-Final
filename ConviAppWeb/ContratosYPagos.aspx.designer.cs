@@ -12,5 +12,7 @@ namespace ConviAppWeb {
         protected global::System.Web.UI.WebControls.TextBox txtRenta;
         protected global::System.Web.UI.WebControls.TextBox txtFianza;
         protected global::System.Web.UI.WebControls.Label lblError;
+        protected global::System.Web.UI.WebControls.Panel pnlApp;
+        protected global::System.Web.UI.WebControls.Panel pnlDemo;
     }
 }
