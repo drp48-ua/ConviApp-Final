@@ -1,4 +1,4 @@
-<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="ConviAppWeb.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="ConviAppWeb.SiteMaster" %>
 <!DOCTYPE html>
 <html lang="es">
 <head runat="server">
@@ -18,7 +18,7 @@
         <header class="header">
             <div class="header-top container" style="max-width:100%; width:100%">
                 <a href="Index.aspx" class="logo" style="color: white;">
-                    <div class="logo-icon" style="background:white; color:var(--primary); font-size:1.5rem">🏠</div>
+                    <div class="logo-icon" style="background:white; color:var(--primary); font-size:1.5rem">ðŸ </div>
                     ConviApp
                 </a>
                 
@@ -71,7 +71,7 @@
                             
                             <div style="color:white; font-size:0.9rem; line-height:1.2;">
                                 <div style="font-weight:600;"><%= Session["UserName"] != null ? Session["UserName"].ToString() : Session["UserEmail"].ToString() %></div>
-                                <asp:LinkButton ID="btnLogout" runat="server" OnClick="BtnLogout_Click" CausesValidation="false" style="color:var(--accent-light); font-size:0.8rem; text-decoration:none;">Cerrar sesión</asp:LinkButton>
+                                <asp:LinkButton ID="btnLogout" runat="server" OnClick="BtnLogout_Click" CausesValidation="false" style="color:var(--accent-light); font-size:0.8rem; text-decoration:none;">Cerrar sesi&oacute;n</asp:LinkButton>
                             </div>
                         </div>
                     <% } else { %>
@@ -84,16 +84,16 @@
                 <div class="container" style="display:flex; gap:8px; width:100%; max-width:100%;">
                     <% bool isAdmin = Session["UserEmail"] != null && Session["UserEmail"].ToString().ToLower().Trim() == "admin@conviapp.com"; %>
                     <% if (isAdmin) { %>
-                        <a href="AdminDashboard.aspx" class="nav-link" id="navAdminPanel">⚙️ Panel Admin</a>
-                        <a href="AdminUsuarios.aspx" class="nav-link" id="navAdminUsuarios">👥 Usuarios</a>
-                        <a href="AdminPisos.aspx" class="nav-link" id="navAdminPisos">🏢 Pisos</a>
-                        <a href="AdminPagos.aspx" class="nav-link" id="navAdminPagos">💳 Pagos</a>
-                        <a href="AdminIncidencias.aspx" class="nav-link" id="navAdminIncidencias">🔧 Incidencias</a>
-                        <a href="AdminPublicidad.aspx" class="nav-link" id="navAdminPublicidad">📢 Publicidad</a>
-                        <a href="AdminInformes.aspx" class="nav-link" id="navAdminInformes">📊 Informes</a>
-                        <a href="Perfil.aspx" class="nav-link" id="navPerfil">👤 Perfil</a>
+                        <a href="AdminDashboard.aspx" class="nav-link" id="navAdminPanel">&#9881; Panel Admin</a>
+                        <a href="AdminUsuarios.aspx" class="nav-link" id="navAdminUsuarios">&#128101; Usuarios</a>
+                        <a href="AdminPisos.aspx" class="nav-link" id="navAdminPisos">&#127970; Pisos</a>
+                        <a href="AdminPagos.aspx" class="nav-link" id="navAdminPagos">&#128179; Pagos</a>
+                        <a href="AdminIncidencias.aspx" class="nav-link" id="navAdminIncidencias">&#128295; Incidencias</a>
+                        <a href="AdminPublicidad.aspx" class="nav-link" id="navAdminPublicidad">&#128226; Publicidad</a>
+                        <a href="AdminInformes.aspx" class="nav-link" id="navAdminInformes">&#128202; Informes</a>
+                        <a href="Perfil.aspx" class="nav-link" id="navPerfil">&#128100; Perfil</a>
                     <% } else { %>
-                        <a href="Index.aspx" class="nav-link" id="navInicio">🏠 Inicio</a>
+                        <a href="Index.aspx" class="nav-link" id="navInicio">&#127968; Inicio</a>
                         <a href="Pisos.aspx" class="nav-link">🏢 Pisos</a>
                         <a href="ContratosYPagos.aspx" class="nav-link" id="navContratos">📄 Contratos</a>
                         <a href="Tareas.aspx" class="nav-link" id="navTareas">✅ Tareas</a>
@@ -101,7 +101,7 @@
                         <a href="Reservas.aspx" class="nav-link" id="navReservas">📅 Reservas</a>
                         <a href="Mensajes.aspx" class="nav-link" id="navMensajes">✉️ Mensajes</a>
                         <% if (Session["UserEmail"] != null) { %>
-                            <a href="Perfil.aspx" class="nav-link" id="navPerfil">👤 Perfil</a>
+                            <a href="Perfil.aspx" class="nav-link" id="navPerfil">&#128100; Perfil</a>
                         <% } %>
                     <% } %>
                 </div>
@@ -171,7 +171,7 @@
                             <h4 style="margin-bottom: 16px; color: #1e3a8a;">✨ Sugerencias Pro</h4>
                             <p style="font-size: 0.85rem; color: #4b5563; margin-bottom: 16px;">Aprovecha al máximo tu suscripción ad-free revisando estos atajos útiles.</p>
 
-                            <a href="MisPisos.aspx" class="btn" style="background:#ef4444; color:white; justify-content:center; margin-bottom:12px; display:flex; align-items:center; gap:8px; padding:10px; border-radius:6px; text-decoration:none; width: 100%;">+ Añadir piso rápido</a>
+                            <a href="MisPisos.aspx" class="btn" style="background:#ef4444; color:white; justify-content:center; margin-bottom:12px; display:flex; align-items:center; gap:8px; padding:10px; border-radius:6px; text-decoration:none; width: 100%;">+ A&ntilde;adir piso rápido</a>
                             <a href="ContratosYPagos.aspx" class="btn" style="background:#3b82f6; color:white; justify-content:center; margin-bottom:12px; display:flex; align-items:center; gap:8px; padding:10px; border-radius:6px; text-decoration:none; width: 100%;">📑 Subir contrato nuevo</a>
                             <a href="Reservas.aspx" class="btn" style="background:#10b981; color:white; justify-content:center; margin-bottom:12px; display:flex; align-items:center; gap:8px; padding:10px; border-radius:6px; text-decoration:none; width: 100%;">📅 Hacer una reserva</a>
 
@@ -196,7 +196,7 @@
                 <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;">
                     <div>
                         <a href="Index.aspx" class="logo" style="font-size:1.2rem; color:var(--text-primary); text-decoration:none; font-weight:800; display:flex; align-items:center; gap:8px; margin-bottom:16px;">
-                            <div class="logo-icon" style="width:32px;height:32px;font-size:1rem;background:linear-gradient(135deg,var(--primary),var(--accent));color:white;border-radius:6px;display:flex;align-items:center;justify-content:center;">🏠</div>
+                            <div class="logo-icon" style="background:white; color:var(--primary); font-size:1.5rem">ðŸ </div>
                             ConviApp
                         </a>
                         <p style="color:var(--text-secondary);font-size:0.95rem;">La plataforma definitiva para gestionar tu piso compartido. Tareas, gastos, reservas y comunicación en un solo lugar.</p>
@@ -246,3 +246,5 @@
     </script>
 </body>
 </html>
+
+

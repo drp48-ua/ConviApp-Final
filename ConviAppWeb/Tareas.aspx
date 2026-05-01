@@ -1,16 +1,16 @@
-<%@ Page Title="Tareas" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Tareas.aspx.cs"
+﻿<%@ Page Title="Tareas" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Tareas.aspx.cs"
     Inherits="ConviAppWeb.Tareas" %>
     <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div class="dash-tabs">
-            <a href="Index.aspx" class="dash-tab">📊 Resumen</a>
+            <a href="Index.aspx" class="dash-tab">&#128202; Resumen</a>
             <a href="Tareas.aspx" class="dash-tab active">✅ Tareas</a>
-            <a href="Gastos.aspx" class="dash-tab">💸 Gastos</a>
-            <a href="Mensajes.aspx" class="dash-tab">💬 Mensajes</a>
-            <a href="Reservas.aspx" class="dash-tab">📅 Reservas</a>
-            <a href="Incidencias.aspx" class="dash-tab">🔧 Incidencias</a>
-            <a href="ContratosYPagos.aspx" class="dash-tab">📄 Contratos</a>
-            <a href="Documentos.aspx" class="dash-tab">📎 Documentos</a>
-            <a href="MisPisos.aspx" class="dash-tab">🏠 Mis Pisos</a>
+            <a href="Gastos.aspx" class="dash-tab">&#128182; Gastos</a>
+            <a href="Mensajes.aspx" class="dash-tab">&#9993; Mensajes</a>
+            <a href="Reservas.aspx" class="dash-tab">&#128197; Reservas</a>
+            <a href="Incidencias.aspx" class="dash-tab">&#128295; Incidencias</a>
+            <a href="ContratosYPagos.aspx" class="dash-tab">&#128196; Contratos</a>
+            <a href="Documentos.aspx" class="dash-tab">&#128206; Documentos</a>
+            <a href="MisPisos.aspx" class="dash-tab">&#127968; Mis Pisos</a>
         </div>
 
         <h2 style="margin-bottom:20px;">✅ Tareas del Piso</h2>
@@ -45,7 +45,7 @@
                                 <select class="form-input" style="flex:1; min-width:120px;" disabled>
                                     <option>🟡 Media</option>
                                 </select>
-                                <div class="btn btn-primary btn-sm">Añadir</div>
+                                <div class="btn btn-primary btn-sm">A&ntilde;adir</div>
                             </div>
                         </div>
                         <!-- OVERLAY PARA REDIRIGIR AL REGISTRO -->
@@ -110,8 +110,8 @@
                                 <asp:ListItem Value="media" Selected="True">🟡 Media</asp:ListItem>
                                 <asp:ListItem Value="alta">🔴 Alta</asp:ListItem>
                             </asp:DropDownList>
-                            <asp:Button ID="btnAnadir" runat="server" Text="Añadir" CssClass="btn btn-primary btn-sm"
-                                OnClick="BtnAnadir_Click" />
+                            <asp:Button ID="btnA&ntilde;adir" runat="server" Text="A&ntilde;adir" CssClass="btn btn-primary btn-sm"
+                                OnClick="BtnA&ntilde;adir_Click" />
                         </div>
                         <asp:Label ID="lblError" runat="server" ForeColor="Red" Visible="false"
                             style="margin-top:8px; display:block;" />
@@ -161,3 +161,4 @@
 
                 </asp:Panel>
     </asp:Content>
+

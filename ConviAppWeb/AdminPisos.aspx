@@ -1,4 +1,4 @@
-<%@ Page Title="Gestión de Pisos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Gestión de Pisos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="AdminPisos.aspx.cs" Inherits="ConviAppWeb.AdminPisos" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -32,3 +32,5 @@
             </div>
         </div>
     </asp:Content>
+
+

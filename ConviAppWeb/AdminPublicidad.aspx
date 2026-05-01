@@ -1,4 +1,4 @@
-<%@ Page Title="Gestión de Publicidad" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Gestión de Publicidad" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="AdminPublicidad.aspx.cs" Inherits="ConviAppWeb.AdminPublicidad" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -38,3 +38,5 @@
             </asp:Repeater>
         </div>
     </asp:Content>
+
+

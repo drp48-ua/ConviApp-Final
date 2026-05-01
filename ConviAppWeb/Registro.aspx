@@ -1,4 +1,4 @@
-<%@ Page Title="Registro" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Registro" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeFile="Registro.aspx.cs" Inherits="ConviAppWeb.Registro" %>
     <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div style="display:flex; justify-content:center; align-items:center; min-height:80vh; padding:20px;">
@@ -79,16 +79,16 @@
                 <div style="margin-bottom:20px;">
                     <label
                         style="display:block; font-size:0.9rem; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">Correo
-                        Electrónico</label>
+                        Electr&oacute;nico</label>
                     <asp:TextBox ID="txtEmail" runat="server" CssClass="form-input" TextMode="Email"
                         placeholder="ejemplo@correo.com" style="width:100%; padding:14px; background:#f9fafb;" />
                 </div>
 
                 <div style="margin-bottom:32px;">
                     <label
-                        style="display:block; font-size:0.9rem; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">Contraseña</label>
+                        style="display:block; font-size:0.9rem; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">Contrase&ntilde;a</label>
                     <asp:TextBox ID="txtPassword" runat="server" CssClass="form-input" TextMode="Password"
-                        placeholder="Crea una contraseña segura"
+                        placeholder="Crea una contrase&ntilde;a segura"
                         style="width:100%; padding:14px; background:#f9fafb;" />
                 </div>
 
@@ -98,7 +98,7 @@
 
                 <div style="margin-top:24px; text-align:center;">
                     <span style="font-size:0.9rem; color:var(--text-secondary);">¿Ya tienes una cuenta?</span>
-                    <a href="Login.aspx" style="font-size:0.9rem; font-weight:600;">Iniciar sesión</a>
+                    <a href="Login.aspx" style="font-size:0.9rem; font-weight:600;">Iniciar sesi&oacute;n</a>
                 </div>
 
                 <script>
@@ -124,3 +124,4 @@
             </div>
         </div>
     </asp:Content>
+

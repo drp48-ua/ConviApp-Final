@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using ConviAppWeb.DataAccess;
 using ConviAppWeb.Models;
 
@@ -34,7 +34,7 @@ namespace ConviAppWeb
             }
         }
 
-        protected void BtnAnadir_Click(object sender, EventArgs e)
+        protected void BtnA&ntilde;adir_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtDireccion.Text) || string.IsNullOrWhiteSpace(txtCiudad.Text))
             { lblMsg.Text = "⚠️ Dirección y ciudad son obligatorios."; lblMsg.Visible = true; return; }
@@ -57,3 +57,5 @@ namespace ConviAppWeb
         }
     }
 }
+
+

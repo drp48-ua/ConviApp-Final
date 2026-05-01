@@ -1,4 +1,4 @@
-<%@ Page Title="Contacto Enterprise" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Contacto Enterprise" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeFile="Contacto.aspx.cs" Inherits="ConviAppWeb.Contacto" %>
     <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div style="min-height:80vh; display:flex; align-items:center; justify-content:center; padding:2rem;">
@@ -57,3 +57,4 @@
             </div>
         </div>
     </asp:Content>
+

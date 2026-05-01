@@ -1,4 +1,4 @@
-namespace ConviAppWeb {
+﻿namespace ConviAppWeb {
     public partial class Incidencias {
         protected global::System.Web.UI.WebControls.Panel pnlVacio;
         protected global::System.Web.UI.WebControls.Repeater rptIncidencias;
@@ -9,3 +9,5 @@ namespace ConviAppWeb {
         protected global::System.Web.UI.WebControls.Panel pnlDemo;
     }
 }
+
+

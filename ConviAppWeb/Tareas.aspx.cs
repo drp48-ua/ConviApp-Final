@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Web.UI.WebControls;
 using ConviAppWeb.DataAccess;
@@ -34,7 +34,7 @@ namespace ConviAppWeb
             }
         }
 
-        protected void BtnAnadir_Click(object sender, EventArgs e)
+        protected void BtnA&ntilde;adir_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtTitulo.Text)) { lblError.Text = "El título es obligatorio."; lblError.Visible = true; return; }
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
@@ -64,3 +64,5 @@ namespace ConviAppWeb
         }
     }
 }
+
+

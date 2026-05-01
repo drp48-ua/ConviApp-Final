@@ -1,4 +1,4 @@
-<%@ Page Title="Informes" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Informes" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="AdminInformes.aspx.cs" Inherits="ConviAppWeb.AdminInformes" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -42,3 +42,5 @@
             <button class="btn btn-outline">🔽 Exportar Usuarios Activos</button>
         </div>
     </asp:Content>
+
+

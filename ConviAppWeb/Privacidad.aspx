@@ -1,4 +1,4 @@
-<%@ Page Title="Política de Privacidad" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Política de Privacidad" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeFile="Privacidad.aspx.cs" Inherits="ConviAppWeb.Privacidad" %>
     <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div class="glass-card" style="max-width:800px; margin:0 auto; padding:3rem;">
@@ -9,7 +9,7 @@
                 datos es el equipo docente de la asignatura HADA.</p>
             <h3>2. Datos que recopilamos</h3>
             <p>Recopilamos únicamente los datos necesarios para el funcionamiento de la plataforma: nombre, email y
-                contraseña (cifrada). No compartimos datos con terceros.</p>
+                contrase&ntilde;a (cifrada). No compartimos datos con terceros.</p>
             <h3>3. Finalidad del tratamiento</h3>
             <p>Los datos se usan exclusivamente para identificar al usuario dentro de la plataforma y personalizar su
                 experiencia.</p>
@@ -18,10 +18,11 @@
                 <a href="mailto:daniramonpoveda@gmail.com"
                     style="color:var(--primary-light);">daniramonpoveda@gmail.com</a>.</p>
             <h3>5. Cookies</h3>
-            <p>Utilizamos cookies de sesión para mantener tu sesión activa. Consulta nuestra <a href="Cookies.aspx"
+            <p>Utilizamos cookies de sesi&oacute;n para mantener tu sesi&oacute;n activa. Consulta nuestra <a href="Cookies.aspx"
                     style="color:var(--primary-light);">Política de Cookies</a>.</p>
             <div style="margin-top:2rem;">
                 <a href="Index.aspx" style="color:var(--text-muted); text-decoration:none;">← Volver al inicio</a>
             </div>
         </div>
     </asp:Content>
+

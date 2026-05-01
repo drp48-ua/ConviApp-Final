@@ -1,4 +1,4 @@
-namespace ConviAppWeb {
+﻿namespace ConviAppWeb {
     public partial class MisPisos {
         protected global::System.Web.UI.WebControls.Panel pnlVacio;
         protected global::System.Web.UI.WebControls.Repeater rptPisos;
@@ -11,3 +11,5 @@ namespace ConviAppWeb {
         protected global::System.Web.UI.WebControls.Panel pnlDemo;
     }
 }
+
+

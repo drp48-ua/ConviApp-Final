@@ -1,4 +1,4 @@
-namespace ConviAppWeb {
+﻿namespace ConviAppWeb {
     public partial class PisoDetail {
         protected global::System.Web.UI.WebControls.Panel pnlNotFound;
         protected global::System.Web.UI.WebControls.Panel pnlDetalle;
@@ -8,3 +8,5 @@ namespace ConviAppWeb {
         protected global::System.Web.UI.WebControls.Label lblPrecio;
     }
 }
+
+

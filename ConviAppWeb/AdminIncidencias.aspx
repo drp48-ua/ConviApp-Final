@@ -1,4 +1,4 @@
-<%@ Page Title="Gestión de Incidencias" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Gestión de Incidencias" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="AdminIncidencias.aspx.cs" Inherits="ConviAppWeb.AdminIncidencias" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -51,3 +51,5 @@
             </div>
         </div>
     </asp:Content>
+
+

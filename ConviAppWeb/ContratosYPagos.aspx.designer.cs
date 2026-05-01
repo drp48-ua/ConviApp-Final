@@ -1,4 +1,4 @@
-namespace ConviAppWeb {
+﻿namespace ConviAppWeb {
     public partial class ContratosYPagos {
         protected global::System.Web.UI.WebControls.Panel pnlVacioContratos;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl hContratos;
@@ -16,3 +16,5 @@ namespace ConviAppWeb {
         protected global::System.Web.UI.WebControls.Panel pnlDemo;
     }
 }
+
+

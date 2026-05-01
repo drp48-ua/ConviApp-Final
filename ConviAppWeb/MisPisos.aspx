@@ -1,15 +1,15 @@
-<%@ Page Title="Mis Pisos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Mis Pisos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeFile="MisPisos.aspx.cs" Inherits="ConviAppWeb.MisPisos" %>
     <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div class="dash-tabs">
-            <a href="Index.aspx" class="dash-tab">📊 Resumen</a>
-            <a href="Tareas.aspx" class="dash-tab">✅ Tareas</a>
-            <a href="Gastos.aspx" class="dash-tab">💸 Gastos</a>
-            <a href="Mensajes.aspx" class="dash-tab">💬 Mensajes</a>
-            <a href="Reservas.aspx" class="dash-tab">📅 Reservas</a>
-            <a href="Incidencias.aspx" class="dash-tab">🔧 Incidencias</a>
-            <a href="ContratosYPagos.aspx" class="dash-tab">📄 Contratos</a>
-            <a href="Documentos.aspx" class="dash-tab">📎 Documentos</a>
+            <a href="Index.aspx" class="dash-tab">&#128202; Resumen</a>
+            <a href="Tareas.aspx" class="dash-tab">&#9989; Tareas</a>
+            <a href="Gastos.aspx" class="dash-tab">&#128182; Gastos</a>
+            <a href="Mensajes.aspx" class="dash-tab">&#9993; Mensajes</a>
+            <a href="Reservas.aspx" class="dash-tab">&#128197; Reservas</a>
+            <a href="Incidencias.aspx" class="dash-tab">&#128295; Incidencias</a>
+            <a href="ContratosYPagos.aspx" class="dash-tab">&#128196; Contratos</a>
+            <a href="Documentos.aspx" class="dash-tab">&#128206; Documentos</a>
             <a href="MisPisos.aspx" class="dash-tab active">🏠 Mis Pisos</a>
         </div>
 
@@ -38,7 +38,7 @@
                 <asp:Panel ID="pnlDemo" runat="server" Visible="false">
                     <div style="position:relative;">
                         <div class="glass-card" style="margin-bottom:24px; position:relative; pointer-events:none;">
-                            <h4 style="margin-top:0; color:var(--primary-light);">➕ Añadir piso</h4>
+                            <h4 style="margin-top:0; color:var(--primary-light);">➕ A&ntilde;adir piso</h4>
                             <div style="display:flex; gap:12px; flex-wrap:wrap;">
                                 <input type="text" class="form-input" placeholder="Dirección"
                                     style="flex:2; min-width:200px;" disabled />
@@ -48,7 +48,7 @@
                                     style="flex:1; min-width:100px;" disabled />
                                 <input type="text" class="form-input" placeholder="Precio Total €/mes"
                                     style="flex:1; min-width:120px;" disabled />
-                                <div class="btn btn-primary btn-sm">Añadir</div>
+                                <div class="btn btn-primary btn-sm">A&ntilde;adir</div>
                             </div>
                         </div>
                         <!-- OVERLAY PARA REDIRIGIR AL REGISTRO -->
@@ -111,7 +111,7 @@
                                 de Propietario</h3>
                             <p
                                 style="color: var(--text-secondary); max-width: 500px; margin: 0 auto 16px; font-size:0.9rem;">
-                                Administra todas tus propiedades con un solo clic. Para usar el formulario de "Añadir
+                                Administra todas tus propiedades con un solo clic. Para usar el formulario de "A&ntilde;adir
                                 piso" te invitamos a registrarte gratis.</p>
                             <a href="Registro.aspx" class="btn btn-primary"
                                 style="font-size: 1rem; padding: 10px 20px; box-shadow:0 4px 6px rgba(37,99,235,0.2);">Regístrate
@@ -126,7 +126,7 @@
                         style="margin-bottom:20px; display:block;" />
 
                     <div class="glass-card" style="margin-bottom:24px;">
-                        <h4 style="margin-top:0; color:var(--primary-light);">➕ Añadir piso</h4>
+                        <h4 style="margin-top:0; color:var(--primary-light);">➕ A&ntilde;adir piso</h4>
                         <div style="display:flex; gap:12px; flex-wrap:wrap;">
                             <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-input" placeholder="Dirección"
                                 style="flex:2; min-width:200px;" />
@@ -136,8 +136,8 @@
                                 placeholder="Habitaciones" TextMode="Number" style="flex:1; min-width:100px;" />
                             <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-input"
                                 placeholder="Precio Total €/mes" TextMode="Number" style="flex:1; min-width:120px;" />
-                            <asp:Button ID="btnAnadir" runat="server" Text="Añadir" CssClass="btn btn-primary btn-sm"
-                                OnClick="BtnAnadir_Click" />
+                            <asp:Button ID="btnA&ntilde;adir" runat="server" Text="A&ntilde;adir" CssClass="btn btn-primary btn-sm"
+                                OnClick="BtnA&ntilde;adir_Click" />
                         </div>
                     </div>
 
@@ -184,3 +184,4 @@
 
                 </asp:Panel>
     </asp:Content>
+

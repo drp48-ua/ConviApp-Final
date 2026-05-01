@@ -8,7 +8,7 @@
                     <asp:Label ID="lblSumaPisos" runat="server"></asp:Label> disponibles en la plataforma.
                 </p>
             </div>
-            <asp:Button ID="btnNuevo" runat="server" Text="+ Añadir Piso" CssClass="btn btn-primary"
+            <asp:Button ID="btnNuevo" runat="server" Text="+ A&ntilde;adir Piso" CssClass="btn btn-primary"
                 OnClick="BtnNuevo_Click" />
         </div>
 
@@ -91,3 +91,4 @@
             </asp:Repeater>
         </div>
     </asp:Content>
+

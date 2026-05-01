@@ -1,16 +1,16 @@
-<%@ Page Title="Incidencias" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Incidencias" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeFile="Incidencias.aspx.cs" Inherits="ConviAppWeb.Incidencias" %>
     <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div class="dash-tabs">
-            <a href="Index.aspx" class="dash-tab">📊 Resumen</a>
-            <a href="Tareas.aspx" class="dash-tab">✅ Tareas</a>
-            <a href="Gastos.aspx" class="dash-tab">💸 Gastos</a>
-            <a href="Mensajes.aspx" class="dash-tab">💬 Mensajes</a>
-            <a href="Reservas.aspx" class="dash-tab">📅 Reservas</a>
+            <a href="Index.aspx" class="dash-tab">&#128202; Resumen</a>
+            <a href="Tareas.aspx" class="dash-tab">&#9989; Tareas</a>
+            <a href="Gastos.aspx" class="dash-tab">&#128182; Gastos</a>
+            <a href="Mensajes.aspx" class="dash-tab">&#9993; Mensajes</a>
+            <a href="Reservas.aspx" class="dash-tab">&#128197; Reservas</a>
             <a href="Incidencias.aspx" class="dash-tab active">🔧 Incidencias</a>
-            <a href="ContratosYPagos.aspx" class="dash-tab">📄 Contratos</a>
-            <a href="Documentos.aspx" class="dash-tab">📎 Documentos</a>
-            <a href="MisPisos.aspx" class="dash-tab">🏠 Mis Pisos</a>
+            <a href="ContratosYPagos.aspx" class="dash-tab">&#128196; Contratos</a>
+            <a href="Documentos.aspx" class="dash-tab">&#128206; Documentos</a>
+            <a href="MisPisos.aspx" class="dash-tab">&#127968; Mis Pisos</a>
         </div>
 
         <h2 style="margin-bottom:20px;">🔧 Incidencias</h2>
@@ -143,3 +143,4 @@
 
                 </asp:Panel>
     </asp:Content>
+

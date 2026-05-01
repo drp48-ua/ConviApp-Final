@@ -1,4 +1,4 @@
-namespace ConviAppWeb {
+﻿namespace ConviAppWeb {
     public partial class Reservas {
         protected global::System.Web.UI.WebControls.Panel pnlVacio;
         protected global::System.Web.UI.WebControls.Repeater rptReservas;
@@ -10,3 +10,5 @@ namespace ConviAppWeb {
         protected global::System.Web.UI.WebControls.Panel pnlDemo;
     }
 }
+
+
