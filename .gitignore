@@ -38,6 +38,8 @@ bld/
 # Except for our init db script
 !init_db.sql
 !create_db.py
+!conviapp.db
+!ConviAppWeb/conviapp.db
 
 # Keep sqlite binaries in lib
 !lib/SQLite/*.dll
