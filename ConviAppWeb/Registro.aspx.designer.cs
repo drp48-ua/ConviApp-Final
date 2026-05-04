@@ -11,6 +11,7 @@ namespace ConviAppWeb {
         protected global::System.Web.UI.WebControls.TextBox txtNombre;
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
+        protected global::System.Web.UI.WebControls.TextBox txtConfirmPassword;
         protected global::System.Web.UI.WebControls.Button btnRegistrar;
     }
 }
