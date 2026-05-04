@@ -1,5 +1,6 @@
 using System;
 using System.Web.UI.WebControls;
+using System.Linq;
 using ConviAppWeb.DataAccess;
 using ConviAppWeb.Models;
 
@@ -16,8 +17,9 @@ namespace ConviAppWeb
 
         private void CargarIncidencias()
         {
+            var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
             var cad = new CADIncidencia();
-            var lista = cad.ListarTodas();
+            var lista = cad.ListarTodas().Where(i => i.ReportadaPorId == userId).ToList();
             if (lista == null || lista.Count == 0)
             {
                 pnlVacio.Visible = true;

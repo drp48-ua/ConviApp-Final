@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using ConviAppWeb.DataAccess;
 using ConviAppWeb.Models;
 
@@ -18,8 +19,12 @@ namespace ConviAppWeb
         private void CargarPisos()
         {
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
-            var cad = new CADPiso();
-            var lista = cad.ListarTodos();
+            var cadPiso = new CADPiso();
+            var cadContrato = new CADContrato();
+            var misContratos = cadContrato.ListarTodos(userId);
+            var misPisoIds = misContratos.Select(c => c.PropertyId).Distinct().ToList();
+            
+            var lista = cadPiso.ListarTodos().Where(p => misPisoIds.Contains(p.Id)).ToList();
             if (lista == null || lista.Count == 0)
             {
                 pnlVacio.Visible = true;

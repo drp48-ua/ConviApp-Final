@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Web.UI.WebControls;
 using System.Linq;
 using ConviAppWeb.DataAccess;
@@ -17,8 +17,9 @@ namespace ConviAppWeb
 
         private void CargarGastos()
         {
+            var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
             var cad = new CADGasto();
-            var lista = cad.ListarTodos();
+            var lista = cad.ListarTodos().Where(g => g.RegistradoPorId == userId).ToList();
             
             pnlVacio.Visible = lista.Count == 0;
             pnlTabla.Visible = lista.Count > 0;
@@ -35,8 +36,9 @@ namespace ConviAppWeb
             decimal imp;
             decimal.TryParse(txtImporte.Text, out imp);
             if(imp > 0 && !string.IsNullOrWhiteSpace(txtConcepto.Text)) {
+                var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
                 var cad = new CADGasto();
-                cad.CrearGasto(new ENGasto { Concepto = txtConcepto.Text, Importe = imp, Fecha = DateTime.Today, Pagado = false });
+                cad.CrearGasto(new ENGasto { Concepto = txtConcepto.Text, Importe = imp, Fecha = DateTime.Today, Pagado = false, RegistradoPorId = userId });
                 txtConcepto.Text = "";
                 txtImporte.Text = "";
                 CargarGastos();

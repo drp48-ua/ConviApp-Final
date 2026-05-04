@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ConviAppWeb.DataAccess;
 using ConviAppWeb.Models;
 
@@ -27,7 +28,7 @@ namespace ConviAppWeb
         {
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
             var cad = new CADMensaje();
-            var raw = cad.ListarTodos();
+            var raw = cad.ListarTodos().Where(m => m.EmisorId == userId || m.ReceptorId == userId).ToList();
             var lista = new List<MensajeVM>();
             foreach (var m in raw)
                 lista.Add(new MensajeVM { Id = m.Id, Contenido = m.Contenido, FechaEnvio = m.FechaEnvio, EmisorId = m.EmisorId, EsMio = m.EmisorId == userId });

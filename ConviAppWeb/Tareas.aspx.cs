@@ -18,8 +18,9 @@ namespace ConviAppWeb
 
         private void CargarTareas()
         {
+            var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
             var cad = new CADTarea();
-            var lista = cad.ListarTodas();
+            var lista = cad.ListarTodas().Where(t => t.CreadaPorId == userId).ToList();
             if (lista == null || lista.Count == 0)
             {
                 pnlVacio.Visible = true;
