@@ -66,7 +66,7 @@
         <div class="feature no"><span class="fi">🔒</span><span>No puedes <strong>añadir gastos</strong> al piso</span></div>
         <div class="feature no"><span class="fi">🔒</span><span>No puedes <strong>enviar mensajes</strong> en el chat</span></div>
         <div class="feature no"><span class="fi">🔒</span><span>Sin acceso a <strong>contratos ni documentos</strong></span></div>
-        <div class="feature no"><span class="fi">🔒</span><span>Sin acceso a <strong>Mis Pisos</strong> (no puedes publicar ni gestionar pisos)</span></div>
+        <div class="feature no"><span class="fi">🔒</span><span>Sin acceso a <strong>Comunidades</strong> (no puedes publicar ni gestionar pisos)</span></div>
         <div class="feature no"><span class="fi">📢</span><span>Verás <strong>anuncios publicitarios</strong> en todas las secciones</span></div>
 
         <div class="plan-hr"></div>

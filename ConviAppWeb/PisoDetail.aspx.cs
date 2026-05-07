@@ -38,5 +38,53 @@ namespace ConviAppWeb
             lblHabitaciones.Text = p.NumeroHabitaciones.ToString();
             lblPrecio.Text = p.PrecioTotal.ToString("0.00");
         }
+
+        protected void btnUnirse_Click(object sender, EventArgs e)
+        {
+            string idStr = Request.QueryString["id"];
+            if (int.TryParse(idStr, out int pisoId) && Session["UserId"] != null)
+            {
+                int userId = Convert.ToInt32(Session["UserId"]);
+                var cadCu = new CADComunidadUsuario();
+                bool exito = cadCu.UnirUsuarioAComunidad(pisoId, userId);
+                
+                if (exito)
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "unirse", "alert('¡Te has unido a la comunidad exitosamente!'); window.location.href='Comunidades.aspx';", true);
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "errorUnir", "alert('Ya eres miembro de esta comunidad o hubo un error.');", true);
+                }
+            }
+        }
+
+        protected void btnContactar_Click(object sender, EventArgs e)
+        {
+            string idStr = Request.QueryString["id"];
+            if (int.TryParse(idStr, out int pisoId) && Session["UserId"] != null)
+            {
+                string myName = Session["UserName"] != null ? Session["UserName"].ToString() : "Un usuario";
+                var cadPiso = new CADPiso();
+                var piso = cadPiso.LeerPiso(pisoId);
+                
+                if (piso != null)
+                {
+                    var cadN = new CADNotificacion();
+                    // ID 1 suele ser el Admin global
+                    cadN.CrearNotificacion(new ENNotificacion
+                    {
+                        UsuarioId = 1,
+                        Titulo = "Nuevo interesado en comunidad",
+                        Mensaje = $"{myName} está interesado en unirse a la comunidad de '{piso.Direccion}'.",
+                        FechaCreacion = DateTime.Now,
+                        Leida = false,
+                        Tipo = "Mensaje"
+                    });
+                    
+                    ClientScript.RegisterStartupScript(this.GetType(), "contactar", "alert('¡Se ha enviado tu solicitud al administrador!');", true);
+                }
+            }
+        }
     }
 }

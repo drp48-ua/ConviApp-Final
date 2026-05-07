@@ -10,7 +10,7 @@
             <a href="Incidencias.aspx" class="dash-tab">&#128295; Incidencias</a>
             <a href="ContratosYPagos.aspx" class="dash-tab">&#128196; Contratos</a>
             <a href="Documentos.aspx" class="dash-tab">&#128206; Documentos</a>
-            <a href="MisPisos.aspx" class="dash-tab">&#127968; Mis Pisos</a>
+            <a href="Comunidades.aspx" class="dash-tab">&#127968; Comunidades</a>
         </div>
 
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">

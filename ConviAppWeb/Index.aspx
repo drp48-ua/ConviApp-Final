@@ -296,7 +296,7 @@
                                 </p>
                                 <div style="display: flex; gap: 12px;">
                                     <button type="button" onclick="switchMainTab('pisos')" class="btn btn-primary">Ver
-                                        mis pisos</button>
+                                        Comunidades</button>
                                     <button type="button" onclick="switchMainTab('tareas')" class="btn btn-outline"
                                         style="background:white">Ir a mis
                                         tareas</button>
@@ -449,7 +449,7 @@
 
                     <!-- MOCK TABS FOR THE UI DEMO -->
                     <div id="tab-pisos" class="tab-content flat-card">
-                        <h2 style="margin-bottom:8px;">🏠 Mis pisos</h2>
+                        <h2 style="margin-bottom:8px;">🏠 Comunidades</h2>
                         <p style="color:#6b7280;margin-bottom:16px;">Consulta y gestiona todos los pisos que
                             administras. Añade fotos, detalles de habitaciones y más.</p>
                         <% if (_isDemo) { %>
@@ -471,7 +471,7 @@
                                     style="margin-left:8px;">← Volver</button>
                             </div>
                             <% } else { %>
-                                <p><a href="MisPisos.aspx" class="btn btn-primary">Ir a mis pisos →</a></p>
+                                <p><a href="Comunidades.aspx" class="btn btn-primary">Ir a Comunidades →</a></p>
                                 <button type="button" onclick="switchMainTab('inicio')" class="btn btn-outline"
                                     style="margin-top:20px;">← Volver</button>
                                 <% } %>
@@ -649,7 +649,7 @@
                                                 Aprovecha al máximo tu suscripción ad-free revisando estos atajos
                                                 útiles.</p>
 
-                                            <a href="MisPisos.aspx" class="btn"
+                                            <a href="Comunidades.aspx" class="btn"
                                                 style="background:#ef4444; color:white; justify-content:center; margin-bottom:12px; display:flex; align-items:center; gap:8px; padding:10px; border-radius:6px; text-decoration:none; width: 100%;">+
                                                 A&ntilde;adir piso rápido</a>
                                             <a href="ContratosYPagos.aspx" class="btn"

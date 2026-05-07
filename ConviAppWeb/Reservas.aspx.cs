@@ -28,7 +28,7 @@ namespace ConviAppWeb
             var usuariosEnPiso = usuarios.Select(u => u.Id).ToList();
 
             var cad = new CADReserva();
-            var lista = cad.ListarTodas(pisoId).Where(r => usuariosEnPiso.Contains(r.UsuarioId)).ToList();
+            var lista = cad.ListarTodas().Where(r => usuariosEnPiso.Contains(r.UsuarioId)).ToList();
             if (lista == null || lista.Count == 0)
             {
                 pnlVacio.Visible = true;

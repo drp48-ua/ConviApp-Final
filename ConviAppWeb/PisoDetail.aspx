@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Detalle de Piso" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+<%@ Page Title="Detalle de Piso" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeFile="PisoDetail.aspx.cs" Inherits="ConviAppWeb.PisoDetail" %>
     <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <asp:Panel ID="pnlNotFound" runat="server" Visible="false">
@@ -65,12 +65,11 @@
                                 <a href="Login.aspx" class="btn btn-outline"
                                     style="width:100%; display:block; text-align:center;">Iniciar sesi&oacute;n</a>
                                 <% } else { %>
-                                    <a href="Mensajes.aspx" class="btn btn-primary"
-                                        style="width:100%; display:block; text-align:center; margin-bottom:12px;">💬
-                                        Contactar</a>
-                                    <a href="MisPisos.aspx" class="btn btn-outline"
-                                        style="width:100%; display:block; text-align:center;">🏠 Mis Pisos</a>
-                                    <% } %>
+                                    <asp:LinkButton ID="btnContactar" runat="server" OnClick="btnContactar_Click" CssClass="btn btn-primary"
+                                        style="width:100%; display:block; text-align:center; margin-bottom:12px;">💬 Contactar propietario</asp:LinkButton>
+                                    <asp:LinkButton ID="btnUnirse" runat="server" OnClick="btnUnirse_Click" CssClass="btn btn-outline"
+                                        style="width:100%; display:block; text-align:center;">🔑 Unirse a la comunidad</asp:LinkButton>
+                                <% } %>
                         </div>
                     </div>
                 </div>
