@@ -43,14 +43,17 @@ namespace ConviAppWeb.DataAccess
             {
                 c.Open();
                 var sql = pisoId.HasValue ? "SELECT * FROM Incidencia WHERE piso_id=@p ORDER BY fecha_reporte DESC" : "SELECT * FROM Incidencia ORDER BY fecha_reporte DESC";
-                SQLiteCommand com = new SQLiteCommand(sql, c);
-                if (pisoId.HasValue) com.Parameters.AddWithValue("@p", pisoId.Value);
-                SQLiteDataReader dr = com.ExecuteReader();
-                while (dr.Read()) lista.Add(MapRow(dr));
-                dr.Close();
+                using (SQLiteCommand com = new SQLiteCommand(sql, c))
+                {
+                    if (pisoId.HasValue) com.Parameters.AddWithValue("@p", pisoId.Value);
+                    using (SQLiteDataReader dr = com.ExecuteReader())
+                    {
+                        while (dr.Read()) lista.Add(MapRow(dr));
+                    }
+                }
             }
             catch (Exception) { lista = new List<ENIncidencia>(); }
-            finally { c.Close(); }
+            finally { c.Close(); c.Dispose(); }
             return lista;
         }
 
