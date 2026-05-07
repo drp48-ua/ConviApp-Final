@@ -72,11 +72,11 @@ namespace ConviAppWeb
                 
                 if (exito)
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "unirse", "alert('¡Te has unido a la comunidad de este piso exitosamente!'); window.location.href='Comunidades.aspx';", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "unirse", "alert('¡Te has unido a la comunidad de este piso exitosamente!'); window.location.href='Comunidades.aspx';", true);
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "errorUnir", "alert('Ya eres miembro de esta comunidad o hubo un error.');", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "errorUnir", "alert('Ya eres miembro de esta comunidad o hubo un error.');", true);
                 }
             }
         }
