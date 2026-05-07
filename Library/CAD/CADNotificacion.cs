@@ -76,6 +76,43 @@ namespace ConviAppWeb.DataAccess
             return en;
         }
 
+        public List<ENNotificacion> ListarPorUsuario(int usuarioId)
+        {
+            var lista = new List<ENNotificacion>();
+            using (SQLiteConnection c = new SQLiteConnection(constring))
+            {
+                try
+                {
+                    c.Open();
+                    using (SQLiteCommand com = new SQLiteCommand("SELECT * FROM Notificacion WHERE usuario_id = @u ORDER BY fecha_creacion DESC", c))
+                    {
+                        com.Parameters.AddWithValue("@u", usuarioId);
+                        using (SQLiteDataReader dr = com.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                var en = new ENNotificacion();
+                                en.Id = dr["id"] != DBNull.Value ? Convert.ToInt32(dr["id"]) : 0;
+                                en.Titulo = dr["titulo"] != DBNull.Value ? dr["titulo"].ToString() : null;
+                                en.Mensaje = dr["mensaje"] != DBNull.Value ? dr["mensaje"].ToString() : null;
+                                en.Tipo = dr["tipo"] != DBNull.Value ? dr["tipo"].ToString() : null;
+                                en.Leida = dr["leida"] != DBNull.Value && Convert.ToInt32(dr["leida"]) == 1;
+                                en.FechaCreacion = dr["fecha_creacion"] != DBNull.Value ? Convert.ToDateTime(dr["fecha_creacion"]) : DateTime.MinValue;
+                                en.FechaLectura = dr["fecha_lectura"] != DBNull.Value ? Convert.ToDateTime(dr["fecha_lectura"]) : (DateTime?)null;
+                                en.UsuarioId = dr["usuario_id"] != DBNull.Value ? Convert.ToInt32(dr["usuario_id"]) : 0;
+                                lista.Add(en);
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    lista = new List<ENNotificacion>();
+                }
+            }
+            return lista;
+        }
+
         // UPDATE — metodo desconectado
         public bool ActualizarNotificacion(ENNotificacion en)
         {
