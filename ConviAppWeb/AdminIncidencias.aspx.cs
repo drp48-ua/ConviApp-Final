@@ -79,7 +79,7 @@ namespace ConviAppWeb
                     txtRespuesta.Text = "";
                     
                     // Alerta simple a traves de script
-                    ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Mensaje enviado al usuario exitosamente.');", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Mensaje enviado al usuario exitosamente.');", true);
                 }
             }
         }
