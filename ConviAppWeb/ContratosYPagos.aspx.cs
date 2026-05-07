@@ -57,20 +57,31 @@ namespace ConviAppWeb
 
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
             var cad = new CADContrato();
-            cad.CrearContrato(new ENContrato
+            try
             {
-                Type = ddlTipo.SelectedValue,
-                StartDate = inicio,
-                EndDate = fin,
-                MonthlyRent = renta,
-                DepositAmount = fianza,
-                Status = "activo",
-                UserId = userId,
-                PropertyId = 1
-            });
-            txtFechaInicio.Text = ""; txtFechaFin.Text = ""; txtRenta.Text = ""; txtFianza.Text = "";
-            lblError.Visible = false;
-            CargarDatos();
+                bool result = cad.CrearContrato(new ENContrato
+                {
+                    Type = ddlTipo.SelectedValue,
+                    StartDate = inicio,
+                    EndDate = fin,
+                    MonthlyRent = renta,
+                    DepositAmount = fianza,
+                    Status = "activo",
+                    UserId = userId,
+                    PropertyId = 1
+                });
+                
+                if (!result) throw new Exception("Error al insertar el contrato en la base de datos.");
+                
+                txtFechaInicio.Text = ""; txtFechaFin.Text = ""; txtRenta.Text = ""; txtFianza.Text = "";
+                lblError.Visible = false;
+                CargarDatos();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = "Error BD: " + ex.Message;
+                lblError.Visible = true;
+            }
         }
 
         protected void RptContratos_ItemCommand(object source, RepeaterCommandEventArgs e)

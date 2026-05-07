@@ -38,19 +38,30 @@ namespace ConviAppWeb
             if (string.IsNullOrWhiteSpace(txtNombre.Text)) { lblError.Text = "El nombre es obligatorio."; lblError.Visible = true; return; }
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
             var cad = new CADDocumento();
-            cad.CrearDocumento(new ENDocumento
+            try
             {
-                FileName = txtNombre.Text.Trim(),
-                Type = ddlTipo.SelectedValue,
-                Description = txtDescripcion.Text.Trim(),
-                UploadDate = DateTime.Now,
-                UserId = userId,
-                FileSize = 0,
-                ContentType = "application/octet-stream"
-            });
-            txtNombre.Text = ""; txtDescripcion.Text = "";
-            lblError.Visible = false;
-            CargarDocumentos();
+                bool result = cad.CrearDocumento(new ENDocumento
+                {
+                    FileName = txtNombre.Text.Trim(),
+                    Type = ddlTipo.SelectedValue,
+                    Description = txtDescripcion.Text.Trim(),
+                    UploadDate = DateTime.Now,
+                    UserId = userId,
+                    FileSize = 0,
+                    ContentType = "application/octet-stream"
+                });
+
+                if (!result) throw new Exception("Error al insertar el documento en la base de datos.");
+
+                txtNombre.Text = ""; txtDescripcion.Text = "";
+                lblError.Visible = false;
+                CargarDocumentos();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = "Error BD: " + ex.Message;
+                lblError.Visible = true;
+            }
         }
 
         protected void GvDocumentos_RowCommand(object sender, GridViewCommandEventArgs e)

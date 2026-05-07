@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SQLite;
 using System.Collections.Generic;
@@ -14,31 +14,26 @@ namespace ConviAppWeb.DataAccess
         public bool CrearContrato(ENContrato en)
         {
             bool creado = false;
-            DataSet bdVirtual = new DataSet();
-            SQLiteConnection c = new SQLiteConnection(constring);
-            try
+            using (SQLiteConnection c = new SQLiteConnection(constring))
             {
-                SQLiteDataAdapter da = new SQLiteDataAdapter("SELECT * FROM Contrato LIMIT 0", c);
-                da.Fill(bdVirtual, "contrato");
-                DataTable t = bdVirtual.Tables["contrato"];
-                DataRow nueva = t.NewRow();
-                nueva["type"]            = en.Type ?? (object)DBNull.Value;
-                nueva["start_date"]      = en.StartDate.ToString("o");
-                nueva["end_date"]        = en.EndDate.ToString("o");
-                nueva["monthly_rent"]    = en.MonthlyRent;
-                nueva["deposit_amount"]  = en.DepositAmount;
-                nueva["status"]          = en.Status ?? "activo";
-                nueva["notes"]           = en.Notes ?? (object)DBNull.Value;
-                nueva["commission_rate"] = en.CommissionRate;
-                nueva["property_id"]     = en.PropertyId;
-                nueva["user_id"]         = en.UserId;
-                t.Rows.Add(nueva);
-                SQLiteCommandBuilder cb = new SQLiteCommandBuilder(da);
-                da.Update(bdVirtual, "contrato");
-                creado = true;
+                c.Open();
+                string sql = "INSERT INTO Contrato (type, start_date, end_date, monthly_rent, deposit_amount, status, notes, commission_rate, property_id, user_id) " +
+                             "VALUES (@ty, @sd, @ed, @mr, @da, @st, @no, @cr, @pi, @ui)";
+                using (SQLiteCommand com = new SQLiteCommand(sql, c))
+                {
+                    com.Parameters.AddWithValue("@ty", en.Type ?? (object)DBNull.Value);
+                    com.Parameters.AddWithValue("@sd", en.StartDate.ToString("o"));
+                    com.Parameters.AddWithValue("@ed", en.EndDate.ToString("o"));
+                    com.Parameters.AddWithValue("@mr", en.MonthlyRent);
+                    com.Parameters.AddWithValue("@da", en.DepositAmount);
+                    com.Parameters.AddWithValue("@st", en.Status ?? "activo");
+                    com.Parameters.AddWithValue("@no", en.Notes ?? (object)DBNull.Value);
+                    com.Parameters.AddWithValue("@cr", en.CommissionRate);
+                    com.Parameters.AddWithValue("@pi", en.PropertyId);
+                    com.Parameters.AddWithValue("@ui", en.UserId);
+                    creado = com.ExecuteNonQuery() > 0;
+                }
             }
-            catch (Exception) { creado = false; }
-            finally { c.Close(); }
             return creado;
         }
 

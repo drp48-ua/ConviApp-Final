@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SQLite;
 using System.Collections.Generic;
@@ -14,30 +14,25 @@ namespace ConviAppWeb.DataAccess
         public bool CrearDocumento(ENDocumento en)
         {
             bool creado = false;
-            DataSet bdVirtual = new DataSet();
-            SQLiteConnection c = new SQLiteConnection(constring);
-            try
+            using (SQLiteConnection c = new SQLiteConnection(constring))
             {
-                SQLiteDataAdapter da = new SQLiteDataAdapter("SELECT * FROM Documento LIMIT 0", c);
-                da.Fill(bdVirtual, "documento");
-                DataTable t = bdVirtual.Tables["documento"];
-                DataRow nueva = t.NewRow();
-                nueva["file_name"]    = en.FileName ?? (object)DBNull.Value;
-                nueva["file_data"]    = en.FileData ?? (object)DBNull.Value;
-                nueva["content_type"] = en.ContentType ?? (object)DBNull.Value;
-                nueva["file_size"]    = en.FileSize;
-                nueva["type"]         = en.Type ?? "otro";
-                nueva["description"]  = en.Description ?? (object)DBNull.Value;
-                nueva["upload_date"]  = en.UploadDate.ToString("o");
-                nueva["property_id"]  = en.PropertyId.HasValue ? (object)en.PropertyId.Value : DBNull.Value;
-                nueva["user_id"]      = en.UserId;
-                t.Rows.Add(nueva);
-                SQLiteCommandBuilder cb = new SQLiteCommandBuilder(da);
-                da.Update(bdVirtual, "documento");
-                creado = true;
+                c.Open();
+                string sql = "INSERT INTO Documento (file_name, file_data, content_type, file_size, type, description, upload_date, property_id, user_id) " +
+                             "VALUES (@fn, @fd, @ct, @fs, @ty, @de, @ud, @pi, @ui)";
+                using (SQLiteCommand com = new SQLiteCommand(sql, c))
+                {
+                    com.Parameters.AddWithValue("@fn", en.FileName ?? (object)DBNull.Value);
+                    com.Parameters.AddWithValue("@fd", en.FileData ?? (object)DBNull.Value);
+                    com.Parameters.AddWithValue("@ct", en.ContentType ?? (object)DBNull.Value);
+                    com.Parameters.AddWithValue("@fs", en.FileSize);
+                    com.Parameters.AddWithValue("@ty", en.Type ?? "otro");
+                    com.Parameters.AddWithValue("@de", en.Description ?? (object)DBNull.Value);
+                    com.Parameters.AddWithValue("@ud", en.UploadDate.ToString("o"));
+                    com.Parameters.AddWithValue("@pi", en.PropertyId.HasValue ? (object)en.PropertyId.Value : DBNull.Value);
+                    com.Parameters.AddWithValue("@ui", en.UserId);
+                    creado = com.ExecuteNonQuery() > 0;
+                }
             }
-            catch (Exception) { creado = false; }
-            finally { c.Close(); }
             return creado;
         }
 
