@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Index.aspx.cs"
+<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Index.aspx.cs"
     Inherits="ConviAppWeb.Index" %>
     <asp:Content ID="HContent" ContentPlaceHolderID="HeadContent" runat="server">
         <!-- Hide global Site.Master right sidebar on Index: managed inside the page -->
@@ -439,6 +439,9 @@
                                                     class="btn btn-outline" style="width:100%;display:block;">Contactar
                                                     ventas ✉️</a>
                                             </div>
+                                        </div>
+                                        <div style="text-align:center; margin-top:24px;">
+                                            <a href="Upgrade.aspx" class="btn btn-outline" style="border-radius:20px; padding:8px 24px;">🔍 Saber más sobre los planes</a>
                                         </div>
                                     </div>
                                     <% } %>

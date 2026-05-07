@@ -98,6 +98,9 @@
                             </div>
                         </label>
                     </div>
+                    <div style="text-align:center; margin-top:16px;">
+                        <a href="Upgrade.aspx" target="_blank" style="font-size:0.85rem; color:#3b82f6; text-decoration:none; font-weight:600;">🔍 Saber más sobre nuestros planes</a>
+                    </div>
                 </div>
 
                 <asp:Button ID="btnRegistrar" runat="server" Text="Registrarse ahora" CssClass="btn btn-primary"
