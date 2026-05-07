@@ -11,6 +11,8 @@ namespace ConviAppWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserEmail"] == null) { pnlApp.Visible = false; pnlDemo.Visible = true; return; }
+            if (Session["ComunidadActivaId"] == null) { Response.Redirect("Comunidades.aspx"); return; }
+            
             pnlApp.Visible = true; pnlDemo.Visible = false;
             
             if (!IsPostBack) CargarReservas();
@@ -19,20 +21,14 @@ namespace ConviAppWeb
         private void CargarReservas()
         {
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
-            var cadContrato = new CADContrato();
-            var contrato = cadContrato.ListarTodos().FirstOrDefault(c => c.UserId == userId && c.IsActive());
-            int? pisoId = contrato != null ? (int?)contrato.PropertyId : null;
+            int pisoId = Convert.ToInt32(Session["ComunidadActivaId"]);
 
-            System.Collections.Generic.List<int> usuariosEnPiso = new System.Collections.Generic.List<int> { userId };
-            if (pisoId.HasValue) {
-                usuariosEnPiso = cadContrato.ListarTodos()
-                                            .Where(c => c.PropertyId == pisoId.Value && c.IsActive())
-                                            .Select(c => c.UserId)
-                                            .ToList();
-            }
+            var cadCu = new CADComunidadUsuario();
+            var usuarios = cadCu.ObtenerUsuariosDeComunidad(pisoId);
+            var usuariosEnPiso = usuarios.Select(u => u.Id).ToList();
 
             var cad = new CADReserva();
-            var lista = cad.ListarTodas(null).Where(r => usuariosEnPiso.Contains(r.UsuarioId)).ToList();
+            var lista = cad.ListarTodas(pisoId).Where(r => usuariosEnPiso.Contains(r.UsuarioId)).ToList();
             if (lista == null || lista.Count == 0)
             {
                 pnlVacio.Visible = true;

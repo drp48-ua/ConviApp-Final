@@ -20,6 +20,8 @@ namespace ConviAppWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserEmail"] == null) { pnlApp.Visible = false; pnlDemo.Visible = true; return; }
+            if (Session["ComunidadActivaId"] == null) { Response.Redirect("Comunidades.aspx"); return; }
+            
             pnlApp.Visible = true; pnlDemo.Visible = false;
             if (!IsPostBack) CargarMensajes();
         }
@@ -27,13 +29,11 @@ namespace ConviAppWeb
         private void CargarMensajes()
         {
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
-            var cadContrato = new CADContrato();
-            var contrato = cadContrato.ListarTodos().FirstOrDefault(c => c.UserId == userId && c.IsActive());
-            int? pisoId = contrato != null ? (int?)contrato.PropertyId : null;
+            int pisoId = Convert.ToInt32(Session["ComunidadActivaId"]);
 
             var cad = new CADMensaje();
-            var raw = cad.ListarTodos().Where(m => 
-                (pisoId.HasValue && m.PisoId == pisoId.Value) ||
+            var raw = cad.ListarTodos(pisoId).Where(m => 
+                m.PisoId == pisoId ||
                 m.EmisorId == userId || m.ReceptorId == userId
             ).ToList();
             var lista = new List<MensajeVM>();
@@ -65,10 +65,7 @@ namespace ConviAppWeb
 
             if (string.IsNullOrWhiteSpace(txtMensaje.Text)) return;
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
-            
-            var cadContrato = new CADContrato();
-            var contrato = cadContrato.ListarTodos().FirstOrDefault(c => c.UserId == userId && c.IsActive());
-            int? pisoId = contrato != null ? (int?)contrato.PropertyId : null;
+            int pisoId = Convert.ToInt32(Session["ComunidadActivaId"]);
 
             var cad = new CADMensaje();
             try
@@ -77,7 +74,7 @@ namespace ConviAppWeb
                 { 
                     Contenido = txtMensaje.Text.Trim(), 
                     EmisorId = userId, 
-                    ReceptorId = 1, // Por defecto al Admin
+                    ReceptorId = null, // Mensaje a la comunidad (sin receptor específico)
                     PisoId = pisoId,
                     FechaEnvio = DateTime.Now 
                 });

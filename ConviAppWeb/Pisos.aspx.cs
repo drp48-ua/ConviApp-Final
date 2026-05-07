@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using ConviAppWeb.DataAccess;
 using ConviAppWeb.Models;
@@ -56,6 +56,31 @@ namespace ConviAppWeb
         protected void BtnBuscar_Click(object sender, EventArgs e)
         {
             CargarPisos();
+        }
+
+        protected void btnUnirsePiso_Click(object sender, EventArgs e)
+        {
+            int pisoId;
+            if (int.TryParse(hdnPisoIdUnir.Value, out pisoId))
+            {
+                string codigoIngresado = txtCodigoUnirPiso.Text.Trim().ToUpper();
+                var cad = new CADPiso();
+                var piso = cad.LeerPiso(pisoId);
+
+                if (piso != null && piso.CodigoComunidad != null && piso.CodigoComunidad.ToUpper() == codigoIngresado)
+                {
+                    int userId = Convert.ToInt32(Session["UserId"]);
+                    var cadCu = new CADComunidadUsuario();
+                    cadCu.UnirUsuarioAComunidad(pisoId, userId);
+                    
+                    // Script para alertar y redirigir
+                    ScriptManager.RegisterStartupScript(this, GetType(), "unirse", "alert('¡Unido a la comunidad exitosamente!'); window.location.href='Comunidades.aspx';", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "errorUnir", "alert('Código incorrecto para este piso.');", true);
+                }
+            }
         }
     }
 }

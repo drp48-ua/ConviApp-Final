@@ -94,6 +94,7 @@
                         <a href="Perfil.aspx" class="nav-link" id="navPerfil">&#128100; Perfil</a>
                     <% } else { %>
                         <a href="Index.aspx" class="nav-link" id="navInicio">&#127968; Inicio</a>
+                        <a href="Comunidades.aspx" class="nav-link" id="navComunidades">🏠 Comunidades</a>
                         <a href="Pisos.aspx" class="nav-link">🏢 Pisos</a>
                         <a href="ContratosYPagos.aspx" class="nav-link" id="navContratos">📄 Contratos</a>
                         <a href="Tareas.aspx" class="nav-link" id="navTareas">✅ Tareas</a>

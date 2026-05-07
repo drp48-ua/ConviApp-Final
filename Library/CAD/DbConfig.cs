@@ -30,6 +30,14 @@ namespace ConviAppWeb.DataAccess
                                     {
                                         cmd.ExecuteNonQuery();
                                     }
+                                    
+                                    // MIGRACIONES AUTOMÁTICAS
+                                    using (var cmd = new SQLiteCommand("CREATE TABLE IF NOT EXISTS ComunidadUsuario (id INTEGER PRIMARY KEY AUTOINCREMENT, piso_id INTEGER NOT NULL, usuario_id INTEGER NOT NULL, fecha_union DATETIME DEFAULT CURRENT_TIMESTAMP);", c))
+                                    {
+                                        cmd.ExecuteNonQuery();
+                                    }
+                                    try { using (var cmd = new SQLiteCommand("ALTER TABLE Piso ADD COLUMN codigo_comunidad TEXT;", c)) { cmd.ExecuteNonQuery(); } } catch { }
+                                    try { using (var cmd = new SQLiteCommand("ALTER TABLE Usuario ADD COLUMN rol TEXT;", c)) { cmd.ExecuteNonQuery(); } } catch { }
                                 }
                             }
                             catch { }

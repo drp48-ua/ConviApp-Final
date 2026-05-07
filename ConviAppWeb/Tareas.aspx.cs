@@ -11,6 +11,8 @@ namespace ConviAppWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserEmail"] == null) { pnlApp.Visible = false; pnlDemo.Visible = true; return; }
+            if (Session["ComunidadActivaId"] == null) { Response.Redirect("Comunidades.aspx"); return; }
+            
             pnlApp.Visible = true; pnlDemo.Visible = false;
             
             if (!IsPostBack) CargarTareas();
@@ -18,9 +20,16 @@ namespace ConviAppWeb
 
         private void CargarTareas()
         {
-            var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
+            int pisoId = Convert.ToInt32(Session["ComunidadActivaId"]);
             var cad = new CADTarea();
-            var lista = cad.ListarTodas().Where(t => t.CreadaPorId == userId).ToList();
+            var lista = cad.ListarTodas(pisoId); // Opcional: si ListarTodas recibe pisoId. Si no, Where(t => t.PisoId == pisoId)
+            
+            // Asumamos que CADTarea.ListarTodas(int?) ya filtra, si no lo haremos manual:
+            if (lista.Count > 0 && lista[0].PisoId != pisoId) 
+            {
+                lista = lista.Where(t => t.PisoId == pisoId).ToList();
+            }
+
             if (lista == null || lista.Count == 0)
             {
                 pnlVacio.Visible = true;
@@ -39,13 +48,15 @@ namespace ConviAppWeb
         {
             if (string.IsNullOrWhiteSpace(txtTitulo.Text)) { lblError.Text = "El título es obligatorio."; lblError.Visible = true; return; }
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
+            int pisoId = Convert.ToInt32(Session["ComunidadActivaId"]);
             var cad = new CADTarea();
             cad.CrearTarea(new ENTarea
             {
                 Titulo = txtTitulo.Text.Trim(),
                 Descripcion = txtDescripcion.Text.Trim(),
                 Prioridad = ddlPrioridad.SelectedValue,
-                CreadaPorId = userId
+                CreadaPorId = userId,
+                PisoId = pisoId
             });
             txtTitulo.Text = "";
             txtDescripcion.Text = "";

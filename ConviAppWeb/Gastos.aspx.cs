@@ -11,6 +11,8 @@ namespace ConviAppWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserEmail"] == null) { pnlApp.Visible = false; pnlDemo.Visible = true; return; }
+            if (Session["ComunidadActivaId"] == null) { Response.Redirect("Comunidades.aspx"); return; }
+            
             pnlApp.Visible = true; pnlDemo.Visible = false;
             if (!IsPostBack) CargarGastos();
         }
@@ -18,15 +20,10 @@ namespace ConviAppWeb
         private void CargarGastos()
         {
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
-            var cadContrato = new CADContrato();
-            var contrato = cadContrato.ListarTodos().FirstOrDefault(c => c.UserId == userId && c.IsActive());
-            int? pisoId = contrato != null ? (int?)contrato.PropertyId : null;
+            int pisoId = Convert.ToInt32(Session["ComunidadActivaId"]);
 
             var cad = new CADGasto();
-            var lista = cad.ListarTodos().Where(g => 
-                (pisoId.HasValue && g.PisoId == pisoId.Value) || 
-                g.RegistradoPorId == userId
-            ).ToList();
+            var lista = cad.ListarTodos(pisoId); // CADGasto.ListarTodos(pisoId) filtra por piso
             
             pnlVacio.Visible = lista.Count == 0;
             pnlTabla.Visible = lista.Count > 0;
@@ -44,8 +41,9 @@ namespace ConviAppWeb
             decimal.TryParse(txtImporte.Text, out imp);
             if(imp > 0 && !string.IsNullOrWhiteSpace(txtConcepto.Text)) {
                 var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
+                int pisoId = Convert.ToInt32(Session["ComunidadActivaId"]);
                 var cad = new CADGasto();
-                cad.CrearGasto(new ENGasto { Concepto = txtConcepto.Text, Importe = imp, Fecha = DateTime.Today, Pagado = false, RegistradoPorId = userId });
+                cad.CrearGasto(new ENGasto { Concepto = txtConcepto.Text, Importe = imp, Fecha = DateTime.Today, Pagado = false, RegistradoPorId = userId, PisoId = pisoId });
                 txtConcepto.Text = "";
                 txtImporte.Text = "";
                 CargarGastos();

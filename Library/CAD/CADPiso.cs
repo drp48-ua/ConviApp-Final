@@ -11,9 +11,9 @@ namespace ConviAppWeb.DataAccess
         private string constring { get { return DbConfig.ConnectionString; } }
 
         // CREATE — método desconectado
-        public bool CrearPiso(ENPiso en)
+        public int CrearPiso(ENPiso en)
         {
-            bool creado = false;
+            int creadoId = 0;
             DataSet bdVirtual = new DataSet();
             SQLiteConnection c = new SQLiteConnection(constring);
             try
@@ -30,14 +30,21 @@ namespace ConviAppWeb.DataAccess
                 nueva["precio_total"]       = en.PrecioTotal;
                 nueva["descripcion"]        = en.Descripcion ?? (object)DBNull.Value;
                 nueva["disponible"]         = en.Disponible ? 1 : 0;
+                nueva["codigo_comunidad"]   = en.CodigoComunidad ?? (object)DBNull.Value;
                 t.Rows.Add(nueva);
                 SQLiteCommandBuilder cb = new SQLiteCommandBuilder(da);
                 da.Update(bdVirtual, "piso");
-                creado = true;
+                
+                // Obtener el ID insertado
+                using (SQLiteCommand cmd = new SQLiteCommand("SELECT MAX(id) FROM Piso", c))
+                {
+                    c.Open();
+                    creadoId = Convert.ToInt32(cmd.ExecuteScalar());
+                }
             }
-            catch (Exception) { creado = false; }
+            catch (Exception) { creadoId = 0; }
             finally { c.Close(); }
-            return creado;
+            return creadoId;
         }
 
         // READ por id — método conectado
@@ -104,6 +111,7 @@ namespace ConviAppWeb.DataAccess
             PrecioTotal       = dr["precio_total"] != DBNull.Value ? Convert.ToDecimal(dr["precio_total"]) : 0,
             Descripcion       = dr["descripcion"] != DBNull.Value ? dr["descripcion"].ToString() : null,
             Disponible        = dr["disponible"] != DBNull.Value && Convert.ToInt32(dr["disponible"]) == 1,
+            CodigoComunidad   = dr["codigo_comunidad"] != DBNull.Value ? dr["codigo_comunidad"].ToString() : null,
         }; }
     }
 }

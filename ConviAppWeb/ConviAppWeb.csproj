@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -54,7 +54,7 @@
     <Content Include="Incidencias.aspx" />
     <Content Include="ContratosYPagos.aspx" />
     <Content Include="Documentos.aspx" />
-    <Content Include="MisPisos.aspx" />
+    <Content Include="Comunidades.aspx" />
     <Content Include="Upgrade.aspx" />
     <Content Include="Contacto.aspx" />
     <Content Include="Privacidad.aspx" />
@@ -185,12 +185,12 @@
     <Compile Include="Documentos.aspx.designer.cs">
       <DependentUpon>Documentos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MisPisos.aspx.cs">
-      <DependentUpon>MisPisos.aspx</DependentUpon>
+    <Compile Include="Comunidades.aspx.cs">
+      <DependentUpon>Comunidades.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MisPisos.aspx.designer.cs">
-      <DependentUpon>MisPisos.aspx</DependentUpon>
+    <Compile Include="Comunidades.aspx.designer.cs">
+      <DependentUpon>Comunidades.aspx</DependentUpon>
     </Compile>
     <Compile Include="Upgrade.aspx.cs">
       <DependentUpon>Upgrade.aspx</DependentUpon>

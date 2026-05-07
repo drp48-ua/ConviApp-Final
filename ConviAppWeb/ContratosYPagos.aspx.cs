@@ -10,6 +10,8 @@ namespace ConviAppWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserEmail"] == null) { pnlApp.Visible = false; pnlDemo.Visible = true; return; }
+            if (Session["ComunidadActivaId"] == null) { Response.Redirect("Comunidades.aspx"); return; }
+            
             pnlApp.Visible = true; pnlDemo.Visible = false;
             
             if (!IsPostBack) {
@@ -20,8 +22,10 @@ namespace ConviAppWeb
         private void CargarDatos()
         {
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
+            int pisoId = Convert.ToInt32(Session["ComunidadActivaId"]);
+
             var cadC = new CADContrato();
-            var contratos = cadC.ListarTodos(userId);
+            var contratos = cadC.ListarTodos(userId).Where(c => c.PropertyId == pisoId).ToList();
 
             bool tieneContratos = contratos != null && contratos.Count > 0;
             pnlVacioContratos.Visible = !tieneContratos;
@@ -68,7 +72,7 @@ namespace ConviAppWeb
                     DepositAmount = fianza,
                     Status = "activo",
                     UserId = userId,
-                    PropertyId = 1
+                    PropertyId = Convert.ToInt32(Session["ComunidadActivaId"])
                 });
                 
                 if (!result) throw new Exception("Error al insertar el contrato en la base de datos.");

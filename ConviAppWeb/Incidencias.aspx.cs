@@ -11,6 +11,8 @@ namespace ConviAppWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserEmail"] == null) { pnlApp.Visible = false; pnlDemo.Visible = true; return; }
+            if (Session["ComunidadActivaId"] == null) { Response.Redirect("Comunidades.aspx"); return; }
+            
             pnlApp.Visible = true; pnlDemo.Visible = false;
 
             if (Session["UserRole"] != null && Session["UserRole"].ToString() == "Basico")
@@ -30,8 +32,12 @@ namespace ConviAppWeb
         private void CargarIncidencias()
         {
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
+            int pisoId = Convert.ToInt32(Session["ComunidadActivaId"]);
             var cad = new CADIncidencia();
-            var lista = cad.ListarTodas().Where(i => i.ReportadaPorId == userId).ToList();
+            // Filtrar por pisoId además de por el que reporta. 
+            // Podríamos listar las de todos en la comunidad, o solo las mías:
+            var lista = cad.ListarTodas().Where(i => i.PisoId == pisoId).ToList();
+            
             if (lista == null || lista.Count == 0)
             {
                 pnlVacio.Visible = true;
@@ -50,10 +56,7 @@ namespace ConviAppWeb
         {
             if (string.IsNullOrWhiteSpace(txtTitulo.Text)) { lblError.Text = "El título es obligatorio."; lblError.Visible = true; return; }
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
-            
-            var cadContrato = new CADContrato();
-            var contrato = cadContrato.ListarTodos().FirstOrDefault(c => c.UserId == userId && c.IsActive());
-            int? pisoId = contrato != null ? (int?)contrato.PropertyId : null;
+            int pisoId = Convert.ToInt32(Session["ComunidadActivaId"]);
 
             var cad = new CADIncidencia();
             try 

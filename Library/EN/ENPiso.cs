@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -21,7 +21,7 @@ namespace ConviAppWeb.Models
         private string _descripcion;
         private bool _disponible;
         private string _caracteristicas; // JSON o CSV de extras (parking, ascensor, etc.)
-
+        private string _codigoComunidad;
         // ─── Propiedades pÃºblicas ───
         [Key]
         public int Id { get { return _id; } set { _id = value; } }
@@ -52,6 +52,9 @@ namespace ConviAppWeb.Models
         public bool Disponible { get { return _disponible; } set { _disponible = value; } }
 
         public string Caracteristicas { get { return _caracteristicas; } set { _caracteristicas = value; } }
+
+        [MaxLength(8)]
+        public string CodigoComunidad { get { return _codigoComunidad; } set { _codigoComunidad = value; } }
 
         // ─── NavegaciÃ³n ───
         public ICollection<ENHabitacion> Habitaciones { get; set; }
