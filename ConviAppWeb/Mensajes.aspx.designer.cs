@@ -5,5 +5,7 @@ namespace ConviAppWeb {
         protected global::System.Web.UI.WebControls.Panel pnlVacio;
         protected global::System.Web.UI.WebControls.Repeater rptMensajes;
         protected global::System.Web.UI.WebControls.TextBox txtMensaje;
+        protected global::System.Web.UI.WebControls.Button btnEnviar;
+        protected global::System.Web.UI.WebControls.Label lblError;
     }
 }

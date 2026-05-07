@@ -53,7 +53,7 @@ namespace ConviAppWeb
             
             var cadContrato = new CADContrato();
             var contrato = cadContrato.ListarTodos().FirstOrDefault(c => c.UserId == userId && c.IsActive());
-            int? pisoId = contrato != null ? (int?)contrato.PisoId : null;
+            int? pisoId = contrato != null ? (int?)contrato.PropertyId : null;
 
             var cad = new CADIncidencia();
             try 
