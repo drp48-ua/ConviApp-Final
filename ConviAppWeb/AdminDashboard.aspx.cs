@@ -1,6 +1,7 @@
 using System;
 using System.Web;
 using System.Web.UI;
+using System.Linq;
 using ConviAppWeb.DataAccess;
 
 namespace ConviAppWeb
@@ -11,6 +12,9 @@ namespace ConviAppWeb
         protected global::System.Web.UI.WebControls.Label lblTotalPisos;
         protected global::System.Web.UI.WebControls.Label lblTotalIncidencias;
         protected global::System.Web.UI.WebControls.Label lblIngresos;
+        protected global::System.Web.UI.WebControls.Label lblTopPiso;
+        protected global::System.Web.UI.WebControls.Label lblTopCliente;
+        protected global::System.Web.UI.WebControls.Label lblBottomCliente;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,10 +34,37 @@ namespace ConviAppWeb
                 var cadI = new CADIncidencia();
                 lblTotalIncidencias.Text = cadI.ObtenerTotalAbiertas().ToString();
 
-                // Mock Ingresos calculation based on total users (e.g. 5% are Pro paying 4.99)
-                int totalUsers = cadU.ObtenerTotal();
-                double mrr = (totalUsers * 0.05) * 4.99;
-                lblIngresos.Text = "$" + mrr.ToString("0.00");
+                var cadC = new CADContrato();
+                var contratos = cadC.ListarTodos();
+                
+                decimal ingresosTotales = contratos.Sum(c => c.TotalContractValue());
+                lblIngresos.Text = ingresosTotales.ToString("C");
+
+                if (contratos.Any())
+                {
+                    var topPisoGroup = contratos.GroupBy(c => c.PropertyId).OrderByDescending(g => g.Count()).FirstOrDefault();
+                    if (topPisoGroup != null)
+                    {
+                        var piso = cadP.LeerPiso(topPisoGroup.Key);
+                        lblTopPiso.Text = piso != null ? $"Piso #{piso.Id} ({topPisoGroup.Count()} contratos)" : $"Piso #{topPisoGroup.Key}";
+                    }
+
+                    var clientesPorRentabilidad = contratos.GroupBy(c => c.UserId)
+                        .Select(g => new { UserId = g.Key, TotalInvertido = g.Sum(c => c.TotalContractValue()) })
+                        .OrderByDescending(x => x.TotalInvertido).ToList();
+
+                    if (clientesPorRentabilidad.Any())
+                    {
+                        var topCliente = clientesPorRentabilidad.First();
+                        var bottomCliente = clientesPorRentabilidad.Last();
+
+                        var uTop = cadU.LeerUsuario(topCliente.UserId);
+                        var uBottom = cadU.LeerUsuario(bottomCliente.UserId);
+
+                        lblTopCliente.Text = uTop != null ? $"{uTop.Email} ({topCliente.TotalInvertido:C})" : $"UID: {topCliente.UserId}";
+                        lblBottomCliente.Text = uBottom != null ? $"{uBottom.Email} ({bottomCliente.TotalInvertido:C})" : $"UID: {bottomCliente.UserId}";
+                    }
+                }
             }
         }
     }

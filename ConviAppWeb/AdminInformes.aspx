@@ -37,8 +37,10 @@
                 </div>
             </div>
 
-            <h3 style="margin-bottom:16px;">Descargar Reportes en CSV/PDF</h3>
-            <button class="btn btn-outline" style="margin-right:8px;">🔽 Resumen Financiero</button>
-            <button class="btn btn-outline">🔽 Exportar Usuarios Activos</button>
+            <h3 style="margin-bottom:16px;">Descargar Reportes en CSV/TXT</h3>
+            <asp:Button ID="btnDescargarFinanciero" runat="server" Text="🔽 Resumen Financiero" CssClass="btn btn-outline" style="margin-right:8px;" OnClick="btnDescargarFinanciero_Click" />
+            <asp:Button ID="btnDescargarUsuarios" runat="server" Text="🔽 Exportar Usuarios Activos" CssClass="btn btn-outline" OnClick="btnDescargarUsuarios_Click" />
         </div>
     </asp:Content>
+
+

@@ -10,27 +10,27 @@
             <p style="color: #6b7280;">Añade nuevos anuncios dirigidos a las cuentas Gratuitas.</p>
         </div>
 
-        <div class="glass-card" style="padding:24px; margin-bottom:32px;">
-            <h3 style="margin-bottom:16px;">Nuevo Anuncio</h3>
-            <div style="display:flex; gap:16px; margin-bottom:16px;">
-                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" Placeholder="Título del anuncio" style="flex:1;"></asp:TextBox>
-                <asp:TextBox ID="txtDesc" runat="server" CssClass="form-control" Placeholder="Descripción corta" style="flex:2;"></asp:TextBox>
-                <asp:Button ID="btnAddAd" runat="server" Text="Guardar Anuncio" CssClass="btn btn-primary" OnClick="btnAddAd_Click" />
-            </div>
+        <div class="glass-card" style="padding:24px; margin-bottom:32px; background-color:#eff6ff; border-left:4px solid #3b82f6;">
+            <h3 style="margin-bottom:8px;">Modo de Edición</h3>
+            <p style="color:#1e40af; font-size:0.9rem;">
+                La creación de nuevos anuncios ha sido deshabilitada por motivos de diseño del overlay. Solo puedes modificar los textos de los anuncios actuales.
+            </p>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;">
-            <asp:Repeater ID="rptAds" runat="server">
+            <asp:Repeater ID="rptAds" runat="server" OnItemCommand="rptAds_ItemCommand">
                 <ItemTemplate>
                     <div class="glass-card" style="padding:0; overflow:hidden;">
                         <div style='height:120px; background:<%# Eval("Bg") %>; color:white; padding:20px; text-align:center;'>
                             <h3 style="font-size:1.2rem;"><%# Eval("Title") %></h3>
                         </div>
                         <div style="padding:16px;">
-                            <p style="font-size:0.85rem; color:#4b5563; margin-bottom:12px;"><%# Eval("Desc") %></p>
+                            <asp:TextBox ID="txtEditTitulo" runat="server" Text='<%# Eval("Title") %>' CssClass="form-control" style="margin-bottom:8px; width:100%; font-weight:bold;" />
+                            <asp:TextBox ID="txtEditDesc" runat="server" Text='<%# Eval("Desc") %>' CssClass="form-control" TextMode="MultiLine" Rows="2" style="margin-bottom:12px; width:100%; font-size:0.85rem;" />
+                            
                             <div style="display:flex; justify-content:space-between; align-items:center;">
                                 <span class="badge" style="background:#ecfdf5; color:#10b981; padding:4px 8px; border-radius:12px; font-size:0.75rem;">Activo</span>
-                                <asp:LinkButton ID="btnDeleteAd" runat="server" CommandArgument='<%# Eval("Id") %>' OnCommand="btnDeleteAd_Command" CssClass="btn btn-sm" style="color:red; background:transparent; border:none;">❌ Borrar</asp:LinkButton>
+                                <asp:Button ID="btnSaveAd" runat="server" Text="Guardar" CommandName="Guardar" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm btn-primary" />
                             </div>
                         </div>
                     </div>
@@ -38,3 +38,5 @@
             </asp:Repeater>
         </div>
     </asp:Content>
+
+

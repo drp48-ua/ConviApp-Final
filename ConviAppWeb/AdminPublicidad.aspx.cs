@@ -16,9 +16,6 @@ namespace ConviAppWeb
     public partial class AdminPublicidad : Page
     {
         protected global::System.Web.UI.WebControls.Repeater rptAds;
-        protected global::System.Web.UI.WebControls.TextBox txtTitulo;
-        protected global::System.Web.UI.WebControls.TextBox txtDesc;
-        protected global::System.Web.UI.WebControls.Button btnAddAd;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -46,32 +43,27 @@ namespace ConviAppWeb
             rptAds.DataBind();
         }
 
-        protected void btnAddAd_Click(object sender, EventArgs e)
+        protected void rptAds_ItemCommand(object source, System.Web.UI.WebControls.RepeaterCommandEventArgs e)
         {
-            var ads = Session["MockAds"] as List<MockAd>;
-            if (ads == null) ads = new List<MockAd>();
-
-            ads.Add(new MockAd {
-                Id = Guid.NewGuid().ToString(),
-                Title = txtTitulo.Text,
-                Desc = txtDesc.Text,
-                Bg = "linear-gradient(135deg,#10b981,#059669)" // default green
-            });
-
-            Session["MockAds"] = ads;
-            txtTitulo.Text = "";
-            txtDesc.Text = "";
-            BindAds();
-        }
-
-        protected void btnDeleteAd_Command(object sender, System.Web.UI.WebControls.CommandEventArgs e)
-        {
-            var ads = Session["MockAds"] as List<MockAd>;
-            if (ads != null)
+            if (e.CommandName == "Guardar")
             {
-                ads.RemoveAll(a => a.Id == e.CommandArgument.ToString());
-                Session["MockAds"] = ads;
-                BindAds();
+                var ads = Session["MockAds"] as List<MockAd>;
+                if (ads != null)
+                {
+                    string id = e.CommandArgument.ToString();
+                    var adToEdit = ads.Find(a => a.Id == id);
+                    if (adToEdit != null)
+                    {
+                        var txtTitulo = (System.Web.UI.WebControls.TextBox)e.Item.FindControl("txtEditTitulo");
+                        var txtDesc = (System.Web.UI.WebControls.TextBox)e.Item.FindControl("txtEditDesc");
+                        
+                        if (txtTitulo != null) adToEdit.Title = txtTitulo.Text;
+                        if (txtDesc != null) adToEdit.Desc = txtDesc.Text;
+                        
+                        Session["MockAds"] = ads;
+                        BindAds();
+                    }
+                }
             }
         }
     }

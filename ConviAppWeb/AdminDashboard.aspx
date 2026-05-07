@@ -38,12 +38,33 @@
                 <div style="font-size: 0.8rem; color: #ef4444; font-weight: 500;">-2% desde ayer</div>
             </div>
             <div class="glass-card" style="padding: 20px;">
-                <div style="font-size: 0.85rem; color: #6b7280; font-weight: 600; text-transform: uppercase;">Ingresos
-                    (MRR)</div>
+                <div style="font-size: 0.85rem; color: #6b7280; font-weight: 600; text-transform: uppercase;">Ingresos Totales (Globales)</div>
                 <div style="font-size: 2rem; font-weight: 800; color: #111827; margin-top: 8px;">
                     <asp:Label ID="lblIngresos" runat="server" Text="$0"></asp:Label>
                 </div>
-                <div style="font-size: 0.8rem; color: #10b981; font-weight: 500;">+8% este mes</div>
+                <div style="font-size: 0.8rem; color: #10b981; font-weight: 500;">Calculado sobre contratos</div>
+            </div>
+        </div>
+
+        <!-- Extra KPI Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 32px;">
+            <div class="glass-card" style="padding: 20px;">
+                <div style="font-size: 0.85rem; color: #6b7280; font-weight: 600; text-transform: uppercase;">Piso Top Ventas</div>
+                <div style="font-size: 1.5rem; font-weight: 800; color: #111827; margin-top: 8px;">
+                    <asp:Label ID="lblTopPiso" runat="server" Text="N/A"></asp:Label>
+                </div>
+            </div>
+            <div class="glass-card" style="padding: 20px;">
+                <div style="font-size: 0.85rem; color: #6b7280; font-weight: 600; text-transform: uppercase;">Cliente Más Rentable</div>
+                <div style="font-size: 1.2rem; font-weight: 800; color: #111827; margin-top: 8px;">
+                    <asp:Label ID="lblTopCliente" runat="server" Text="N/A"></asp:Label>
+                </div>
+            </div>
+            <div class="glass-card" style="padding: 20px;">
+                <div style="font-size: 0.85rem; color: #6b7280; font-weight: 600; text-transform: uppercase;">Cliente Menos Rentable</div>
+                <div style="font-size: 1.2rem; font-weight: 800; color: #111827; margin-top: 8px;">
+                    <asp:Label ID="lblBottomCliente" runat="server" Text="N/A"></asp:Label>
+                </div>
             </div>
         </div>
 
@@ -75,3 +96,5 @@
             </ul>
         </div>
     </asp:Content>
+
+

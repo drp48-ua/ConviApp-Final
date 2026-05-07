@@ -35,19 +35,24 @@
                 <button class="filter-btn">No resueltas</button>
             </div>
 
-            <div
-                style="border:1px solid #fee2e2; border-left:4px solid #ef4444; background:#fef2f2; border-radius:8px; padding:16px; margin-bottom:16px;">
-                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-                    <strong style="color:#991b1b;">[URGENTE] Conflicto impago de fianza - Piso #102</strong>
-                    <span class="badge"
-                        style="background:#fecaca; color:#b91c1c; padding:4px 8px; border-radius:12px; font-size:0.75rem;">Abierta</span>
-                </div>
-                <p style="font-size:0.85rem; color:#7f1d1d; margin-bottom:12px;">Un usuario ha reportado que el
-                    compañero no devuelve la fianza tras 2 meses.</p>
-                <div style="display:flex; gap:8px;">
-                    <button class="btn btn-sm" style="background:#ef4444; color:white;">Contactar Usuarios</button>
-                    <button class="btn btn-sm btn-outline">Cerrar disputa</button>
-                </div>
-            </div>
+            <asp:Repeater ID="rptIncidencias" runat="server" OnItemCommand="rptIncidencias_ItemCommand">
+                <ItemTemplate>
+                    <div style="border:1px solid #fee2e2; border-left:4px solid #ef4444; background:#fef2f2; border-radius:8px; padding:16px; margin-bottom:16px;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                            <strong style="color:#991b1b;">[<%# Eval("Severidad") %>] Piso #<%# Eval("PisoId") %></strong>
+                            <span class="badge" style="background:<%# Eval("Estado").ToString() == "Abierta" ? "#fecaca" : "#d1fae5" %>; color:<%# Eval("Estado").ToString() == "Abierta" ? "#b91c1c" : "#065f46" %>; padding:4px 8px; border-radius:12px; font-size:0.75rem;"><%# Eval("Estado") %></span>
+                        </div>
+                        <p style="font-size:0.85rem; color:#7f1d1d; margin-bottom:12px;"><%# Eval("Descripcion") %></p>
+                        
+                        <div style="display:flex; gap:8px; align-items:center;">
+                            <asp:TextBox ID="txtRespuesta" runat="server" Placeholder="Escribe un mensaje al usuario..." style="padding:6px; font-size:0.8rem; flex:1; border:1px solid #ccc; border-radius:4px;" />
+                            <asp:Button ID="btnContactar" runat="server" Text="Contactar" CommandName="Contactar" CommandArgument='<%# Eval("Id") + "|" + Eval("ReportadaPorId") %>' CssClass="btn btn-sm" style="background:#ef4444; color:white;" />
+                            <asp:Button ID="btnCerrar" runat="server" Text="Cerrar Disputa" CommandName="Cerrar" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm btn-outline" />
+                        </div>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
         </div>
     </asp:Content>
+
+
