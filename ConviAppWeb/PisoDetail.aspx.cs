@@ -42,7 +42,8 @@ namespace ConviAppWeb
         protected void btnUnirse_Click(object sender, EventArgs e)
         {
             string idStr = Request.QueryString["id"];
-            if (int.TryParse(idStr, out int pisoId) && Session["UserId"] != null)
+            int pisoId;
+            if (int.TryParse(idStr, out pisoId) && Session["UserId"] != null)
             {
                 int userId = Convert.ToInt32(Session["UserId"]);
                 var cadCu = new CADComunidadUsuario();
@@ -62,7 +63,8 @@ namespace ConviAppWeb
         protected void btnContactar_Click(object sender, EventArgs e)
         {
             string idStr = Request.QueryString["id"];
-            if (int.TryParse(idStr, out int pisoId) && Session["UserId"] != null)
+            int pisoId;
+            if (int.TryParse(idStr, out pisoId) && Session["UserId"] != null)
             {
                 string myName = Session["UserName"] != null ? Session["UserName"].ToString() : "Un usuario";
                 var cadPiso = new CADPiso();
