@@ -14,9 +14,9 @@
                         style="width:64px; height:64px; background:linear-gradient(135deg, #eff6ff, #dbeafe); color:var(--primary); border-radius:16px; display:inline-flex; align-items:center; justify-content:center; font-size:2rem; margin-bottom:16px; border:1px solid #bfdbfe;">
                         👋
                     </div>
-                    <h2 style="color:var(--text-primary); font-size:1.8rem; margin:0 0 8px;">Bienvenido de nuevo
+                    <h2 style="color:var(--text-primary); font-size:1.8rem; margin:0 0 8px;">&#128075; Bienvenido de nuevo
                     </h2>
-                    <p style="color:var(--text-secondary); margin:0;">Inicia sesión para gestionar tu piso</p>
+                    <p style="color:var(--text-secondary); margin:0;">Inicia sesi&oacute;n para gestionar tu piso</p>
                 </div>
 
                 <asp:Panel ID="pnlError" runat="server" Visible="false"
@@ -30,7 +30,7 @@
                 <div style="margin-bottom:20px;">
                     <label
                         style="display:block; font-size:0.9rem; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">Correo
-                        Electrónico</label>
+                        Electr&oacute;nico</label>
                     <asp:TextBox ID="txtEmail" runat="server" CssClass="form-input" TextMode="Email"
                         placeholder="ejemplo@correo.com" style="width:100%; padding:14px; background:#f9fafb;" />
                     <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmail"
@@ -41,9 +41,9 @@
                 <div style="margin-bottom:32px;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
                         <label
-                            style="font-size:0.9rem; font-weight:600; color:var(--text-secondary);">Contraseña</label>
+                            style="font-size:0.9rem; font-weight:600; color:var(--text-secondary);">Contrase&ntilde;a</label>
                         <a href="#" style="font-size:0.8rem; color:var(--primary-light);">¿Olvidaste tu
-                            contraseña?</a>
+                            contrase&ntilde;a?</a>
                     </div>
                     <asp:TextBox ID="txtPassword" runat="server" CssClass="form-input" TextMode="Password"
                         placeholder="••••••••" style="width:100%; padding:14px; background:#f9fafb;" />
@@ -68,3 +68,4 @@
             </div>
         </div>
     </asp:Content>
+

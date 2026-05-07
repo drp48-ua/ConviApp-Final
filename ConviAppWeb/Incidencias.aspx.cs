@@ -12,6 +12,18 @@ namespace ConviAppWeb
         {
             if (Session["UserEmail"] == null) { pnlApp.Visible = false; pnlDemo.Visible = true; return; }
             pnlApp.Visible = true; pnlDemo.Visible = false;
+
+            if (Session["UserRole"] != null && Session["UserRole"].ToString() == "Basico")
+            {
+                pnlBasicWarning.Visible = true;
+                pnlCrearIncidencia.Visible = false;
+            }
+            else
+            {
+                pnlBasicWarning.Visible = false;
+                pnlCrearIncidencia.Visible = true;
+            }
+
             if (!IsPostBack) CargarIncidencias();
         }
 
@@ -38,18 +50,32 @@ namespace ConviAppWeb
         {
             if (string.IsNullOrWhiteSpace(txtTitulo.Text)) { lblError.Text = "El título es obligatorio."; lblError.Visible = true; return; }
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
+            
+            var cadContrato = new CADContrato();
+            var contrato = cadContrato.ListarTodos().FirstOrDefault(c => c.UserId == userId && c.IsActive);
+            int? pisoId = contrato != null ? (int?)contrato.PisoId : null;
+
             var cad = new CADIncidencia();
-            cad.CrearIncidencia(new ENIncidencia
+            try 
             {
-                Titulo = txtTitulo.Text.Trim(),
-                Descripcion = txtDescripcion.Text.Trim(),
-                Estado = "abierta",
-                ReportadaPorId = userId,
-                FechaReporte = DateTime.Now
-            });
-            txtTitulo.Text = ""; txtDescripcion.Text = "";
-            lblError.Visible = false;
-            CargarIncidencias();
+                cad.CrearIncidencia(new ENIncidencia
+                {
+                    Titulo = txtTitulo.Text.Trim(),
+                    Descripcion = txtDescripcion.Text.Trim(),
+                    Estado = "abierta",
+                    ReportadaPorId = userId,
+                    PisoId = pisoId,
+                    FechaReporte = DateTime.Now
+                });
+                txtTitulo.Text = ""; txtDescripcion.Text = "";
+                lblError.Visible = false;
+                CargarIncidencias();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = "Error BD: " + ex.Message;
+                lblError.Visible = true;
+            }
         }
 
         protected void RptIncidencias_ItemCommand(object source, RepeaterCommandEventArgs e)

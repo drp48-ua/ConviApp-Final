@@ -28,10 +28,15 @@
                     <asp:Label ID="lblErrPro" runat="server" ForeColor="Red" Visible="false"
                         style="margin-bottom:12px; display:block;" />
                     <div style="display:flex; gap:12px; flex-wrap:wrap;">
-                        <asp:TextBox ID="txtIBANPro" runat="server" CssClass="form-input"
-                            placeholder="IBAN simulado (> 10 caracteres)" style="flex:1;" />
-                        <asp:Button ID="btnPro" runat="server" Text="Activar Pro →" CssClass="btn btn-primary"
-                            OnClick="BtnPro_Click" />
+                        <% if (Session["UserEmail"] != null) { %>
+                            <asp:TextBox ID="txtIBANPro" runat="server" CssClass="form-input"
+                                placeholder="IBAN simulado (> 10 caracteres)" style="flex:1;" />
+                            <asp:Button ID="btnPro" runat="server" Text="Activar Pro →" CssClass="btn btn-primary"
+                                OnClick="BtnPro_Click" />
+                        <% } else { %>
+                            <asp:Button ID="btnProAnon" runat="server" Text="Regístrate para Activar →" CssClass="btn btn-primary"
+                                OnClick="BtnPro_Click" style="width:100%; justify-content:center;" />
+                        <% } %>
                     </div>
                 </asp:Panel>
 
@@ -65,3 +70,4 @@
             </div>
         </div>
     </asp:Content>
+

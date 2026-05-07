@@ -51,10 +51,31 @@ namespace ConviAppWeb
         {
             if (string.IsNullOrWhiteSpace(txtMensaje.Text)) return;
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
+            
+            var cadContrato = new CADContrato();
+            var contrato = cadContrato.ListarTodos().FirstOrDefault(c => c.UserId == userId && c.IsActive);
+            int? pisoId = contrato != null ? (int?)contrato.PisoId : null;
+
             var cad = new CADMensaje();
-            cad.CrearMensaje(new ENMensaje { Contenido = txtMensaje.Text.Trim(), EmisorId = userId, FechaEnvio = DateTime.Now });
-            txtMensaje.Text = "";
-            CargarMensajes();
+            try
+            {
+                cad.CrearMensaje(new ENMensaje 
+                { 
+                    Contenido = txtMensaje.Text.Trim(), 
+                    EmisorId = userId, 
+                    ReceptorId = 1, // Por defecto al Admin
+                    PisoId = pisoId,
+                    FechaEnvio = DateTime.Now 
+                });
+                txtMensaje.Text = "";
+                lblError.Visible = false;
+                CargarMensajes();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = "Error BD: " + ex.Message;
+                lblError.Visible = true;
+            }
         }
     }
 }

@@ -2,15 +2,15 @@
     CodeFile="Incidencias.aspx.cs" Inherits="ConviAppWeb.Incidencias" %>
     <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div class="dash-tabs">
-            <a href="Index.aspx" class="dash-tab">📊 Resumen</a>
-            <a href="Tareas.aspx" class="dash-tab">✅ Tareas</a>
-            <a href="Gastos.aspx" class="dash-tab">💸 Gastos</a>
-            <a href="Mensajes.aspx" class="dash-tab">💬 Mensajes</a>
-            <a href="Reservas.aspx" class="dash-tab">📅 Reservas</a>
+            <a href="Index.aspx" class="dash-tab">&#128202; Resumen</a>
+            <a href="Tareas.aspx" class="dash-tab">&#9989; Tareas</a>
+            <a href="Gastos.aspx" class="dash-tab">&#128182; Gastos</a>
+            <a href="Mensajes.aspx" class="dash-tab">&#9993; Mensajes</a>
+            <a href="Reservas.aspx" class="dash-tab">&#128197; Reservas</a>
             <a href="Incidencias.aspx" class="dash-tab active">🔧 Incidencias</a>
-            <a href="ContratosYPagos.aspx" class="dash-tab">📄 Contratos</a>
-            <a href="Documentos.aspx" class="dash-tab">📎 Documentos</a>
-            <a href="MisPisos.aspx" class="dash-tab">🏠 Mis Pisos</a>
+            <a href="ContratosYPagos.aspx" class="dash-tab">&#128196; Contratos</a>
+            <a href="Documentos.aspx" class="dash-tab">&#128206; Documentos</a>
+            <a href="MisPisos.aspx" class="dash-tab">&#127968; Mis Pisos</a>
         </div>
 
         <h2 style="margin-bottom:20px;">🔧 Incidencias</h2>
@@ -89,19 +89,29 @@
 
                 <asp:Panel ID="pnlApp" runat="server">
 
-                    <div class="glass-card" style="margin-bottom:24px;">
-                        <h4 style="margin-top:0; color:var(--primary-light);">➕ Reportar incidencia</h4>
-                        <div style="display:flex; gap:12px; flex-wrap:wrap;">
-                            <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-input" placeholder="Título"
-                                style="flex:1; min-width:200px;" />
-                            <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-input"
-                                placeholder="Descripción detallada" style="flex:2; min-width:200px;" />
-                            <asp:Button ID="btnReportar" runat="server" Text="Reportar"
-                                CssClass="btn btn-primary btn-sm" OnClick="BtnReportar_Click" />
+                    <asp:Panel ID="pnlBasicWarning" runat="server" Visible="false">
+                        <div class="glass-card" style="margin-bottom:24px; background:rgba(251, 191, 36, 0.1); border:1px solid rgba(251, 191, 36, 0.3);">
+                            <h4 style="margin-top:0; color:#d97706;">🔒 Funcionalidad Premium</h4>
+                            <p style="color:#b45309; font-size:0.9rem; margin-bottom:12px;">Crear incidencias es una funcionalidad exclusiva para planes Profesionales y Enterprise.</p>
+                            <a href="Upgrade.aspx" class="btn btn-sm" style="background:#f59e0b; color:white;">Mejorar Plan</a>
                         </div>
-                        <asp:Label ID="lblError" runat="server" ForeColor="Red" Visible="false"
-                            style="margin-top:8px; display:block;" />
-                    </div>
+                    </asp:Panel>
+
+                    <asp:Panel ID="pnlCrearIncidencia" runat="server">
+                        <div class="glass-card" style="margin-bottom:24px;">
+                            <h4 style="margin-top:0; color:var(--primary-light);">➕ Reportar incidencia</h4>
+                            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-input" placeholder="Título"
+                                    style="flex:1; min-width:200px;" />
+                                <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-input"
+                                    placeholder="Descripción detallada" style="flex:2; min-width:200px;" />
+                                <asp:Button ID="btnReportar" runat="server" Text="Reportar"
+                                    CssClass="btn btn-primary btn-sm" OnClick="BtnReportar_Click" />
+                            </div>
+                            <asp:Label ID="lblError" runat="server" ForeColor="Red" Visible="false"
+                                style="margin-top:8px; display:block;" />
+                        </div>
+                    </asp:Panel>
 
                     <asp:Panel ID="pnlVacio" runat="server" Visible="false">
                         <div class="glass-card" style="text-align:center; padding:3rem; color:var(--text-muted);">
@@ -143,3 +153,4 @@
 
                 </asp:Panel>
     </asp:Content>
+

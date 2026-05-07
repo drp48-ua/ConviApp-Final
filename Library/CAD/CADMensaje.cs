@@ -16,23 +16,19 @@ namespace ConviAppWeb.DataAccess
             bool creado = false;
             using (SQLiteConnection c = new SQLiteConnection(constring))
             {
-                try
+                c.Open();
+                string sql = "INSERT INTO Mensaje (contenido, fecha_envio, leido, emisor_id, receptor_id, piso_id) " +
+                             "VALUES (@c, @f, @l, @e, @r, @pi)";
+                using (SQLiteCommand com = new SQLiteCommand(sql, c))
                 {
-                    c.Open();
-                    string sql = "INSERT INTO Mensaje (contenido, fecha_envio, leido, emisor_id, receptor_id, piso_id) " +
-                                 "VALUES (@c, @f, @l, @e, @r, @pi)";
-                    using (SQLiteCommand com = new SQLiteCommand(sql, c))
-                    {
-                        com.Parameters.AddWithValue("@c", en.Contenido ?? (object)DBNull.Value);
-                        com.Parameters.AddWithValue("@f", en.FechaEnvio.ToString("o"));
-                        com.Parameters.AddWithValue("@l", en.Leido ? 1 : 0);
-                        com.Parameters.AddWithValue("@e", en.EmisorId);
-                        com.Parameters.AddWithValue("@r", en.ReceptorId.HasValue ? (object)en.ReceptorId.Value : DBNull.Value);
-                        com.Parameters.AddWithValue("@pi", en.PisoId.HasValue ? (object)en.PisoId.Value : DBNull.Value);
-                        creado = com.ExecuteNonQuery() > 0;
-                    }
+                    com.Parameters.AddWithValue("@c", en.Contenido ?? (object)DBNull.Value);
+                    com.Parameters.AddWithValue("@f", en.FechaEnvio.ToString("o"));
+                    com.Parameters.AddWithValue("@l", en.Leido ? 1 : 0);
+                    com.Parameters.AddWithValue("@e", en.EmisorId);
+                    com.Parameters.AddWithValue("@r", en.ReceptorId.HasValue ? (object)en.ReceptorId.Value : DBNull.Value);
+                    com.Parameters.AddWithValue("@pi", en.PisoId.HasValue ? (object)en.PisoId.Value : DBNull.Value);
+                    creado = com.ExecuteNonQuery() > 0;
                 }
-                catch (Exception) { creado = false; }
             }
             return creado;
         }

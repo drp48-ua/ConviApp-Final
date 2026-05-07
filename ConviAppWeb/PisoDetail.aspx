@@ -1,4 +1,4 @@
-<%@ Page Title="Detalle de Piso" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Detalle de Piso" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeFile="PisoDetail.aspx.cs" Inherits="ConviAppWeb.PisoDetail" %>
     <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <asp:Panel ID="pnlNotFound" runat="server" Visible="false">
@@ -63,7 +63,7 @@
                                     style="width:100%; display:block; text-align:center; margin-bottom:12px;">Registrarse
                                     gratis</a>
                                 <a href="Login.aspx" class="btn btn-outline"
-                                    style="width:100%; display:block; text-align:center;">Iniciar sesión</a>
+                                    style="width:100%; display:block; text-align:center;">Iniciar sesi&oacute;n</a>
                                 <% } else { %>
                                     <a href="Mensajes.aspx" class="btn btn-primary"
                                         style="width:100%; display:block; text-align:center; margin-bottom:12px;">💬
@@ -82,3 +82,4 @@
             </div>
         </asp:Panel>
     </asp:Content>
+

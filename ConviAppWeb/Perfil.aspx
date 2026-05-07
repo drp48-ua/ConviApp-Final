@@ -34,29 +34,29 @@
                     </div>
 
                     <div>
-                        <label style="display: block; font-weight: 500; margin-bottom: 8px;">Correo Electrónico</label>
+                        <label style="display: block; font-weight: 500; margin-bottom: 8px;">Correo Electr&oacute;nico</label>
                         <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"
                             style="width: 100%; padding: 10px; border-radius: var(--radius-md); border: 1px solid var(--border);" />
                     </div>
 
                     <hr style="border:0; border-top:1px solid #e5e7eb; margin: 16px 0;" />
-                    <h4 style="color:var(--text-primary); margin-bottom:12px;">Cambiar Contraseña</h4>
+                    <h4 style="color:var(--text-primary); margin-bottom:12px;">Cambiar Contrase&ntilde;a</h4>
 
                     <div>
-                        <label style="display: block; font-weight: 500; margin-bottom: 8px;">Contraseña Actual</label>
+                        <label style="display: block; font-weight: 500; margin-bottom: 8px;">Contrase&ntilde;a Actual</label>
                         <asp:TextBox ID="txtOldPassword" runat="server" TextMode="Password" CssClass="form-control"
                             style="width: 100%; padding: 10px; border-radius: var(--radius-md); border: 1px solid var(--border);" />
                     </div>
 
                     <div>
-                        <label style="display: block; font-weight: 500; margin-bottom: 8px;">Nueva Contraseña</label>
+                        <label style="display: block; font-weight: 500; margin-bottom: 8px;">Nueva Contrase&ntilde;a</label>
                         <asp:TextBox ID="txtNewPassword" runat="server" TextMode="Password" CssClass="form-control"
                             style="width: 100%; padding: 10px; border-radius: var(--radius-md); border: 1px solid var(--border);" />
                     </div>
 
                     <div>
                         <label style="display: block; font-weight: 500; margin-bottom: 8px;">Confirmar Nueva
-                            Contraseña</label>
+                            Contrase&ntilde;a</label>
                         <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" CssClass="form-control"
                             style="width: 100%; padding: 10px; border-radius: var(--radius-md); border: 1px solid var(--border);" />
                     </div>
@@ -71,3 +71,4 @@
             </div>
         </div>
     </asp:Content>
+

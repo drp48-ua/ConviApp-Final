@@ -1,4 +1,4 @@
-<%@ Page Title="Términos de Servicio" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Términos de Servicio" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeFile="Terminos.aspx.cs" Inherits="ConviAppWeb.Terminos" %>
     <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div class="glass-card" style="max-width:800px; margin:0 auto; padding:3rem;">
@@ -27,3 +27,4 @@
             </div>
         </div>
     </asp:Content>
+

@@ -1,4 +1,4 @@
-<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Index.aspx.cs"
+﻿<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Index.aspx.cs"
     Inherits="ConviAppWeb.Index" %>
     <asp:Content ID="HContent" ContentPlaceHolderID="HeadContent" runat="server">
         <!-- Hide global Site.Master right sidebar on Index: managed inside the page -->
@@ -648,7 +648,7 @@
 
                                             <a href="MisPisos.aspx" class="btn"
                                                 style="background:#ef4444; color:white; justify-content:center; margin-bottom:12px; display:flex; align-items:center; gap:8px; padding:10px; border-radius:6px; text-decoration:none; width: 100%;">+
-                                                Añadir piso rápido</a>
+                                                A&ntilde;adir piso rápido</a>
                                             <a href="ContratosYPagos.aspx" class="btn"
                                                 style="background:#3b82f6; color:white; justify-content:center; margin-bottom:12px; display:flex; align-items:center; gap:8px; padding:10px; border-radius:6px; text-decoration:none; width: 100%;">📑
                                                 Subir contrato nuevo</a>
@@ -695,3 +695,4 @@
                 });
             </script>
     </asp:Content>
+

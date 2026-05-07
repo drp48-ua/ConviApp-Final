@@ -2,15 +2,15 @@
     Inherits="ConviAppWeb.Gastos" %>
     <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div class="dash-tabs">
-            <a href="Index.aspx" class="dash-tab">📊 Resumen</a>
-            <a href="Tareas.aspx" class="dash-tab">✅ Tareas</a>
+            <a href="Index.aspx" class="dash-tab">&#128202; Resumen</a>
+            <a href="Tareas.aspx" class="dash-tab">&#9989; Tareas</a>
             <a href="Gastos.aspx" class="dash-tab active">💸 Gastos</a>
-            <a href="Mensajes.aspx" class="dash-tab">💬 Mensajes</a>
-            <a href="Reservas.aspx" class="dash-tab">📅 Reservas</a>
-            <a href="Incidencias.aspx" class="dash-tab">🔧 Incidencias</a>
-            <a href="ContratosYPagos.aspx" class="dash-tab">📄 Contratos</a>
-            <a href="Documentos.aspx" class="dash-tab">📎 Documentos</a>
-            <a href="MisPisos.aspx" class="dash-tab">🏠 Mis Pisos</a>
+            <a href="Mensajes.aspx" class="dash-tab">&#9993; Mensajes</a>
+            <a href="Reservas.aspx" class="dash-tab">&#128197; Reservas</a>
+            <a href="Incidencias.aspx" class="dash-tab">&#128295; Incidencias</a>
+            <a href="ContratosYPagos.aspx" class="dash-tab">&#128196; Contratos</a>
+            <a href="Documentos.aspx" class="dash-tab">&#128206; Documentos</a>
+            <a href="MisPisos.aspx" class="dash-tab">&#127968; Mis Pisos</a>
         </div>
 
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -45,9 +45,9 @@
                             <div style="display: flex; gap: 12px; flex-wrap: wrap;">
                                 <input type="text" class="form-input" placeholder="Concepto"
                                     style="flex: 2; min-width: 200px;" disabled />
-                                <input type="number" class="form-input" placeholder="Importe (€)"
+                                <input type="number" class="form-input" placeholder="Importe (&euro;)"
                                     style="flex: 1; min-width: 120px;" disabled />
-                                <div class="btn btn-primary btn-sm">Añadir</div>
+                                <div class="btn btn-primary btn-sm">A&ntilde;adir</div>
                             </div>
                         </div>
 
@@ -120,9 +120,9 @@
                         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
                             <asp:TextBox ID="txtConcepto" runat="server" CssClass="form-input" placeholder="Concepto"
                                 required="true" style="flex: 2; min-width: 200px;" />
-                            <asp:TextBox ID="txtImporte" runat="server" CssClass="form-input" placeholder="Importe (€)"
+                            <asp:TextBox ID="txtImporte" runat="server" CssClass="form-input" placeholder="Importe (&euro;)"
                                 required="true" step="0.01" type="number" style="flex: 1; min-width: 120px;" />
-                            <asp:Button ID="btnGuardar" runat="server" Text="Añadir" CssClass="btn btn-primary btn-sm"
+                            <asp:Button ID="btnGuardar" runat="server" Text="A&ntilde;adir" CssClass="btn btn-primary btn-sm"
                                 OnClick="BtnGuardar_Click" />
                         </div>
                     </div>
@@ -181,3 +181,4 @@
 
                 </asp:Panel>
     </asp:Content>
+

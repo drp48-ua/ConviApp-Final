@@ -1,4 +1,4 @@
-<%@ Page Title="Gestión de Pagos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Gestión de Pagos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="AdminPagos.aspx.cs" Inherits="ConviAppWeb.AdminPagos" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -38,3 +38,5 @@
             </table>
         </div>
     </asp:Content>
+
+

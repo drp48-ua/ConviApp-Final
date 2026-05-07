@@ -16,24 +16,20 @@ namespace ConviAppWeb.DataAccess
             bool creado = false;
             using (SQLiteConnection c = new SQLiteConnection(constring))
             {
-                try
+                c.Open();
+                string sql = "INSERT INTO Incidencia (titulo, descripcion, estado, prioridad, fecha_reporte, reportada_por_id, piso_id) " +
+                             "VALUES (@t, @d, @e, @p, @f, @r, @pi)";
+                using (SQLiteCommand com = new SQLiteCommand(sql, c))
                 {
-                    c.Open();
-                    string sql = "INSERT INTO Incidencia (titulo, descripcion, estado, prioridad, fecha_reporte, reportada_por_id, piso_id) " +
-                                 "VALUES (@t, @d, @e, @p, @f, @r, @pi)";
-                    using (SQLiteCommand com = new SQLiteCommand(sql, c))
-                    {
-                        com.Parameters.AddWithValue("@t", en.Titulo ?? (object)DBNull.Value);
-                        com.Parameters.AddWithValue("@d", en.Descripcion ?? (object)DBNull.Value);
-                        com.Parameters.AddWithValue("@e", en.Estado ?? "abierta");
-                        com.Parameters.AddWithValue("@p", en.Prioridad ?? "media");
-                        com.Parameters.AddWithValue("@f", en.FechaReporte.ToString("o"));
-                        com.Parameters.AddWithValue("@r", en.ReportadaPorId);
-                        com.Parameters.AddWithValue("@pi", en.PisoId.HasValue ? (object)en.PisoId.Value : DBNull.Value);
-                        creado = com.ExecuteNonQuery() > 0;
-                    }
+                    com.Parameters.AddWithValue("@t", en.Titulo ?? (object)DBNull.Value);
+                    com.Parameters.AddWithValue("@d", en.Descripcion ?? (object)DBNull.Value);
+                    com.Parameters.AddWithValue("@e", en.Estado ?? "abierta");
+                    com.Parameters.AddWithValue("@p", en.Prioridad ?? "media");
+                    com.Parameters.AddWithValue("@f", en.FechaReporte.ToString("o"));
+                    com.Parameters.AddWithValue("@r", en.ReportadaPorId);
+                    com.Parameters.AddWithValue("@pi", en.PisoId.HasValue ? (object)en.PisoId.Value : DBNull.Value);
+                    creado = com.ExecuteNonQuery() > 0;
                 }
-                catch (Exception) { creado = false; }
             }
             return creado;
         }
