@@ -62,8 +62,8 @@
         <div class="listings-grid">
             <asp:Repeater ID="rptPisos" runat="server" OnItemCommand="rptPisos_ItemCommand">
                 <ItemTemplate>
-                    <a href="PisoDetail.aspx?id=<%# Eval(" Id") %>" class="listing-card">
-                        <div class="listing-img" style="position:relative; overflow:hidden;">
+                    <a href="PisoDetail.aspx?id=<%# Eval("Id") %>" class="listing-card" style="display:flex; flex-direction:column; overflow:hidden;">
+                        <div class="listing-img" style="position:relative; overflow:hidden; width:100%; height:220px; flex-shrink:0;">
                             <img src='<%# "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=600&q=80&sig=" + Eval("Id") %>'
                                 style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;"
                                 alt="Portada Piso" />

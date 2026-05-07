@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SQLite;
 using System.Collections.Generic;
@@ -27,7 +27,10 @@ namespace ConviAppWeb.DataAccess
                 nueva["estado"]         = en.Estado ?? "pendiente";
                 nueva["motivo"]         = en.Motivo ?? (object)DBNull.Value;
                 nueva["usuario_id"]     = en.UsuarioId;
-                nueva["zona_comun_id"]  = en.ZonaComunId;
+                if (en.ZonaComunId > 0)
+                    nueva["zona_comun_id"] = en.ZonaComunId;
+                else
+                    nueva["zona_comun_id"] = DBNull.Value;
                 t.Rows.Add(nueva);
                 SQLiteCommandBuilder cb = new SQLiteCommandBuilder(da);
                 da.Update(bdVirtual, "reserva");

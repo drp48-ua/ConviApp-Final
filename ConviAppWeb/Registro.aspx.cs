@@ -35,7 +35,13 @@ namespace ConviAppWeb
                 return;
             }
 
-            var en = new ENUsuario { Nombre = txtNombre.Text, Email = txtEmail.Text.Trim(), PasswordHash = txtPassword.Text, FechaRegistro = DateTime.Today };
+            var en = new ENUsuario { 
+                Nombre = txtNombre.Text, 
+                Email = txtEmail.Text.Trim(), 
+                PasswordHash = txtPassword.Text, 
+                FechaRegistro = DateTime.Today,
+                Rol = new ENRol { Nombre = Request.Form["planSelected"] ?? "Basico" }
+            };
             var cad = new CADUsuario();
             if (cad.CrearUsuario(en))
             {

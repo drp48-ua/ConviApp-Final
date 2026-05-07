@@ -54,17 +54,27 @@ namespace ConviAppWeb
 
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
             var cad = new CADReserva();
-            cad.CrearReserva(new ENReserva
+            bool exito = cad.CrearReserva(new ENReserva
             {
                 Motivo = txtMotivo.Text.Trim(),
                 FechaInicio = inicio,
                 FechaFin = fin,
                 Estado = "confirmada",
                 UsuarioId = userId,
-                ZonaComunId = 1
+                ZonaComunId = 0
             });
-            txtMotivo.Text = ""; txtFechaInicio.Text = ""; txtFechaFin.Text = "";
-            lblError.Visible = false;
+            
+            if (exito)
+            {
+                txtMotivo.Text = ""; txtFechaInicio.Text = ""; txtFechaFin.Text = "";
+                lblError.Visible = false;
+            }
+            else
+            {
+                lblError.Text = "Hubo un error al crear la reserva. Inténtalo de nuevo.";
+                lblError.Visible = true;
+            }
+            
             CargarReservas();
         }
 
