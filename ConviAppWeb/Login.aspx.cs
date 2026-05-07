@@ -15,10 +15,12 @@ namespace ConviAppWeb
                 var user = cad.BuscarPorEmail(txtEmail.Text.Trim());
                 if (user != null && user.PasswordHash == txtPassword.Text)
                 {
-                    Session["UserId"] = user.Id;
+                    Session["UserId"]   = user.Id;
                     Session["UserEmail"] = user.Email;
-                    Session["UserName"] = user.Nombre;
-                    Session["UserRole"] = "Basico";
+                    Session["UserName"]  = user.Nombre;
+                    Session["UserRole"]  = (user.Rol != null && !string.IsNullOrEmpty(user.Rol.Nombre))
+                                            ? user.Rol.Nombre
+                                            : "Basico";
                     if (user.Email.ToLower().Trim() == "admin@conviapp.com")
                     {
                         Response.Redirect("AdminDashboard.aspx");
