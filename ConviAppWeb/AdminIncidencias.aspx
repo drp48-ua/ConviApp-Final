@@ -46,7 +46,7 @@
                         
                         <div style="display:flex; gap:8px; align-items:center;">
                             <asp:TextBox ID="txtRespuesta" runat="server" Placeholder="Escribe un mensaje al usuario..." style="padding:6px; font-size:0.8rem; flex:1; border:1px solid #ccc; border-radius:4px;" />
-                            <asp:Button ID="btnContactar" runat="server" Text="Contactar" CommandName="Contactar" CommandArgument='<%# Eval("Id") + "|" + Eval("ReportadaPorId") %>' CssClass="btn btn-sm" style="background:#ef4444; color:white;" />
+                            <asp:Button ID="btnContactar" runat="server" Text="Contactar" CommandName="Contactar" CommandArgument='<%# Eval("Id").ToString() + "|" + Eval("ReportadaPorId").ToString() %>' CssClass="btn btn-sm" style="background:#ef4444; color:white;" />
                             <asp:Button ID="btnCerrar" runat="server" Text="Cerrar Disputa" CommandName="Cerrar" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm btn-outline" />
                         </div>
                     </div>

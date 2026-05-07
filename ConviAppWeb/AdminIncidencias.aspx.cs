@@ -39,13 +39,8 @@ namespace ConviAppWeb
             if (e.CommandName == "Cerrar")
             {
                 int id = Convert.ToInt32(e.CommandArgument);
-                var inc = cadI.LeerIncidencia(id);
-                if (inc != null)
-                {
-                    inc.Estado = "Resuelta";
-                    cadI.ActualizarIncidencia(inc);
-                    CargarIncidencias();
-                }
+                cadI.ActualizarEstado(id, "Resuelta");
+                CargarIncidencias();
             }
             else if (e.CommandName == "Contactar")
             {
@@ -73,9 +68,10 @@ namespace ConviAppWeb
                     var cadN = new CADNotificacion();
                     cadN.CrearNotificacion(new ENNotificacion
                     {
-                        UserId = userId,
-                        Contenido = $"Tienes un nuevo mensaje del Administrador sobre la incidencia #{incidenciaId}.",
-                        Fecha = DateTime.Now,
+                        UsuarioId = userId,
+                        Titulo = "Mensaje del Administrador",
+                        Mensaje = $"Tienes un nuevo mensaje del Administrador sobre la incidencia #{incidenciaId}.",
+                        FechaCreacion = DateTime.Now,
                         Leida = false,
                         Tipo = "Sistema"
                     });
