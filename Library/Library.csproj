@@ -73,6 +73,8 @@
     <Compile Include="EN\ENTarea.cs" />
     <Compile Include="EN\ENUsuario.cs" />
     <Compile Include="EN\ENZonaComun.cs" />
+    <Compile Include="CAD\CADComunidadUsuario.cs" />
+    <Compile Include="EN\ENComunidadUsuario.cs" />
   </ItemGroup>
 </Project>
 
