@@ -26,8 +26,40 @@
                     </div>
                 </asp:Panel>
 
+
+
+                <div style="margin-bottom:20px;">
+                    <label
+                        style="display:block; font-size:0.9rem; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">Nombre
+                        completo</label>
+                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-input" placeholder="Ej. María García"
+                        style="width:100%; padding:14px; background:#f9fafb;" />
+                </div>
+
+                <div style="margin-bottom:20px;">
+                    <label
+                        style="display:block; font-size:0.9rem; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">Correo
+                        Electr&oacute;nico</label>
+                    <asp:TextBox ID="txtEmail" runat="server" CssClass="form-input" TextMode="Email"
+                        placeholder="ejemplo@correo.com" style="width:100%; padding:14px; background:#f9fafb;" />
+                </div>
+
+                <div style="margin-bottom:32px;">
+                    <label
+                        style="display:block; font-size:0.9rem; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">Contrase&ntilde;a</label>
+                    <asp:TextBox ID="txtPassword" runat="server" CssClass="form-input" TextMode="Password"
+                        placeholder="Crea una contrase&ntilde;a segura"
+                        style="width:100%; padding:14px; background:#f9fafb; margin-bottom:16px;" />
+                        
+                    <label
+                        style="display:block; font-size:0.9rem; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">Confirmar Contrase&ntilde;a</label>
+                    <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-input" TextMode="Password"
+                        placeholder="Repite tu contrase&ntilde;a"
+                        style="width:100%; padding:14px; background:#f9fafb;" />
+                </div>
+
                 <!-- Selector de Plan Simulado con Radios -->
-                <div style="margin-bottom:24px;">
+                <div style="margin-bottom:32px;">
                     <label
                         style="display:block; font-size:0.9rem; font-weight:600; color:var(--text-secondary); margin-bottom:12px;">Elige
                         tu plan</label>
@@ -66,36 +98,6 @@
                             </div>
                         </label>
                     </div>
-                </div>
-
-                <div style="margin-bottom:20px;">
-                    <label
-                        style="display:block; font-size:0.9rem; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">Nombre
-                        completo</label>
-                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-input" placeholder="Ej. María García"
-                        style="width:100%; padding:14px; background:#f9fafb;" />
-                </div>
-
-                <div style="margin-bottom:20px;">
-                    <label
-                        style="display:block; font-size:0.9rem; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">Correo
-                        Electr&oacute;nico</label>
-                    <asp:TextBox ID="txtEmail" runat="server" CssClass="form-input" TextMode="Email"
-                        placeholder="ejemplo@correo.com" style="width:100%; padding:14px; background:#f9fafb;" />
-                </div>
-
-                <div style="margin-bottom:32px;">
-                    <label
-                        style="display:block; font-size:0.9rem; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">Contrase&ntilde;a</label>
-                    <asp:TextBox ID="txtPassword" runat="server" CssClass="form-input" TextMode="Password"
-                        placeholder="Crea una contrase&ntilde;a segura"
-                        style="width:100%; padding:14px; background:#f9fafb; margin-bottom:16px;" />
-                        
-                    <label
-                        style="display:block; font-size:0.9rem; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">Confirmar Contrase&ntilde;a</label>
-                    <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-input" TextMode="Password"
-                        placeholder="Repite tu contrase&ntilde;a"
-                        style="width:100%; padding:14px; background:#f9fafb;" />
                 </div>
 
                 <asp:Button ID="btnRegistrar" runat="server" Text="Registrarse ahora" CssClass="btn btn-primary"
