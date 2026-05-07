@@ -8,7 +8,7 @@ namespace ConviAppWeb.DataAccess
         // Ruta al archivo SQLite en el mismo directorio que el ejecutable
         public static string ConnectionString {
             get {
-                return "Data Source=" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "conviapp.db") + ";Version=3;Pooling=False;";
+                return "Data Source=" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "conviapp.db") + ";Version=3;Default Timeout=5;";
             }
         }
     }

@@ -38,22 +38,23 @@ namespace ConviAppWeb.DataAccess
         public List<ENIncidencia> ListarTodas(int? pisoId = null)
         {
             var lista = new List<ENIncidencia>();
-            SQLiteConnection c = new SQLiteConnection(constring);
             try
             {
-                c.Open();
-                var sql = pisoId.HasValue ? "SELECT * FROM Incidencia WHERE piso_id=@p ORDER BY fecha_reporte DESC" : "SELECT * FROM Incidencia ORDER BY fecha_reporte DESC";
-                using (SQLiteCommand com = new SQLiteCommand(sql, c))
+                using (SQLiteConnection c = new SQLiteConnection(constring))
                 {
-                    if (pisoId.HasValue) com.Parameters.AddWithValue("@p", pisoId.Value);
-                    using (SQLiteDataReader dr = com.ExecuteReader())
+                    c.Open();
+                    var sql = pisoId.HasValue ? "SELECT * FROM Incidencia WHERE piso_id=@p ORDER BY fecha_reporte DESC" : "SELECT * FROM Incidencia ORDER BY fecha_reporte DESC";
+                    using (SQLiteCommand com = new SQLiteCommand(sql, c))
                     {
-                        while (dr.Read()) lista.Add(MapRow(dr));
+                        if (pisoId.HasValue) com.Parameters.AddWithValue("@p", pisoId.Value);
+                        using (SQLiteDataReader dr = com.ExecuteReader())
+                        {
+                            while (dr.Read()) lista.Add(MapRow(dr));
+                        }
                     }
                 }
             }
             catch (Exception) { lista = new List<ENIncidencia>(); }
-            finally { c.Close(); c.Dispose(); }
             return lista;
         }
 
@@ -61,17 +62,20 @@ namespace ConviAppWeb.DataAccess
         public bool ActualizarEstado(int id, string estado)
         {
             bool ok = false;
-            SQLiteConnection c = new SQLiteConnection(constring);
             try
             {
-                c.Open();
-                SQLiteCommand com = new SQLiteCommand("UPDATE Incidencia SET estado=@e WHERE id=@id", c);
-                com.Parameters.AddWithValue("@e", estado);
-                com.Parameters.AddWithValue("@id", id);
-                ok = com.ExecuteNonQuery() > 0;
+                using (SQLiteConnection c = new SQLiteConnection(constring))
+                {
+                    c.Open();
+                    using (SQLiteCommand com = new SQLiteCommand("UPDATE Incidencia SET estado=@e WHERE id=@id", c))
+                    {
+                        com.Parameters.AddWithValue("@e", estado);
+                        com.Parameters.AddWithValue("@id", id);
+                        ok = com.ExecuteNonQuery() > 0;
+                    }
+                }
             }
             catch (Exception) { ok = false; }
-            finally { c.Close(); }
             return ok;
         }
 
@@ -95,15 +99,18 @@ namespace ConviAppWeb.DataAccess
         public int ObtenerTotalAbiertas()
         {
             int total = 0;
-            SQLiteConnection c = new SQLiteConnection(constring);
             try
             {
-                c.Open();
-                SQLiteCommand com = new SQLiteCommand("SELECT COUNT(*) FROM Incidencia WHERE estado='abierta'", c);
-                total = Convert.ToInt32(com.ExecuteScalar());
+                using (SQLiteConnection c = new SQLiteConnection(constring))
+                {
+                    c.Open();
+                    using (SQLiteCommand com = new SQLiteCommand("SELECT COUNT(*) FROM Incidencia WHERE estado='abierta'", c))
+                    {
+                        total = Convert.ToInt32(com.ExecuteScalar());
+                    }
+                }
             }
             catch (Exception) { }
-            finally { c.Close(); }
             return total;
         }
 
