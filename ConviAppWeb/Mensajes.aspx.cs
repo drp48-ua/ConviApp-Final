@@ -32,10 +32,7 @@ namespace ConviAppWeb
             int pisoId = Convert.ToInt32(Session["ComunidadActivaId"]);
 
             var cad = new CADMensaje();
-            var raw = cad.ListarTodos(pisoId).Where(m => 
-                m.PisoId == pisoId ||
-                m.EmisorId == userId || m.ReceptorId == userId
-            ).ToList();
+            var raw = cad.ListarTodos(pisoId).Where(m => m.PisoId == pisoId).ToList();
             var lista = new List<MensajeVM>();
             foreach (var m in raw)
                 lista.Add(new MensajeVM { Id = m.Id, Contenido = m.Contenido, FechaEnvio = m.FechaEnvio, EmisorId = m.EmisorId, EsMio = m.EmisorId == userId });

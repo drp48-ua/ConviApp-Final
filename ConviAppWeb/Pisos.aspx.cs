@@ -58,27 +58,23 @@ namespace ConviAppWeb
             CargarPisos();
         }
 
-        protected void btnUnirsePiso_Click(object sender, EventArgs e)
+        protected void rptPisos_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            int pisoId;
-            if (int.TryParse(hdnPisoIdUnir.Value, out pisoId))
+            if (e.CommandName == "Unirse")
             {
-                string codigoIngresado = txtCodigoUnirPiso.Text.Trim().ToUpper();
-                var cad = new CADPiso();
-                var piso = cad.LeerPiso(pisoId);
-
-                if (piso != null && piso.CodigoComunidad != null && piso.CodigoComunidad.ToUpper() == codigoIngresado)
+                int pisoId = Convert.ToInt32(e.CommandArgument);
+                int userId = Convert.ToInt32(Session["UserId"]);
+                
+                var cadCu = new CADComunidadUsuario();
+                bool exito = cadCu.UnirUsuarioAComunidad(pisoId, userId);
+                
+                if (exito)
                 {
-                    int userId = Convert.ToInt32(Session["UserId"]);
-                    var cadCu = new CADComunidadUsuario();
-                    cadCu.UnirUsuarioAComunidad(pisoId, userId);
-                    
-                    // Script para alertar y redirigir
-                    ScriptManager.RegisterStartupScript(this, GetType(), "unirse", "alert('¡Unido a la comunidad exitosamente!'); window.location.href='Comunidades.aspx';", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "unirse", "alert('¡Te has unido a la comunidad de este piso exitosamente!'); window.location.href='Comunidades.aspx';", true);
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "errorUnir", "alert('Código incorrecto para este piso.');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "errorUnir", "alert('Ya eres miembro de esta comunidad o hubo un error.');", true);
                 }
             }
         }
