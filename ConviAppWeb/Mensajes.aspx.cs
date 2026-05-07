@@ -53,7 +53,7 @@ namespace ConviAppWeb
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
             
             var cadContrato = new CADContrato();
-            var contrato = cadContrato.ListarTodos().FirstOrDefault(c => c.UserId == userId && c.IsActive);
+            var contrato = cadContrato.ListarTodos().FirstOrDefault(c => c.UserId == userId && c.IsActive());
             int? pisoId = contrato != null ? (int?)contrato.PisoId : null;
 
             var cad = new CADMensaje();
