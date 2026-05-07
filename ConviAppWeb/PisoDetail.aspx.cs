@@ -76,7 +76,7 @@ namespace ConviAppWeb
                     {
                         UsuarioId = 1,
                         Titulo = "Nuevo interesado en comunidad",
-                        Mensaje = $"{myName} está interesado en unirse a la comunidad de '{piso.Direccion}'.",
+                        Mensaje = string.Format("{0} está interesado en unirse a la comunidad de '{1}'.", myName, piso.Direccion),
                         FechaCreacion = DateTime.Now,
                         Leida = false,
                         Tipo = "Mensaje"
