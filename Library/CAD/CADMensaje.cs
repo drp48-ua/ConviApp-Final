@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SQLite;
 using System.Collections.Generic;
@@ -14,26 +14,26 @@ namespace ConviAppWeb.DataAccess
         public bool CrearMensaje(ENMensaje en)
         {
             bool creado = false;
-            DataSet bdVirtual = new DataSet();
-            SQLiteConnection c = new SQLiteConnection(constring);
-            try
+            using (SQLiteConnection c = new SQLiteConnection(constring))
             {
-                SQLiteDataAdapter da = new SQLiteDataAdapter("SELECT * FROM Mensaje LIMIT 0", c);
-                da.Fill(bdVirtual, "mensaje");
-                DataTable t = bdVirtual.Tables["mensaje"];
-                DataRow nueva = t.NewRow();
-                nueva["contenido"]   = en.Contenido ?? (object)DBNull.Value;
-                nueva["fecha_envio"] = en.FechaEnvio.ToString("o");
-                nueva["leido"]       = en.Leido ? 1 : 0;
-                nueva["emisor_id"]   = en.EmisorId;
-                nueva["piso_id"]     = en.PisoId.HasValue ? (object)en.PisoId.Value : DBNull.Value;
-                t.Rows.Add(nueva);
-                SQLiteCommandBuilder cb = new SQLiteCommandBuilder(da);
-                da.Update(bdVirtual, "mensaje");
-                creado = true;
+                try
+                {
+                    c.Open();
+                    string sql = "INSERT INTO Mensaje (contenido, fecha_envio, leido, emisor_id, receptor_id, piso_id) " +
+                                 "VALUES (@c, @f, @l, @e, @r, @pi)";
+                    using (SQLiteCommand com = new SQLiteCommand(sql, c))
+                    {
+                        com.Parameters.AddWithValue("@c", en.Contenido ?? (object)DBNull.Value);
+                        com.Parameters.AddWithValue("@f", en.FechaEnvio.ToString("o"));
+                        com.Parameters.AddWithValue("@l", en.Leido ? 1 : 0);
+                        com.Parameters.AddWithValue("@e", en.EmisorId);
+                        com.Parameters.AddWithValue("@r", en.ReceptorId.HasValue ? (object)en.ReceptorId.Value : DBNull.Value);
+                        com.Parameters.AddWithValue("@pi", en.PisoId.HasValue ? (object)en.PisoId.Value : DBNull.Value);
+                        creado = com.ExecuteNonQuery() > 0;
+                    }
+                }
+                catch (Exception) { creado = false; }
             }
-            catch (Exception) { creado = false; }
-            finally { c.Close(); }
             return creado;
         }
 

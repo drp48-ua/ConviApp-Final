@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SQLite;
 using System.Collections.Generic;
@@ -14,28 +14,27 @@ namespace ConviAppWeb.DataAccess
         public bool CrearGasto(ENGasto en)
         {
             bool creado = false;
-            DataSet bdVirtual = new DataSet();
-            SQLiteConnection c = new SQLiteConnection(constring);
-            try
+            using (SQLiteConnection c = new SQLiteConnection(constring))
             {
-                SQLiteDataAdapter da = new SQLiteDataAdapter("SELECT * FROM Gasto LIMIT 0", c);
-                da.Fill(bdVirtual, "gasto");
-                DataTable t = bdVirtual.Tables["gasto"];
-                DataRow nueva = t.NewRow();
-                nueva["concepto"]          = en.Concepto ?? (object)DBNull.Value;
-                nueva["importe"]           = en.Importe;
-                nueva["fecha"]             = en.Fecha.ToString("o");
-                nueva["pagado"]            = en.Pagado ? 1 : 0;
-                nueva["descripcion"]       = en.Descripcion ?? (object)DBNull.Value;
-                nueva["registrado_por_id"] = en.RegistradoPorId;
-                nueva["piso_id"]           = en.PisoId.HasValue ? (object)en.PisoId.Value : DBNull.Value;
-                t.Rows.Add(nueva);
-                SQLiteCommandBuilder cb = new SQLiteCommandBuilder(da);
-                da.Update(bdVirtual, "gasto");
-                creado = true;
+                try
+                {
+                    c.Open();
+                    string sql = "INSERT INTO Gasto (concepto, importe, fecha, pagado, descripcion, registrado_por_id, piso_id) " +
+                                 "VALUES (@c, @i, @f, @pa, @d, @r, @pi)";
+                    using (SQLiteCommand com = new SQLiteCommand(sql, c))
+                    {
+                        com.Parameters.AddWithValue("@c", en.Concepto ?? (object)DBNull.Value);
+                        com.Parameters.AddWithValue("@i", en.Importe);
+                        com.Parameters.AddWithValue("@f", en.Fecha.ToString("o"));
+                        com.Parameters.AddWithValue("@pa", en.Pagado ? 1 : 0);
+                        com.Parameters.AddWithValue("@d", en.Descripcion ?? (object)DBNull.Value);
+                        com.Parameters.AddWithValue("@r", en.RegistradoPorId);
+                        com.Parameters.AddWithValue("@pi", en.PisoId.HasValue ? (object)en.PisoId.Value : DBNull.Value);
+                        creado = com.ExecuteNonQuery() > 0;
+                    }
+                }
+                catch (Exception) { creado = false; }
             }
-            catch (Exception) { creado = false; }
-            finally { c.Close(); }
             return creado;
         }
 

@@ -14,28 +14,27 @@ namespace ConviAppWeb.DataAccess
         public bool CrearIncidencia(ENIncidencia en)
         {
             bool creado = false;
-            DataSet bdVirtual = new DataSet();
-            SQLiteConnection c = new SQLiteConnection(constring);
-            try
+            using (SQLiteConnection c = new SQLiteConnection(constring))
             {
-                SQLiteDataAdapter da = new SQLiteDataAdapter("SELECT * FROM Incidencia LIMIT 0", c);
-                da.Fill(bdVirtual, "incidencia");
-                DataTable t = bdVirtual.Tables["incidencia"];
-                DataRow nueva = t.NewRow();
-                nueva["titulo"]           = en.Titulo ?? (object)DBNull.Value;
-                nueva["descripcion"]      = en.Descripcion ?? (object)DBNull.Value;
-                nueva["estado"]           = en.Estado ?? "abierta";
-                nueva["prioridad"]        = en.Prioridad ?? "media";
-                nueva["fecha_reporte"]    = en.FechaReporte.ToString("o");
-                nueva["reportada_por_id"] = en.ReportadaPorId;
-                nueva["piso_id"]          = en.PisoId.HasValue ? (object)en.PisoId.Value : DBNull.Value;
-                t.Rows.Add(nueva);
-                SQLiteCommandBuilder cb = new SQLiteCommandBuilder(da);
-                da.Update(bdVirtual, "incidencia");
-                creado = true;
+                try
+                {
+                    c.Open();
+                    string sql = "INSERT INTO Incidencia (titulo, descripcion, estado, prioridad, fecha_reporte, reportada_por_id, piso_id) " +
+                                 "VALUES (@t, @d, @e, @p, @f, @r, @pi)";
+                    using (SQLiteCommand com = new SQLiteCommand(sql, c))
+                    {
+                        com.Parameters.AddWithValue("@t", en.Titulo ?? (object)DBNull.Value);
+                        com.Parameters.AddWithValue("@d", en.Descripcion ?? (object)DBNull.Value);
+                        com.Parameters.AddWithValue("@e", en.Estado ?? "abierta");
+                        com.Parameters.AddWithValue("@p", en.Prioridad ?? "media");
+                        com.Parameters.AddWithValue("@f", en.FechaReporte.ToString("o"));
+                        com.Parameters.AddWithValue("@r", en.ReportadaPorId);
+                        com.Parameters.AddWithValue("@pi", en.PisoId.HasValue ? (object)en.PisoId.Value : DBNull.Value);
+                        creado = com.ExecuteNonQuery() > 0;
+                    }
+                }
+                catch (Exception) { creado = false; }
             }
-            catch (Exception) { creado = false; }
-            finally { c.Close(); }
             return creado;
         }
 

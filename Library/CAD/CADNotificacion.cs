@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SQLite;
 using System.Collections.Generic;
@@ -14,28 +14,24 @@ namespace ConviAppWeb.DataAccess
         public bool CrearNotificacion(ENNotificacion en)
         {
             bool creado = false;
-            DataSet bdVirtual = new DataSet();
             using (SQLiteConnection c = new SQLiteConnection(constring))
             {
                 try
                 {
-                    SQLiteDataAdapter da = new SQLiteDataAdapter("SELECT * FROM Notificacion LIMIT 0", c);
-                    da.Fill(bdVirtual, "notificacion");
-
-                    DataTable t = bdVirtual.Tables["notificacion"];
-                    DataRow nueva = t.NewRow();
-                    nueva["titulo"] = en.Titulo ?? (object)DBNull.Value;
-                    nueva["mensaje"] = en.Mensaje ?? (object)DBNull.Value;
-                    nueva["tipo"] = en.Tipo ?? (object)DBNull.Value;
-                    nueva["leida"] = en.Leida ? 1 : 0;
-                    nueva["fecha_creacion"] = en.FechaCreacion.ToString("o");
-                    nueva["fecha_lectura"] = en.FechaLectura.HasValue ? (object)en.FechaLectura.Value.ToString("o") : (object)DBNull.Value;
-                    nueva["usuario_id"] = en.UsuarioId;
-                    t.Rows.Add(nueva);
-
-                    SQLiteCommandBuilder cb = new SQLiteCommandBuilder(da);
-                    da.Update(bdVirtual, "notificacion");
-                    creado = true;
+                    c.Open();
+                    string sql = "INSERT INTO Notificacion (titulo, mensaje, tipo, leida, fecha_creacion, fecha_lectura, usuario_id) " +
+                                 "VALUES (@t, @m, @tipo, @l, @fc, @fl, @u)";
+                    using (SQLiteCommand com = new SQLiteCommand(sql, c))
+                    {
+                        com.Parameters.AddWithValue("@t", en.Titulo ?? (object)DBNull.Value);
+                        com.Parameters.AddWithValue("@m", en.Mensaje ?? (object)DBNull.Value);
+                        com.Parameters.AddWithValue("@tipo", en.Tipo ?? (object)DBNull.Value);
+                        com.Parameters.AddWithValue("@l", en.Leida ? 1 : 0);
+                        com.Parameters.AddWithValue("@fc", en.FechaCreacion.ToString("o"));
+                        com.Parameters.AddWithValue("@fl", en.FechaLectura.HasValue ? (object)en.FechaLectura.Value.ToString("o") : (object)DBNull.Value);
+                        com.Parameters.AddWithValue("@u", en.UsuarioId);
+                        creado = com.ExecuteNonQuery() > 0;
+                    }
                 }
                 catch (Exception)
                 {
