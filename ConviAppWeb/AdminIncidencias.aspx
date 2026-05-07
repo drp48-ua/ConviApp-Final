@@ -39,8 +39,8 @@
                 <ItemTemplate>
                     <div style="border:1px solid #fee2e2; border-left:4px solid #ef4444; background:#fef2f2; border-radius:8px; padding:16px; margin-bottom:16px;">
                         <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-                            <strong style="color:#991b1b;">[<%# Eval("Severidad") %>] Piso #<%# Eval("PisoId") %></strong>
-                            <span class="badge" style="background:<%# Eval("Estado").ToString() == "Abierta" ? "#fecaca" : "#d1fae5" %>; color:<%# Eval("Estado").ToString() == "Abierta" ? "#b91c1c" : "#065f46" %>; padding:4px 8px; border-radius:12px; font-size:0.75rem;"><%# Eval("Estado") %></span>
+                            <strong style="color:#991b1b;">[<%# Eval("Prioridad") %>] Piso #<%# Eval("PisoId") %></strong>
+                            <span class="badge" style="background:<%# Eval("Estado").ToString() == "abierta" ? "#fecaca" : "#d1fae5" %>; color:<%# Eval("Estado").ToString() == "abierta" ? "#b91c1c" : "#065f46" %>; padding:4px 8px; border-radius:12px; font-size:0.75rem;"><%# Eval("Estado") %></span>
                         </div>
                         <p style="font-size:0.85rem; color:#7f1d1d; margin-bottom:12px;"><%# Eval("Descripcion") %></p>
                         
