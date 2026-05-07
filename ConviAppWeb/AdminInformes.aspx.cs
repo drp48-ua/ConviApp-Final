@@ -59,15 +59,36 @@ namespace ConviAppWeb
         protected void btnDescargarUsuarios_Click(object sender, EventArgs e)
         {
             var cadUsuarios = new CADUsuario();
-            // Assuming CADUsuario has a ListarTodos method or we get them somehow.
-            // If it doesn't, we can just dump a placeholder or list what we can.
+            var usuarios = cadUsuarios.ObtenerTodos();
+            var cadInc = new CADIncidencia();
+            var todasInc = cadInc.ListarTodas();
+            var cadGasto = new CADGasto();
+            var todosGastos = cadGasto.ListarTodos();
+
             var sb = new StringBuilder();
-            sb.AppendLine("=== REPORTE DE USUARIOS ACTIVOS ===");
-            sb.AppendLine("Exportación temporal no disponible en su totalidad. Función en desarrollo.");
-            
+            sb.AppendLine("=== REPORTE COMPLETO DE USUARIOS — CONVIAPP ===");
+            sb.AppendLine("Fecha: " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+            sb.AppendLine("Total usuarios registrados: " + usuarios.Count);
+            sb.AppendLine(new string('=', 60));
+
+            foreach (var u in usuarios)
+            {
+                sb.AppendLine($"\nID: {u.Id}");
+                sb.AppendLine($"Nombre: {u.Nombre} {u.Apellidos}");
+                sb.AppendLine($"Email: {u.Email}");
+                sb.AppendLine($"Plan: {(u.Rol != null ? u.Rol.Nombre : "Basico")}");
+                sb.AppendLine($"Activo: {(u.Activo ? "Sí" : "No")}");
+                sb.AppendLine($"Fecha registro: {u.FechaRegistro:dd/MM/yyyy}");
+                int numInc = todasInc.Count(i => i.ReportadaPorId == u.Id);
+                decimal totalGastos = todosGastos.Where(g => g.RegistradoPorId == u.Id).Sum(g => g.Importe);
+                sb.AppendLine($"Incidencias creadas: {numInc}");
+                sb.AppendLine($"Total gastos registrados: {totalGastos:C}");
+                sb.AppendLine(new string('-', 40));
+            }
+
             Response.Clear();
             Response.ContentType = "text/plain";
-            Response.AddHeader("content-disposition", "attachment;filename=Usuarios_Activos.txt");
+            Response.AddHeader("content-disposition", "attachment;filename=Usuarios_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt");
             Response.Write(sb.ToString());
             Response.End();
         }

@@ -38,8 +38,26 @@ namespace ConviAppWeb
             
             if (e.CommandName == "Cerrar")
             {
-                int id = Convert.ToInt32(e.CommandArgument);
-                cadI.ActualizarEstado(id, "Resuelta");
+                int id = Convert.ToInt32(e.CommandArgument.ToString().Split('|')[0]);
+                // Recuperar el userId para notificarle
+                var incidencias = cadI.ListarTodas();
+                var inc = incidencias.FirstOrDefault(i => i.Id == id);
+                cadI.EliminarIncidencia(id);
+                
+                // Notificar al usuario que su incidencia fue resuelta
+                if (inc != null && inc.ReportadaPorId > 0)
+                {
+                    var cadN = new CADNotificacion();
+                    cadN.CrearNotificacion(new ENNotificacion
+                    {
+                        UsuarioId = inc.ReportadaPorId,
+                        Titulo = "Incidencia resuelta ✅",
+                        Mensaje = $"Tu incidencia «{inc.Titulo}» ha sido resuelta y cerrada por el administrador.",
+                        FechaCreacion = DateTime.Now,
+                        Leida = false,
+                        Tipo = "Sistema"
+                    });
+                }
                 CargarIncidencias();
             }
             else if (e.CommandName == "Contactar")

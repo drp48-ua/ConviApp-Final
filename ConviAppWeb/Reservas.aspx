@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Reservas" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+<%@ Page Title="Reservas" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeFile="Reservas.aspx.cs" Inherits="ConviAppWeb.Reservas" %>
     <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div class="dash-tabs">
@@ -15,21 +15,20 @@
 
         <h2 style="margin-bottom:20px;">📅 Reservas de Zonas Comunes</h2>
 
-        <% if (Session["UserRole"]==null || Session["UserRole"].ToString()=="Basico" ) { %>
+        <% if (Session["UserRole"]==null || Session["UserRole"].ToString()=="Basico" ) { 
+               var _cadAd = new ConviAppWeb.DataAccess.CADAnuncio();
+               var _ad = _cadAd.LeerPorSeccion("Reservas") ?? new ConviAppWeb.Models.ENAnuncio { Titulo = "Gimnasio cercano", Subtitulo = "Matrícula gratis este mes.", ImagenUrl = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop" };
+        %>
             <div class="ad-slider-wrap"
                 style="margin-bottom:24px; position:relative; background:white; border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; display:flex; align-items:center;">
                 <div style="width:120px; height:80px; overflow:hidden; flex-shrink:0;">
-                    <img src="https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?w=400&h=300&fit=crop"
-                        style="width:100%; height:100%; object-fit:cover;" />
+                    <img src="<%= _ad.ImagenUrl %>" style="width:100%; height:100%; object-fit:cover;" />
                 </div>
                 <div style="padding:16px; flex:1;">
-                    <div
-                        style="position:absolute; top:0; right:0; background:#f3f4f6; padding:2px 8px; font-size:0.7rem; font-weight:600; color:#6b7280; border-bottom-left-radius:6px;">
+                    <div style="position:absolute; top:0; right:0; background:#f3f4f6; padding:2px 8px; font-size:0.7rem; font-weight:600; color:#6b7280; border-bottom-left-radius:6px;">
                         PUBLICIDAD</div>
-                    <strong style="color:var(--primary); font-size:1.1rem; display:block; margin-bottom:4px;">Gimnasio
-                        Urban Fit</strong>
-                    <span style="color:#4b5563; font-size:0.9rem;">Prueba 7 días gratis. A solo 2 minutos de tu
-                        piso.</span>
+                    <strong style="color:var(--primary); font-size:1.1rem; display:block; margin-bottom:4px;"><%= _ad.Titulo %></strong>
+                    <span style="color:#4b5563; font-size:0.9rem;"><%= _ad.Subtitulo %></span>
                 </div>
             </div>
             <% } %>

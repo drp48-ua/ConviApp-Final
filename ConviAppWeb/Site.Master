@@ -1,4 +1,4 @@
-<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="ConviAppWeb.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="ConviAppWeb.SiteMaster" %>
 <!DOCTYPE html>
 <html lang="es">
 <head runat="server">
@@ -18,7 +18,7 @@
         <header class="header">
             <div class="header-top container" style="max-width:100%; width:100%">
                 <a href="Index.aspx" class="logo" style="color: white;">
-                    <div class="logo-icon" style="background:white; color:var(--primary); font-size:1.5rem">ðŸ </div>
+                    <img src="img/logo.png" alt="ConviApp" style="width:40px; height:40px; border-radius:10px; object-fit:cover;" />
                     ConviApp
                 </a>
                 
@@ -34,35 +34,34 @@
                             <div style="position:relative;">
                                 <a href="javascript:void(0)" onclick="toggleNotifications()" style="text-decoration:none; position:relative; display:inline-block; margin-right:10px;">
                                     <span style="font-size:1.5rem;">🔔</span>
-                                    <span style="position:absolute; top:-2px; right:-2px; background:var(--danger); color:white; font-size:0.6rem; font-weight:bold; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center;">3</span>
+                                    <% var _cntN = new ConviAppWeb.DataAccess.CADNotificacion();
+                                       int _cntUid = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
+                                       int _cntTotal = _cntUid > 0 ? _cntN.ListarPorUsuario(_cntUid).Count : 0; %>
+                                    <% if (_cntTotal > 0) { %>
+                                    <span style="position:absolute; top:-2px; right:-2px; background:var(--danger); color:white; font-size:0.6rem; font-weight:bold; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center;"><%= _cntTotal > 9 ? "9+" : _cntTotal.ToString() %></span>
+                                    <% } %>
                                 </a>
                                 <!-- DROPDOWN -->
-                                <div id="notifications-dropdown" class="glass-card" style="display:none; position:absolute; top:40px; right:0; width:300px; z-index:100; padding:16px; border:1px solid #e5e7eb; box-shadow:0 10px 15px -3px rgba(0,0,0,0.1);">
-                                    <h4 style="margin:0 0 12px 0; color:var(--text-primary); font-size:1rem; border-bottom:1px solid #e5e7eb; padding-bottom:8px;">Notificaciones</h4>
-                                    <div style="display:flex; flex-direction:column; gap:12px;">
-                                        <div style="display:flex; gap:12px; align-items:flex-start;">
-                                            <div style="font-size:1.5rem; line-height:1;">✅</div>
-                                            <div>
-                                                <div style="font-size:0.85rem; font-weight:600; color:var(--text-primary); margin-bottom:2px;">Tarea completada</div>
-                                                <div style="font-size:0.75rem; color:var(--text-secondary);">María completó 'Limpiar cocina'.</div>
-                                            </div>
-                                        </div>
-                                        <div style="display:flex; gap:12px; align-items:flex-start;">
-                                            <div style="font-size:1.5rem; line-height:1;">💸</div>
-                                            <div>
-                                                <div style="font-size:0.85rem; font-weight:600; color:var(--text-primary); margin-bottom:2px;">Nuevo gasto añadido</div>
-                                                <div style="font-size:0.75rem; color:var(--text-secondary);">Carlos añadió 'Internet Fibra'.</div>
-                                            </div>
-                                        </div>
-                                        <div style="display:flex; gap:12px; align-items:flex-start;">
-                                            <div style="font-size:1.5rem; line-height:1;">📅</div>
-                                            <div>
-                                                <div style="font-size:0.85rem; font-weight:600; color:var(--text-primary); margin-bottom:2px;">Reserva confirmada</div>
-                                                <div style="font-size:0.75rem; color:var(--text-secondary);">Tienes la lavadora hoy a las 18:00.</div>
-                                            </div>
+                                <div id="notifications-dropdown" class="glass-card" style="display:none; position:absolute; top:40px; right:0; width:320px; z-index:100; padding:16px; border:1px solid #e5e7eb; box-shadow:0 10px 15px -3px rgba(0,0,0,0.1); max-height:400px; overflow-y:auto;">
+                                    <h4 style="margin:0 0 12px 0; color:var(--text-primary); font-size:1rem; border-bottom:1px solid #e5e7eb; padding-bottom:8px;">🔔 Notificaciones</h4>
+                                    <% 
+                                        var _cadN = new ConviAppWeb.DataAccess.CADNotificacion();
+                                        int _uid = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
+                                        var _notifs = _uid > 0 ? _cadN.ListarPorUsuario(_uid) : new System.Collections.Generic.List<ConviAppWeb.Models.ENNotificacion>();
+                                    %>
+                                    <% if (_notifs.Count == 0) { %>
+                                    <div style="color:var(--text-muted); font-size:.85rem; text-align:center; padding:12px 0;">Sin notificaciones nuevas</div>
+                                    <% } else { foreach (var _n in _notifs) { %>
+                                    <div style="display:flex; gap:10px; align-items:flex-start; padding:10px 0; border-bottom:1px solid #f3f4f6;">
+                                        <div style="font-size:1.3rem; line-height:1; flex-shrink:0;"><%= _n.Tipo == "Sistema" ? "🔔" : "💬" %></div>
+                                        <div style="flex:1;">
+                                            <div style="font-size:.83rem; font-weight:600; color:var(--text-primary); margin-bottom:2px;"><%= System.Web.HttpUtility.HtmlEncode(_n.Titulo) %></div>
+                                            <div style="font-size:.75rem; color:var(--text-secondary);"><%= System.Web.HttpUtility.HtmlEncode(_n.Mensaje) %></div>
+                                            <div style="font-size:.7rem; color:var(--text-muted); margin-top:2px;"><%= _n.FechaCreacion.ToString("dd/MM HH:mm") %></div>
                                         </div>
                                     </div>
-                                    <a href="Javascript:void(0)" onclick="toggleNotifications()" style="display:block; text-align:center; margin-top:12px; font-size:0.8rem; color:var(--primary); text-decoration:none; font-weight:600;">Cerrar</a>
+                                    <% } } %>
+                                    <a href="Javascript:void(0)" onclick="toggleNotifications()" style="display:block; text-align:center; margin-top:10px; font-size:.8rem; color:var(--primary); text-decoration:none; font-weight:600;">Cerrar ✕</a>
                                 </div>
                             </div>
 
@@ -197,7 +196,7 @@
                 <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;">
                     <div>
                         <a href="Index.aspx" class="logo" style="font-size:1.2rem; color:var(--text-primary); text-decoration:none; font-weight:800; display:flex; align-items:center; gap:8px; margin-bottom:16px;">
-                            <div class="logo-icon" style="background:white; color:var(--primary); font-size:1.5rem">ðŸ </div>
+                            <img src="img/logo.png" alt="ConviApp" style="width:40px; height:40px; border-radius:10px; object-fit:cover;" />
                             ConviApp
                         </a>
                         <p style="color:var(--text-secondary);font-size:0.95rem;">La plataforma definitiva para gestionar tu piso compartido. Tareas, gastos, reservas y comunicación en un solo lugar.</p>

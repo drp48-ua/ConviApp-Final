@@ -2,17 +2,11 @@ using System;
 using System.Web;
 using System.Web.UI;
 using System.Collections.Generic;
+using ConviAppWeb.DataAccess;
+using ConviAppWeb.Models;
 
 namespace ConviAppWeb
 {
-    public class MockAd
-    {
-        public string Id { get; set; }
-        public string Title { get; set; }
-        public string Desc { get; set; }
-        public string Bg { get; set; }
-    }
-
     public partial class AdminPublicidad : Page
     {
         protected global::System.Web.UI.WebControls.Repeater rptAds;
@@ -26,19 +20,14 @@ namespace ConviAppWeb
 
             if (!IsPostBack)
             {
-                if (Session["MockAds"] == null)
-                {
-                    Session["MockAds"] = new List<MockAd> {
-                        new MockAd { Id = Guid.NewGuid().ToString(), Title = "Limpieza a domicilio", Desc = "Primera limpieza al 50%.", Bg = "linear-gradient(135deg,#1e3a8a,#3b82f6)" }
-                    };
-                }
                 BindAds();
             }
         }
 
         private void BindAds()
         {
-            var ads = Session["MockAds"] as List<MockAd>;
+            var cad = new CADAnuncio();
+            var ads = cad.ListarTodos();
             rptAds.DataSource = ads;
             rptAds.DataBind();
         }
@@ -47,22 +36,24 @@ namespace ConviAppWeb
         {
             if (e.CommandName == "Guardar")
             {
-                var ads = Session["MockAds"] as List<MockAd>;
-                if (ads != null)
+                var cad = new CADAnuncio();
+                string idStr = e.CommandArgument.ToString();
+                
+                var txtTitulo = (System.Web.UI.WebControls.TextBox)e.Item.FindControl("txtEditTitulo");
+                var txtDesc = (System.Web.UI.WebControls.TextBox)e.Item.FindControl("txtEditDesc");
+                var txtImg = (System.Web.UI.WebControls.TextBox)e.Item.FindControl("txtEditImg");
+                
+                if (txtTitulo != null && txtDesc != null && txtImg != null)
                 {
-                    string id = e.CommandArgument.ToString();
-                    var adToEdit = ads.Find(a => a.Id == id);
-                    if (adToEdit != null)
-                    {
-                        var txtTitulo = (System.Web.UI.WebControls.TextBox)e.Item.FindControl("txtEditTitulo");
-                        var txtDesc = (System.Web.UI.WebControls.TextBox)e.Item.FindControl("txtEditDesc");
-                        
-                        if (txtTitulo != null) adToEdit.Title = txtTitulo.Text;
-                        if (txtDesc != null) adToEdit.Desc = txtDesc.Text;
-                        
-                        Session["MockAds"] = ads;
-                        BindAds();
-                    }
+                    cad.Actualizar(new ENAnuncio {
+                        Id = Convert.ToInt32(idStr),
+                        Titulo = txtTitulo.Text.Trim(),
+                        Subtitulo = txtDesc.Text.Trim(),
+                        ImagenUrl = txtImg.Text.Trim()
+                    });
+                    
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Anuncio guardado con éxito.');", true);
+                    BindAds();
                 }
             }
         }

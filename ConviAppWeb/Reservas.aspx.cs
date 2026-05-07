@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Web.UI.WebControls;
 using ConviAppWeb.DataAccess;
 using ConviAppWeb.Models;
@@ -18,8 +19,20 @@ namespace ConviAppWeb
         private void CargarReservas()
         {
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
+            var cadContrato = new CADContrato();
+            var contrato = cadContrato.ListarTodos().FirstOrDefault(c => c.UserId == userId && c.IsActive());
+            int? pisoId = contrato != null ? (int?)contrato.PropertyId : null;
+
+            System.Collections.Generic.List<int> usuariosEnPiso = new System.Collections.Generic.List<int> { userId };
+            if (pisoId.HasValue) {
+                usuariosEnPiso = cadContrato.ListarTodos()
+                                            .Where(c => c.PropertyId == pisoId.Value && c.IsActive())
+                                            .Select(c => c.UserId)
+                                            .ToList();
+            }
+
             var cad = new CADReserva();
-            var lista = cad.ListarTodas(userId);
+            var lista = cad.ListarTodas(null).Where(r => usuariosEnPiso.Contains(r.UsuarioId)).ToList();
             if (lista == null || lista.Count == 0)
             {
                 pnlVacio.Visible = true;

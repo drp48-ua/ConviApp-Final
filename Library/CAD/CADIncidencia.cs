@@ -72,6 +72,22 @@ namespace ConviAppWeb.DataAccess
             return ok;
         }
 
+        // DELETE — elimina físicamente la incidencia
+        public bool EliminarIncidencia(int id)
+        {
+            bool ok = false;
+            using (SQLiteConnection c = new SQLiteConnection(constring))
+            {
+                c.Open();
+                using (SQLiteCommand com = new SQLiteCommand("DELETE FROM Incidencia WHERE id=@id", c))
+                {
+                    com.Parameters.AddWithValue("@id", id);
+                    ok = com.ExecuteNonQuery() > 0;
+                }
+            }
+            return ok;
+        }
+
         // COUNT abiertas — método conectado
         public int ObtenerTotalAbiertas()
         {

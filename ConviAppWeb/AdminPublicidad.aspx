@@ -21,15 +21,24 @@
             <asp:Repeater ID="rptAds" runat="server" OnItemCommand="rptAds_ItemCommand">
                 <ItemTemplate>
                     <div class="glass-card" style="padding:0; overflow:hidden;">
-                        <div style='height:120px; background:<%# Eval("Bg") %>; color:white; padding:20px; text-align:center;'>
-                            <h3 style="font-size:1.2rem;"><%# Eval("Title") %></h3>
+                        <div style='height:120px; background-image:url("<%# Eval("ImagenUrl") %>"); background-size:cover; background-position:center; position:relative;'>
+                            <div style="position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5);"></div>
+                            <div style="position:relative; color:white; padding:20px; text-align:center; height:100%; display:flex; align-items:center; justify-content:center;">
+                                <h3 style="font-size:1.2rem; margin:0;"><%# Eval("Seccion") %></h3>
+                            </div>
                         </div>
                         <div style="padding:16px;">
-                            <asp:TextBox ID="txtEditTitulo" runat="server" Text='<%# Eval("Title") %>' CssClass="form-control" style="margin-bottom:8px; width:100%; font-weight:bold;" />
-                            <asp:TextBox ID="txtEditDesc" runat="server" Text='<%# Eval("Desc") %>' CssClass="form-control" TextMode="MultiLine" Rows="2" style="margin-bottom:12px; width:100%; font-size:0.85rem;" />
+                            <label style="font-size:0.8rem; color:var(--text-muted); display:block; margin-bottom:2px;">Título del anuncio</label>
+                            <asp:TextBox ID="txtEditTitulo" runat="server" Text='<%# Eval("Titulo") %>' CssClass="form-input" style="margin-bottom:8px; width:100%; font-weight:bold;" />
+                            
+                            <label style="font-size:0.8rem; color:var(--text-muted); display:block; margin-bottom:2px;">Subtítulo o descripción</label>
+                            <asp:TextBox ID="txtEditDesc" runat="server" Text='<%# Eval("Subtitulo") %>' CssClass="form-input" TextMode="MultiLine" Rows="2" style="margin-bottom:8px; width:100%; font-size:0.85rem;" />
+                            
+                            <label style="font-size:0.8rem; color:var(--text-muted); display:block; margin-bottom:2px;">URL de la imagen</label>
+                            <asp:TextBox ID="txtEditImg" runat="server" Text='<%# Eval("ImagenUrl") %>' CssClass="form-input" style="margin-bottom:12px; width:100%; font-size:0.85rem;" />
                             
                             <div style="display:flex; justify-content:space-between; align-items:center;">
-                                <span class="badge" style="background:#ecfdf5; color:#10b981; padding:4px 8px; border-radius:12px; font-size:0.75rem;">Activo</span>
+                                <span class="badge" style="background:#ecfdf5; color:#10b981; padding:4px 8px; border-radius:12px; font-size:0.75rem;">Activo en <%# Eval("Seccion") %></span>
                                 <asp:Button ID="btnSaveAd" runat="server" Text="Guardar" CommandName="Guardar" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm btn-primary" />
                             </div>
                         </div>

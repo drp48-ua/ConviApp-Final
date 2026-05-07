@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Gastos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Gastos.aspx.cs"
+<%@ Page Title="Gastos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Gastos.aspx.cs"
     Inherits="ConviAppWeb.Gastos" %>
     <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div class="dash-tabs">
@@ -20,20 +20,20 @@
             </div>
         </div>
 
-        <% if (Session["UserRole"]==null || Session["UserRole"].ToString()=="Basico" ) { %>
+        <% if (Session["UserRole"]==null || Session["UserRole"].ToString()=="Basico" ) { 
+               var _cadAd = new ConviAppWeb.DataAccess.CADAnuncio();
+               var _ad = _cadAd.LeerPorSeccion("Gastos") ?? new ConviAppWeb.Models.ENAnuncio { Titulo = "Ahorra en Luz", Subtitulo = "Contrata tarifa compartida y ahorra un 20%.", ImagenUrl = "https://images.unsplash.com/photo-1550565118-3a14e8d0386f?w=400&h=300&fit=crop" };
+        %>
             <div class="ad-slider-wrap"
                 style="margin-bottom:24px; position:relative; background:white; border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; display:flex; align-items:center;">
                 <div style="width:120px; height:100px; overflow:hidden; flex-shrink:0;">
-                    <img src="https://images.unsplash.com/photo-1550565118-3a14e8d0386f?w=400&h=300&fit=crop"
-                        style="width:100%; height:100%; object-fit:cover;" />
+                    <img src="<%= _ad.ImagenUrl %>" style="width:100%; height:100%; object-fit:cover;" />
                 </div>
                 <div style="padding:16px; flex:1;">
-                    <div
-                        style="position:absolute; top:0; right:0; background:#f3f4f6; padding:2px 8px; font-size:0.7rem; font-weight:600; color:#6b7280; border-bottom-left-radius:6px;">
+                    <div style="position:absolute; top:0; right:0; background:#f3f4f6; padding:2px 8px; font-size:0.7rem; font-weight:600; color:#6b7280; border-bottom-left-radius:6px;">
                         PUBLICIDAD</div>
-                    <strong style="color:var(--primary); font-size:1.1rem; display:block; margin-bottom:4px;">Ahorra en
-                        Luz</strong>
-                    <span style="color:#4b5563; font-size:0.9rem;">Contrata tarifa compartida y ahorra un 20%.</span>
+                    <strong style="color:var(--primary); font-size:1.1rem; display:block; margin-bottom:4px;"><%= _ad.Titulo %></strong>
+                    <span style="color:#4b5563; font-size:0.9rem;"><%= _ad.Subtitulo %></span>
                 </div>
             </div>
             <% } %>

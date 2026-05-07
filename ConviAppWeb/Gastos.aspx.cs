@@ -18,8 +18,15 @@ namespace ConviAppWeb
         private void CargarGastos()
         {
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
+            var cadContrato = new CADContrato();
+            var contrato = cadContrato.ListarTodos().FirstOrDefault(c => c.UserId == userId && c.IsActive());
+            int? pisoId = contrato != null ? (int?)contrato.PropertyId : null;
+
             var cad = new CADGasto();
-            var lista = cad.ListarTodos().Where(g => g.RegistradoPorId == userId).ToList();
+            var lista = cad.ListarTodos().Where(g => 
+                (pisoId.HasValue && g.PisoId == pisoId.Value) || 
+                g.RegistradoPorId == userId
+            ).ToList();
             
             pnlVacio.Visible = lista.Count == 0;
             pnlTabla.Visible = lista.Count > 0;

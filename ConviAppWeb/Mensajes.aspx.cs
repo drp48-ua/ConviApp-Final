@@ -27,8 +27,15 @@ namespace ConviAppWeb
         private void CargarMensajes()
         {
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
+            var cadContrato = new CADContrato();
+            var contrato = cadContrato.ListarTodos().FirstOrDefault(c => c.UserId == userId && c.IsActive());
+            int? pisoId = contrato != null ? (int?)contrato.PropertyId : null;
+
             var cad = new CADMensaje();
-            var raw = cad.ListarTodos().Where(m => m.EmisorId == userId || m.ReceptorId == userId).ToList();
+            var raw = cad.ListarTodos().Where(m => 
+                (pisoId.HasValue && m.PisoId == pisoId.Value) ||
+                m.EmisorId == userId || m.ReceptorId == userId
+            ).ToList();
             var lista = new List<MensajeVM>();
             foreach (var m in raw)
                 lista.Add(new MensajeVM { Id = m.Id, Contenido = m.Contenido, FechaEnvio = m.FechaEnvio, EmisorId = m.EmisorId, EsMio = m.EmisorId == userId });
@@ -49,6 +56,13 @@ namespace ConviAppWeb
 
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
+            if (Session["UserRole"] != null && Session["UserRole"].ToString() == "Basico")
+            {
+                lblError.Text = "Tu plan Básico solo permite leer mensajes. Actualiza a Pro para participar en el chat.";
+                lblError.Visible = true;
+                return;
+            }
+
             if (string.IsNullOrWhiteSpace(txtMensaje.Text)) return;
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
             

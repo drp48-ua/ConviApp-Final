@@ -15,21 +15,20 @@
 
         <h2 style="margin-bottom:20px;">💬 Chat del Piso</h2>
 
-        <% if (Session["UserRole"]==null || Session["UserRole"].ToString()=="Basico" ) { %>
+        <% if (Session["UserRole"]==null || Session["UserRole"].ToString()=="Basico" ) { 
+               var _cadAd = new ConviAppWeb.DataAccess.CADAnuncio();
+               var _ad = _cadAd.LeerPorSeccion("Mensajes") ?? new ConviAppWeb.Models.ENAnuncio { Titulo = "Pizza a domicilio", Subtitulo = "2x1 en pizzas medianas hoy.", ImagenUrl = "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop" };
+        %>
             <div class="ad-slider-wrap"
                 style="margin-bottom:24px; position:relative; background:white; border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; display:flex; align-items:center; max-width:700px;">
                 <div style="width:120px; height:80px; overflow:hidden; flex-shrink:0;">
-                    <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=400&h=300&fit=crop"
-                        style="width:100%; height:100%; object-fit:cover;" />
+                    <img src="<%= _ad.ImagenUrl %>" style="width:100%; height:100%; object-fit:cover;" />
                 </div>
                 <div style="padding:16px; flex:1;">
-                    <div
-                        style="position:absolute; top:0; right:0; background:#f3f4f6; padding:2px 8px; font-size:0.7rem; font-weight:600; color:#6b7280; border-bottom-left-radius:6px;">
+                    <div style="position:absolute; top:0; right:0; background:#f3f4f6; padding:2px 8px; font-size:0.7rem; font-weight:600; color:#6b7280; border-bottom-left-radius:6px;">
                         PUBLICIDAD</div>
-                    <strong style="color:var(--primary); font-size:1.1rem; display:block; margin-bottom:4px;">Fibra
-                        Óptica Compartida</strong>
-                    <span style="color:#4b5563; font-size:0.9rem;">Mejora tu conexión con planes para
-                        estudiantes.</span>
+                    <strong style="color:var(--primary); font-size:1.1rem; display:block; margin-bottom:4px;"><%= _ad.Titulo %></strong>
+                    <span style="color:#4b5563; font-size:0.9rem;"><%= _ad.Subtitulo %></span>
                 </div>
             </div>
             <% } %>
