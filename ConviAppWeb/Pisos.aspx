@@ -14,10 +14,29 @@
 
         <asp:Panel ID="pnlForm" runat="server" Visible="false" CssClass="glass-card"
             style="margin-bottom:20px; padding:20px;">
-            <h3 style="margin-bottom:12px; color:var(--primary);">Nuevo Piso</h3>
-            <div style="display:flex; gap:12px; margin-bottom:12px;">
-                <asp:TextBox ID="txtDir" runat="server" CssClass="form-input" placeholder="Dirección" style="flex:2;" />
-                <asp:TextBox ID="txtCiudad" runat="server" CssClass="form-input" placeholder="Ciudad" style="flex:1;" />
+            <h3 style="margin-bottom:12px; color:var(--primary);">Nuevo Piso / Comunidad</h3>
+            <div style="display:flex; gap:12px; margin-bottom:12px; flex-wrap:wrap;">
+                <asp:TextBox ID="txtDir" runat="server" CssClass="form-input" placeholder="Dirección" style="flex:2; min-width:200px;" />
+                <asp:TextBox ID="txtCiudad" runat="server" CssClass="form-input" placeholder="Ciudad" style="flex:1; min-width:150px;" />
+            </div>
+            <div style="margin-bottom:12px;">
+                <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-input" placeholder="Descripción de la comunidad" TextMode="MultiLine" Rows="3" style="width:100%;" />
+            </div>
+            <div style="display:flex; gap:12px; margin-bottom:16px; align-items:center; flex-wrap:wrap;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <label style="color:var(--text-secondary); font-size:0.9rem;">Habitaciones:</label>
+                    <asp:TextBox ID="txtHabitaciones" runat="server" CssClass="form-input" TextMode="Number" Text="1" style="width:70px; padding:8px;" />
+                </div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <label style="color:var(--text-secondary); font-size:0.9rem;">Aseos:</label>
+                    <asp:TextBox ID="txtBanos" runat="server" CssClass="form-input" TextMode="Number" Text="1" style="width:70px; padding:8px;" />
+                </div>
+                <div style="display:flex; align-items:center; gap:8px; margin-left:10px;">
+                    <asp:CheckBox ID="chkCocina" runat="server" Text="Cocina equipada" ForeColor="Gray" />
+                </div>
+                <div style="display:flex; align-items:center; gap:8px; margin-left:10px;">
+                    <asp:CheckBox ID="chkGaraje" runat="server" Text="Garaje" ForeColor="Gray" />
+                </div>
             </div>
             <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary"
                 OnClick="BtnGuardar_Click" />

@@ -46,10 +46,34 @@ namespace ConviAppWeb
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
             if(!string.IsNullOrWhiteSpace(txtDir.Text)) {
-                var p = new ENPiso { Direccion = txtDir.Text, Ciudad = txtCiudad.Text, PrecioTotal = 350.00m, NumeroHabitaciones = 4, Disponible = true };
+                int habs = 1; int banos = 1;
+                int.TryParse(txtHabitaciones.Text, out habs);
+                int.TryParse(txtBanos.Text, out banos);
+                
+                string caracteristicas = "";
+                if (chkCocina.Checked) caracteristicas += "Cocina equipada, ";
+                if (chkGaraje.Checked) caracteristicas += "Garaje, ";
+                if (caracteristicas.EndsWith(", ")) caracteristicas = caracteristicas.Substring(0, caracteristicas.Length - 2);
+
+                int userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
+
+                var p = new ENPiso { 
+                    Direccion = txtDir.Text, 
+                    Ciudad = txtCiudad.Text, 
+                    Descripcion = txtDescripcion.Text.Trim(),
+                    NumeroHabitaciones = habs,
+                    NumeroBanos = banos,
+                    Caracteristicas = caracteristicas,
+                    PrecioTotal = 350.00m, 
+                    Disponible = true
+                };
                 var cad = new CADPiso();
                 cad.CrearPiso(p);
-                txtDir.Text = ""; txtCiudad.Text = "";
+                
+                txtDir.Text = ""; txtCiudad.Text = ""; txtDescripcion.Text = "";
+                txtHabitaciones.Text = "1"; txtBanos.Text = "1";
+                chkCocina.Checked = false; chkGaraje.Checked = false;
+                
                 pnlForm.Visible = false;
                 CargarPisos();
             }

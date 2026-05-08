@@ -47,10 +47,20 @@
                                     </div>
                                     <div style="color:var(--text-muted); font-size:0.85rem;">Habitaciones</div>
                                 </div>
+                                <div style="text-align:center;">
+                                    <div style="font-size:2rem;">🚿</div>
+                                    <div style="font-weight:700; font-size:1.3rem;">
+                                        <asp:Label ID="lblBanos" runat="server" />
+                                    </div>
+                                    <div style="color:var(--text-muted); font-size:0.85rem;">Aseos</div>
+                                </div>
                             </div>
-                            <p style="color:var(--text-secondary);">Piso compartido ideal para estudiantes y
-                                profesionales. Todas las zonas comunes incluidas. Precio total dividido entre los
-                                inquilinos.</p>
+                            <div style="margin-bottom:20px; color:var(--text-secondary); font-size:0.95rem; display:flex; flex-wrap:wrap; gap:8px;">
+                                <asp:Label ID="lblCaracteristicas" runat="server" />
+                            </div>
+                            <p style="color:var(--text-secondary);">
+                                <asp:Label ID="lblDescripcion" runat="server" />
+                            </p>
                         </div>
                     </div>
                     <div>
