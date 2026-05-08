@@ -34,6 +34,7 @@ namespace ConviAppWeb.DataAccess
                 nueva["caracteristicas"]    = en.Caracteristicas ?? (object)DBNull.Value;
                 nueva["propietario_id"]     = en.PropietarioId > 0 ? (object)en.PropietarioId : DBNull.Value;
                 nueva["imagen_url"]         = en.ImagenUrl ?? (object)DBNull.Value;
+                nueva["es_privado"]         = en.EsPrivado ? 1 : 0;
                 t.Rows.Add(nueva);
                 SQLiteCommandBuilder cb = new SQLiteCommandBuilder(da);
                 da.Update(bdVirtual, "piso");
@@ -118,6 +119,7 @@ namespace ConviAppWeb.DataAccess
             Caracteristicas   = dr["caracteristicas"] != DBNull.Value ? dr["caracteristicas"].ToString() : null,
             PropietarioId     = dr["propietario_id"] != DBNull.Value ? Convert.ToInt32(dr["propietario_id"]) : 0,
             ImagenUrl         = dr["imagen_url"] != DBNull.Value ? dr["imagen_url"].ToString() : null,
+            EsPrivado         = dr.GetSchemaTable().Select("ColumnName = 'es_privado'").Length > 0 && dr["es_privado"] != DBNull.Value && Convert.ToInt32(dr["es_privado"]) == 1
         }; }
     }
 }

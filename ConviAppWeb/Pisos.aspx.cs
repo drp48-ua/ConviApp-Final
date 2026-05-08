@@ -24,7 +24,7 @@ namespace ConviAppWeb
         private void CargarPisos()
         {
             var cad = new CADPiso();
-            var filtrados = cad.ListarTodos();
+            var filtrados = cad.ListarTodos().Where(p => !p.EsPrivado).ToList();
             
             if(!string.IsNullOrWhiteSpace(txtFiltroCiudad.Text)) {
                 filtrados = filtrados.Where(p => p.Ciudad != null && p.Ciudad.IndexOf(txtFiltroCiudad.Text, StringComparison.OrdinalIgnoreCase) >= 0).ToList();

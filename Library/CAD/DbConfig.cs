@@ -40,6 +40,8 @@ namespace ConviAppWeb.DataAccess
                                     try { using (var cmd = new SQLiteCommand("ALTER TABLE Piso ADD COLUMN caracteristicas TEXT;", c)) { cmd.ExecuteNonQuery(); } } catch { }
                                     try { using (var cmd = new SQLiteCommand("ALTER TABLE Piso ADD COLUMN propietario_id INTEGER;", c)) { cmd.ExecuteNonQuery(); } } catch { }
                                     try { using (var cmd = new SQLiteCommand("ALTER TABLE Piso ADD COLUMN imagen_url TEXT;", c)) { cmd.ExecuteNonQuery(); } } catch { }
+                                    try { using (var cmd = new SQLiteCommand("ALTER TABLE Piso ADD COLUMN es_privado INTEGER DEFAULT 0;", c)) { cmd.ExecuteNonQuery(); } } catch { }
+                                    try { using (var cmd = new SQLiteCommand("ALTER TABLE Contrato ADD COLUMN archivo_url TEXT;", c)) { cmd.ExecuteNonQuery(); } } catch { }
                                     try { using (var cmd = new SQLiteCommand("ALTER TABLE Usuario ADD COLUMN rol TEXT;", c)) { cmd.ExecuteNonQuery(); } } catch { }
                                 }
                             }

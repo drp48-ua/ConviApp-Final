@@ -63,6 +63,8 @@ namespace ConviAppWeb.Models
         [MaxLength(500)]
         public string ImagenUrl { get { return _imagenUrl; } set { _imagenUrl = value; } }
 
+        public bool EsPrivado { get; set; }
+
         // ─── NavegaciÃ³n ───
         public ICollection<ENHabitacion> Habitaciones { get; set; }
 

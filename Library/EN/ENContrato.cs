@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -73,6 +73,9 @@ namespace ConviAppWeb.Models
         {
             get { return _notes; } set { _notes = value; }
         }
+
+        [MaxLength(500)]
+        public string ArchivoUrl { get; set; }
 
         /// <summary>Porcentaje de comisiÃ³n sobre la renta mensual (ej: 5 = 5%).</summary>
         [Column(TypeName = "decimal(5,2)")]

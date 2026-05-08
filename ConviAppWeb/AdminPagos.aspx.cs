@@ -1,6 +1,7 @@
 using System;
 using System.Web;
 using System.Web.UI;
+using ConviAppWeb.DataAccess;
 
 namespace ConviAppWeb
 {
@@ -12,6 +13,22 @@ namespace ConviAppWeb
             {
                 Response.Redirect("Login.aspx");
             }
+
+            if (!IsPostBack)
+            {
+                CargarContratos();
+            }
+        }
+
+        private void CargarContratos()
+        {
+            var cad = new CADContrato();
+            var contratos = cad.ListarTodos();
+            
+            rptContratos.DataSource = contratos;
+            rptContratos.DataBind();
+            
+            lblVacio.Visible = contratos.Count == 0;
         }
     }
 }

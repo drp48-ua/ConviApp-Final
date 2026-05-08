@@ -17,8 +17,8 @@ namespace ConviAppWeb.DataAccess
             using (SQLiteConnection c = new SQLiteConnection(constring))
             {
                 c.Open();
-                string sql = "INSERT INTO Contrato (type, start_date, end_date, monthly_rent, deposit_amount, status, notes, commission_rate, property_id, user_id) " +
-                             "VALUES (@ty, @sd, @ed, @mr, @da, @st, @no, @cr, @pi, @ui)";
+                string sql = "INSERT INTO Contrato (type, start_date, end_date, monthly_rent, deposit_amount, status, notes, commission_rate, property_id, user_id, archivo_url) " +
+                             "VALUES (@ty, @sd, @ed, @mr, @da, @st, @no, @cr, @pi, @ui, @au)";
                 using (SQLiteCommand com = new SQLiteCommand(sql, c))
                 {
                     com.Parameters.AddWithValue("@ty", en.Type ?? (object)DBNull.Value);
@@ -31,6 +31,7 @@ namespace ConviAppWeb.DataAccess
                     com.Parameters.AddWithValue("@cr", en.CommissionRate);
                     com.Parameters.AddWithValue("@pi", en.PropertyId);
                     com.Parameters.AddWithValue("@ui", en.UserId);
+                    com.Parameters.AddWithValue("@au", en.ArchivoUrl ?? (object)DBNull.Value);
                     creado = com.ExecuteNonQuery() > 0;
                 }
             }
@@ -134,6 +135,7 @@ namespace ConviAppWeb.DataAccess
             CommissionRate = dr["commission_rate"] != DBNull.Value ? Convert.ToDecimal(dr["commission_rate"]) : 0,
             PropertyId     = dr["property_id"] != DBNull.Value ? Convert.ToInt32(dr["property_id"]) : 0,
             UserId         = dr["user_id"] != DBNull.Value ? Convert.ToInt32(dr["user_id"]) : 0,
+            ArchivoUrl     = dr.GetSchemaTable().Select("ColumnName = 'archivo_url'").Length > 0 && dr["archivo_url"] != DBNull.Value ? dr["archivo_url"].ToString() : null,
         }; }
     }
 }
