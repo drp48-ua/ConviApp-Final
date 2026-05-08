@@ -81,11 +81,11 @@ namespace ConviAppWeb
                 var cadCu = new CADComunidadUsuario();
                 cadCu.UnirUsuarioAComunidad(nuevoPisoId, userId);
                 
-                txtNombreComunidad.Text = ""; txtDireccion.Text = ""; txtCiudad.Text = ""; txtHabitaciones.Text = ""; txtPrecio.Text = ""; txtDescripcion.Text = "";
-                lblMsg.Text = "✅ Comunidad creada con éxito. Código de invitación: <b>" + codigo + "</b>";
-                lblMsg.CssClass = "alert alert-success";
-                lblMsg.Visible = true;
-                CargarComunidades();
+                // Entrar directamente a la nueva comunidad
+                Session["ComunidadActivaId"] = nuevoPisoId;
+                Session["ComunidadActivaNombre"] = !string.IsNullOrWhiteSpace(txtNombreComunidad.Text) ? txtNombreComunidad.Text.Trim() : txtDireccion.Text.Trim();
+                
+                Response.Redirect("Comunidades.aspx");
             }
             else
             {

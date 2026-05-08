@@ -10,7 +10,7 @@
             <h2 style="font-size: 1.8rem; color: #111827; margin-bottom: 8px;">Administración de Pisos</h2>
             <p style="color: #6b7280;">Añade pisos privados por contrato, o revisa los pisos públicos de la app.</p>
         </div>
-        <button type="button" class="btn btn-primary" onclick="document.getElementById('pnlCrearPisoPrivado').style.display='block';">+ Añadir Piso Privado</button>
+        <button type="button" class="btn btn-primary" onclick="document.getElementById('pnlCrearPisoPrivado').style.display='block';">+ Añadir Comunidad Privada</button>
     </div>
 
     <asp:Label ID="lblMsg" runat="server" Visible="false" style="display:block; padding:1rem; border-radius:8px; margin-bottom:1rem; font-weight:600;"></asp:Label>

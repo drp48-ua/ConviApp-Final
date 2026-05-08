@@ -97,7 +97,18 @@ namespace ConviAppWeb
                     Nombre = txtNombre.Text.Trim()
                 };
                 var cad = new CADPiso();
-                cad.CrearPiso(p);
+                int nuevoPisoId = cad.CrearPiso(p);
+                
+                if (nuevoPisoId > 0 && userId > 0)
+                {
+                    var cadCu = new CADComunidadUsuario();
+                    cadCu.UnirUsuarioAComunidad(nuevoPisoId, userId);
+                    
+                    Session["ComunidadActivaId"] = nuevoPisoId;
+                    Session["ComunidadActivaNombre"] = !string.IsNullOrWhiteSpace(p.Nombre) ? p.Nombre : p.Direccion;
+                    
+                    Response.Redirect("Index.aspx");
+                }
                 
                 txtDir.Text = ""; txtCiudad.Text = ""; txtDescripcion.Text = "";
                 txtHabitaciones.Text = "1"; txtBanos.Text = "1";
