@@ -22,31 +22,33 @@
                     ConviApp
                 </a>
                 
-                <!-- Centro del header: Comunidad activa (izq) + Foro Social (der) -->
-                <div style="flex:1; display:flex; align-items:center; justify-content:space-between; margin:0 24px; gap:12px;">
+                <!-- Centro del header: siempre Foro centrado; si hay comunidad, nombre a la izquierda -->
+                <div style="flex:1; display:flex; align-items:center; margin:0 24px; gap:12px; min-width:0;">
 
-                    <!-- Si hay comunidad activa: nombre + salir a la izquierda -->
                     <% if (Session["ComunidadActivaNombre"] != null) { %>
-                    <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;">
-                        <div style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.15); border:1.5px solid rgba(255,255,255,0.4); border-radius:100px; padding:7px 18px; min-width:0;">
-                            <span style="font-size:1.1rem; flex-shrink:0;">🏘️</span>
+                    <!-- Comunidad activa: nombre izquierda -->
+                    <div style="display:flex; align-items:center; gap:8px; flex:1; min-width:0;">
+                        <div style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.15); border:1.5px solid rgba(255,255,255,0.4); border-radius:100px; padding:7px 16px; min-width:0; max-width:320px;">
+                            <span style="font-size:1rem; flex-shrink:0;">&#127968;</span>
                             <div style="min-width:0;">
-                                <div style="font-size:0.65rem; color:rgba(255,255,255,0.65); font-weight:500; text-transform:uppercase; letter-spacing:0.07em;">Comunidad Activa</div>
-                                <div style="font-size:0.95rem; font-weight:700; color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><%= Session["ComunidadActivaNombre"] %></div>
+                                <div style="font-size:0.6rem; color:rgba(255,255,255,0.65); font-weight:600; text-transform:uppercase; letter-spacing:0.07em;">Comunidad Activa</div>
+                                <div style="font-size:0.9rem; font-weight:700; color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><%= Session["ComunidadActivaNombre"] %></div>
                             </div>
                         </div>
-                        <a href="javascript:void(0)" onclick="limpiarComunidad()" title="Salir de la comunidad"
-                           style="color:rgba(255,255,255,0.75); font-size:0.78rem; text-decoration:none; white-space:nowrap; border:1px solid rgba(255,255,255,0.35); border-radius:20px; padding:5px 12px; flex-shrink:0; transition:background 0.2s;"
-                           onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">✕ Salir</a>
+                        <a href="javascript:void(0)" onclick="limpiarComunidad()" title="Salir"
+                           style="color:rgba(255,255,255,0.7); font-size:0.78rem; text-decoration:none; white-space:nowrap; border:1px solid rgba(255,255,255,0.3); border-radius:20px; padding:4px 10px; flex-shrink:0;"
+                           onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">&#10005; Salir</a>
                     </div>
                     <% } else { %>
-                    <div></div><!-- espacio vacío para empujar el Foro a la derecha -->
+                    <!-- Sin comunidad: flex-1 vacío para centrar el Foro -->
+                    <div style="flex:1;"></div>
                     <% } %>
 
-                    <!-- Foro Social siempre a la derecha del centro -->
-                    <a href="Foro.aspx" style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.15); border:1.5px solid rgba(255,255,255,0.35); border-radius:100px; padding:8px 20px; text-decoration:none; transition:background 0.2s; flex-shrink:0;"
+                    <!-- Foro Social: centrado sin comunidad, desplazado a la derecha con comunidad -->
+                    <a href="Foro.aspx" style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.15); border:1.5px solid rgba(255,255,255,0.35); border-radius:100px; padding:8px 20px; text-decoration:none; transition:background 0.2s; flex-shrink:0;
+                        <% if (Session["ComunidadActivaNombre"] == null) { %>margin:0 auto;<% } %>"
                        onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">
-                        <span style="font-size:1.1rem;">👥</span>
+                        <span style="font-size:1.1rem;">&#128101;</span>
                         <span style="color:rgba(255,255,255,0.9); font-size:0.9rem; font-weight:600;">Foro Social</span>
                         <% if (Session["UserId"] != null) {
                                var _cadMF = new ConviAppWeb.DataAccess.CADMensaje();
@@ -57,6 +59,11 @@
                             <% } %>
                         <% } %>
                     </a>
+
+                    <% if (Session["ComunidadActivaNombre"] == null) { %>
+                    <!-- balanceo: div vacío para centrar el Foro -->
+                    <div style="flex:1;"></div>
+                    <% } %>
                 </div>
 
                 <div class="header-actions">

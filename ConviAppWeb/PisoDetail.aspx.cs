@@ -79,20 +79,35 @@ namespace ConviAppWeb
         {
             string idStr = Request.QueryString["id"];
             int pisoId;
-            if (int.TryParse(idStr, out pisoId) && Session["UserId"] != null)
+            if (!int.TryParse(idStr, out pisoId) || Session["UserId"] == null) return;
+
+            int myId = Convert.ToInt32(Session["UserId"]);
+            var cadPiso = new CADPiso();
+            var piso = cadPiso.LeerPiso(pisoId);
+            if (piso == null) return;
+
+            int destinatarioId = 0;
+
+            // Primero intentamos usar el PropietarioId registrado
+            if (piso.PropietarioId > 0 && piso.PropietarioId != myId)
             {
-                var cadPiso = new CADPiso();
-                var piso = cadPiso.LeerPiso(pisoId);
-                if (piso != null && piso.PropietarioId > 0)
+                destinatarioId = piso.PropietarioId;
+            }
+            else
+            {
+                // Fallback: primer miembro de la comunidad que no sea yo
+                var cadCu = new CADComunidadUsuario();
+                var miembros = cadCu.ObtenerUsuariosDeComunidad(pisoId);
+                foreach (var m in miembros)
                 {
-                    Response.Redirect("Chat.aspx?con=" + piso.PropietarioId);
-                }
-                else
-                {
-                    // Si no hay propietario, redirigir al foro
-                    Response.Redirect("Foro.aspx");
+                    if (m.Id != myId) { destinatarioId = m.Id; break; }
                 }
             }
+
+            if (destinatarioId > 0)
+                Response.Redirect("Chat.aspx?con=" + destinatarioId);
+            else
+                Response.Redirect("Foro.aspx"); // última opción: no hay otro usuario
         }
     }
 }
