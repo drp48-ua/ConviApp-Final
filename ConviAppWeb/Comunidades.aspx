@@ -19,29 +19,64 @@
 
             <!-- Listado de comunidades -->
             <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:20px;">
-                <asp:Repeater ID="rptComunidades" runat="server" OnItemCommand="rptComunidades_ItemCommand">
+                <asp:Repeater ID="rptComunidades" runat="server" OnItemCommand="rptComunidades_ItemCommand" OnItemDataBound="rptComunidades_ItemDataBound">
                     <ItemTemplate>
-                        <div style="background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:1.5rem; transition:box-shadow 0.2s; position:relative;"
-                             onmouseover="this.style.boxShadow='0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)'"
-                             onmouseout="this.style.boxShadow='none'">
+                        <div style="background:linear-gradient(to bottom right, #ffffff, #f8fafc); border:1px solid #e2e8f0; border-radius:16px; padding:1.5rem; transition:all 0.3s ease; position:relative; overflow:hidden;"
+                             onmouseover="this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'; this.style.transform='translateY(-4px)'"
+                             onmouseout="this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'; this.style.transform='none'">
                             
+                            <!-- Header Decorativo Privado -->
+                            <asp:Panel runat="server" Visible='<%# Convert.ToBoolean(Eval("EsPrivado")) %>' style="position:absolute; top:0; left:0; right:0; height:4px; background:var(--accent);"></asp:Panel>
+
                             <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
-                                <h3 style="font-size:1.25rem; font-weight:700; color:#111827; margin:0;"><%# Eval("Nombre") != null && !string.IsNullOrEmpty(Eval("Nombre").ToString()) ? Eval("Nombre") : "Comunidad #" + Eval("Id") %></h3>
-                                <span style="background:#eff6ff; color:#1d4ed8; padding:4px 10px; border-radius:20px; font-size:0.75rem; font-weight:600; font-family:monospace;" title="Código de invitación">
+                                <h3 style="font-size:1.35rem; font-weight:800; color:#0f172a; margin:0; display:flex; align-items:center; gap:6px;">
+                                    <%# Convert.ToBoolean(Eval("EsPrivado")) ? "🔒" : "🏘️" %>
+                                    <%# Eval("Nombre") != null && !string.IsNullOrEmpty(Eval("Nombre").ToString()) ? Eval("Nombre") : "Comunidad #" + Eval("Id") %>
+                                </h3>
+                                <span style="background:#eff6ff; color:#1d4ed8; padding:4px 10px; border-radius:20px; font-size:0.75rem; font-weight:700; font-family:monospace; box-shadow:inset 0 0 0 1px rgba(29, 78, 216, 0.2);" title="Código de invitación">
                                     <%# Eval("CodigoComunidad") %>
                                 </span>
                             </div>
                             
-                            <p style="color:#6b7280; font-size:0.9rem; margin-bottom:4px;">📍 <%# Eval("Ciudad") %></p>
-                            <p style="color:#9ca3af; font-size:0.8rem; margin-bottom:8px; margin-left:18px;"><%# Eval("Direccion") %></p>
+                            <div style="display:flex; align-items:center; gap:6px; color:#475569; font-size:0.9rem; margin-bottom:4px;">
+                                <span style="font-size:1rem;">📍</span> <span style="font-weight:600;"><%# Eval("Ciudad") %></span>
+                            </div>
+                            <p style="color:#94a3b8; font-size:0.8rem; margin-bottom:12px; margin-left:22px;"><%# Eval("Direccion") %></p>
                             
-                            <p style="color:#4b5563; font-size:0.9rem; margin-bottom:16px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">
-                                <%# Eval("Descripcion") %>
+                            <p style="color:#334155; font-size:0.9rem; margin-bottom:16px; line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; border-left:3px solid #cbd5e1; padding-left:10px;">
+                                <%# string.IsNullOrEmpty(Convert.ToString(Eval("Descripcion"))) ? "Sin descripción" : Eval("Descripcion") %>
                             </p>
 
+                            <!-- Lista de Miembros -->
+                            <div style="margin-bottom:16px; background:#f1f5f9; border-radius:8px; padding:12px; border:1px solid #e2e8f0;">
+                                <h4 style="font-size:0.8rem; font-weight:700; color:#64748b; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.05em;">👥 Integrantes</h4>
+                                <div style="display:flex; flex-direction:column; gap:6px;">
+                                    <asp:Repeater ID="rptMiembros" runat="server">
+                                        <ItemTemplate>
+                                            <div style="display:flex; justify-content:space-between; align-items:center; background:white; padding:6px 10px; border-radius:6px; border:1px solid #e2e8f0; font-size:0.85rem; color:#334155;">
+                                                <div style="display:flex; align-items:center; gap:6px;">
+                                                    <div style="width:24px; height:24px; border-radius:50%; background:linear-gradient(135deg, var(--primary), var(--primary-light)); color:white; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:0.7rem;">
+                                                        <%# Eval("Nombre") != null && Eval("Nombre").ToString().Length > 0 ? Eval("Nombre").ToString().Substring(0,1).ToUpper() : "?" %>
+                                                    </div>
+                                                    <span><%# Eval("Nombre") %> <%# Eval("Apellidos") %></span>
+                                                </div>
+                                                <asp:LinkButton ID="btnExpulsar" runat="server" CommandName="Expulsar" 
+                                                    CommandArgument='<%# DataBinder.Eval(((RepeaterItem)Container.Parent.Parent).DataItem, "Id") + "_" + Eval("Id") %>' 
+                                                    Visible="false"
+                                                    style="color:#ef4444; font-size:1rem; text-decoration:none; transition:transform 0.1s;" 
+                                                    onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"
+                                                    title="Expulsar usuario" OnClientClick="return confirm('¿Seguro que deseas expulsar a este usuario de la comunidad?');">
+                                                    🗑️
+                                                </asp:LinkButton>
+                                            </div>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </div>
+                            </div>
+
                             <asp:LinkButton ID="btnEntrar" runat="server" CommandName="Entrar" CommandArgument='<%# Eval("Id") %>' 
-                                CssClass="btn btn-outline" style="width:100%; display:block; text-align:center;">
-                                Entrar a la comunidad ➔
+                                CssClass="btn btn-primary" style="width:100%; display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; font-weight:600; border-radius:8px; box-shadow:0 4px 6px -1px rgba(var(--primary-rgb), 0.2);">
+                                Entrar a la comunidad <span style="font-size:1.1rem;">➔</span>
                             </asp:LinkButton>
                         </div>
                     </ItemTemplate>

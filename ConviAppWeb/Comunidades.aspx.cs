@@ -143,17 +143,80 @@ namespace ConviAppWeb
                 int pisoId = Convert.ToInt32(e.CommandArgument);
                 string nombre = e.CommandArgument.ToString(); // default
 
-                // Buscar el nombre real del piso
                 var cadPiso = new CADPiso();
                 var piso = cadPiso.LeerPiso(pisoId);
                 if (piso != null)
                 {
                     nombre = !string.IsNullOrWhiteSpace(piso.Nombre) ? piso.Nombre : piso.Direccion;
+                    
+                    // Lógica de Roles Dinámicos
+                    if (piso.EsPrivado)
+                    {
+                        if (Session["UserRole"] != null && Session["UserRole"].ToString() == "Basico")
+                        {
+                            Session["OriginalUserRole"] = "Basico";
+                            Session["UserRole"] = "Profesional";
+                        }
+                    }
                 }
 
                 Session["ComunidadActivaId"] = pisoId;
                 Session["ComunidadActivaNombre"] = nombre;
                 Response.Redirect("Index.aspx");
+            }
+            else if (e.CommandName == "Expulsar")
+            {
+                // Formato CommandArgument: "pisoId_usuarioId"
+                string[] args = e.CommandArgument.ToString().Split('_');
+                if (args.Length == 2)
+                {
+                    int pId = Convert.ToInt32(args[0]);
+                    int uId = Convert.ToInt32(args[1]);
+                    
+                    var cadCu = new CADComunidadUsuario();
+                    cadCu.ExpulsarUsuario(pId, uId);
+                    
+                    lblMsg.Text = "✅ Usuario expulsado de la comunidad.";
+                    lblMsg.CssClass = "alert alert-success";
+                    lblMsg.Visible = true;
+                    
+                    CargarComunidades();
+                }
+            }
+        }
+
+        protected void rptComunidades_ItemDataBound(object sender, System.Web.UI.WebControls.RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == System.Web.UI.WebControls.ListItemType.Item || e.Item.ItemType == System.Web.UI.WebControls.ListItemType.AlternatingItem)
+            {
+                var piso = (ENPiso)e.Item.DataItem;
+                var rptMiembros = (System.Web.UI.WebControls.Repeater)e.Item.FindControl("rptMiembros");
+                
+                if (rptMiembros != null)
+                {
+                    var cadCu = new CADComunidadUsuario();
+                    var miembros = cadCu.ObtenerUsuariosDeComunidad(piso.Id);
+                    rptMiembros.DataSource = miembros;
+                    rptMiembros.DataBind();
+                    
+                    // Solo mostrar botón de eliminar si soy el creador de la comunidad
+                    int currentUserId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
+                    bool soyCreador = (piso.PropietarioId == currentUserId);
+
+                    foreach (System.Web.UI.WebControls.RepeaterItem item in rptMiembros.Items)
+                    {
+                        var btnExpulsar = (System.Web.UI.WebControls.LinkButton)item.FindControl("btnExpulsar");
+                        // Extraemos el ID del usuario de CommandArgument "pisoId_usuarioId"
+                        string[] args = btnExpulsar.CommandArgument.Split('_');
+                        int userIdDelMiembro = Convert.ToInt32(args[1]);
+
+                        // Mostramos el botón solo si soy creador y el miembro no soy yo mismo
+                        if (soyCreador && userIdDelMiembro != currentUserId)
+                        {
+                            btnExpulsar.Visible = true;
+                        }
+                    }
+                }
             }
         }
 

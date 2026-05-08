@@ -123,6 +123,24 @@ namespace ConviAppWeb.DataAccess
             EsPrivado         = dr.GetSchemaTable().Select("ColumnName = 'es_privado'").Length > 0 && dr["es_privado"] != DBNull.Value && Convert.ToInt32(dr["es_privado"]) == 1,
             Nombre            = dr.GetSchemaTable().Select("ColumnName = 'nombre'").Length > 0 && dr["nombre"] != DBNull.Value ? dr["nombre"].ToString() : null
         }; }
+        public bool BorrarPiso(int id)
+        {
+            bool exito = false;
+            using (SQLiteConnection c = new SQLiteConnection(constring))
+            {
+                try
+                {
+                    c.Open();
+                    using (SQLiteCommand com = new SQLiteCommand("DELETE FROM Piso WHERE id=@id", c))
+                    {
+                        com.Parameters.AddWithValue("@id", id);
+                        exito = com.ExecuteNonQuery() > 0;
+                    }
+                }
+                catch (Exception) { exito = false; }
+            }
+            return exito;
+        }
     }
 }
 

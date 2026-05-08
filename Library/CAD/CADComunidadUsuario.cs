@@ -41,6 +41,26 @@ namespace ConviAppWeb.DataAccess
             return exito;
         }
 
+        public bool ExpulsarUsuario(int pisoId, int usuarioId)
+        {
+            bool exito = false;
+            using (SQLiteConnection c = new SQLiteConnection(constring))
+            {
+                try
+                {
+                    c.Open();
+                    using (SQLiteCommand com = new SQLiteCommand("DELETE FROM ComunidadUsuario WHERE piso_id=@p AND usuario_id=@u", c))
+                    {
+                        com.Parameters.AddWithValue("@p", pisoId);
+                        com.Parameters.AddWithValue("@u", usuarioId);
+                        exito = com.ExecuteNonQuery() > 0;
+                    }
+                }
+                catch (Exception) { exito = false; }
+            }
+            return exito;
+        }
+
         public List<ENUsuario> ObtenerUsuariosDeComunidad(int pisoId)
         {
             var lista = new List<ENUsuario>();
@@ -94,6 +114,9 @@ namespace ConviAppWeb.DataAccess
                                 en.CodigoComunidad = dr["codigo_comunidad"] != DBNull.Value ? dr["codigo_comunidad"].ToString() : null;
                                 en.Descripcion = dr["descripcion"] != DBNull.Value ? dr["descripcion"].ToString() : null;
                                 en.PrecioTotal = dr["precio_total"] != DBNull.Value ? Convert.ToDecimal(dr["precio_total"]) : 0;
+                                en.Nombre = dr["nombre"] != DBNull.Value ? dr["nombre"].ToString() : null;
+                                en.PropietarioId = dr["propietario_id"] != DBNull.Value ? Convert.ToInt32(dr["propietario_id"]) : 0;
+                                en.EsPrivado = dr["es_privado"] != DBNull.Value ? Convert.ToInt32(dr["es_privado"]) == 1 : false;
                                 lista.Add(en);
                             }
                         }

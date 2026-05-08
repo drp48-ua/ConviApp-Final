@@ -91,6 +91,8 @@ namespace ConviAppWeb
                 }
             }
 
+            string codigo = GenerarCodigo(8);
+
             var p = new ENPiso { 
                 Direccion = txtDir.Text, 
                 Ciudad = txtCiudad.Text, 
@@ -103,13 +105,21 @@ namespace ConviAppWeb
                 PropietarioId = userId,
                 ImagenUrl = imagenUrl,
                 EsPrivado = true, // IMPORTANTE: Es un piso privado
-                Nombre = txtNombre.Text.Trim()
+                Nombre = txtNombre.Text.Trim(),
+                CodigoComunidad = codigo
             };
             var cadPiso = new CADPiso();
             int pisoId = cadPiso.CrearPiso(p);
 
             if (pisoId > 0)
             {
+                // Unir al propietario directamente a la comunidad
+                if (userId > 0)
+                {
+                    var cadCu = new CADComunidadUsuario();
+                    cadCu.UnirUsuarioAComunidad(pisoId, userId);
+                }
+
                 // Guardar el contrato asociado
                 string contratoUrl = null;
                 if (fuContrato.HasFile)
@@ -156,6 +166,67 @@ namespace ConviAppWeb
                 lblMsg.CssClass = "alert alert-danger";
                 lblMsg.Visible = true;
             }
+        }
+
+        protected void rptPisosPrivados_ItemDataBound(object sender, System.Web.UI.WebControls.RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == System.Web.UI.WebControls.ListItemType.Item || e.Item.ItemType == System.Web.UI.WebControls.ListItemType.AlternatingItem)
+            {
+                var piso = (ENPiso)e.Item.DataItem;
+                var rptMiembros = (System.Web.UI.WebControls.Repeater)e.Item.FindControl("rptMiembros");
+                if (rptMiembros != null)
+                {
+                    var cadCu = new CADComunidadUsuario();
+                    rptMiembros.DataSource = cadCu.ObtenerUsuariosDeComunidad(piso.Id);
+                    rptMiembros.DataBind();
+                }
+            }
+        }
+
+        protected void rptPisosPrivados_ItemCommand(object source, System.Web.UI.WebControls.RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "Expulsar")
+            {
+                string[] args = e.CommandArgument.ToString().Split('_');
+                if (args.Length == 2)
+                {
+                    int pId = Convert.ToInt32(args[0]);
+                    int uId = Convert.ToInt32(args[1]);
+                    
+                    var cadCu = new CADComunidadUsuario();
+                    cadCu.ExpulsarUsuario(pId, uId);
+                    
+                    lblMsg.Text = "Miembro expulsado de la comunidad privada.";
+                    lblMsg.CssClass = "alert alert-success";
+                    lblMsg.Visible = true;
+                    
+                    CargarPisos();
+                }
+            }
+        }
+
+        protected void rptPisosApp_ItemCommand(object source, System.Web.UI.WebControls.RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "Borrar")
+            {
+                int pId = Convert.ToInt32(e.CommandArgument);
+                var cadPiso = new CADPiso();
+                cadPiso.BorrarPiso(pId);
+                
+                lblMsg.Text = "Comunidad pública eliminada correctamente.";
+                lblMsg.CssClass = "alert alert-success";
+                lblMsg.Visible = true;
+                
+                CargarPisos();
+            }
+        }
+
+        private string GenerarCodigo(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

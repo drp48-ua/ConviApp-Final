@@ -9,6 +9,14 @@ namespace ConviAppWeb
         {
             Session.Remove("ComunidadActivaId");
             Session.Remove("ComunidadActivaNombre");
+            
+            // Restore Original Role if it was modified dynamically
+            if (Session["OriginalUserRole"] != null)
+            {
+                Session["UserRole"] = Session["OriginalUserRole"];
+                Session.Remove("OriginalUserRole");
+            }
+            
             Response.Redirect("Comunidades.aspx");
         }
     }

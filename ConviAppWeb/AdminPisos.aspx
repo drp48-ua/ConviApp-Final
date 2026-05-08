@@ -84,16 +84,32 @@
     <!-- PISOS PRIVADOS -->
     <h3 style="margin-top:32px; margin-bottom:16px; color:#1f2937; border-bottom:2px solid #e5e7eb; padding-bottom:8px;">🔒 Pisos Privados (Gestión Admin)</h3>
     <div style="margin-bottom:32px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px;">
-        <asp:Repeater ID="rptPisosPrivados" runat="server">
+        <asp:Repeater ID="rptPisosPrivados" runat="server" OnItemDataBound="rptPisosPrivados_ItemDataBound" OnItemCommand="rptPisosPrivados_ItemCommand">
             <ItemTemplate>
                 <div class="glass-card" style="padding:16px; border-left:4px solid var(--accent);">
                     <h4 style="margin-bottom:8px;"><%# Eval("Nombre") != null && !string.IsNullOrEmpty(Eval("Nombre").ToString()) ? Eval("Nombre") : "Piso #" + Eval("Id") %></h4>
                     <p style="font-size:0.85rem; color:#6b7280; margin-bottom:12px;">
+                        <strong>Código:</strong> <span style="font-family:monospace; font-weight:bold; color:var(--primary);"><%# Eval("CodigoComunidad") %></span><br />
                         <strong>Ciudad:</strong> <%# Eval("Ciudad") %><br />
                         <strong>Dirección:</strong> <%# Eval("Direccion") %><br />
                         <strong>Precio:</strong> <%# Eval("PrecioTotal") %>€/mes<br />
                         <strong>Habitaciones:</strong> <%# Eval("NumeroHabitaciones") %>
                     </p>
+                    
+                    <div style="margin-bottom:12px; padding:8px; background:rgba(0,0,0,0.03); border-radius:6px;">
+                        <strong style="font-size:0.8rem; display:block; margin-bottom:4px;">Miembros:</strong>
+                        <asp:Repeater ID="rptMiembros" runat="server">
+                            <ItemTemplate>
+                                <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; margin-bottom:4px;">
+                                    <span>👤 <%# Eval("Nombre") %> <%# Eval("Apellidos") %></span>
+                                    <asp:LinkButton ID="btnExpulsarAdmin" runat="server" CommandName="Expulsar" 
+                                        CommandArgument='<%# DataBinder.Eval(((RepeaterItem)Container.Parent.Parent).DataItem, "Id") + "_" + Eval("Id") %>' 
+                                        style="color:#ef4444; text-decoration:none;" title="Expulsar" OnClientClick="return confirm('¿Seguro que deseas expulsar a este usuario de la comunidad?');">❌</asp:LinkButton>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
+
                     <div style="display:flex; gap:8px;">
                         <a href="AdminPagos.aspx" class="btn btn-sm" style="background:#f3f4f6; color:#374151; border:1px solid #d1d5db;">Ver Contrato ➔</a>
                     </div>
@@ -106,7 +122,7 @@
     <!-- PISOS PÚBLICOS APP -->
     <h3 style="margin-top:32px; margin-bottom:16px; color:#1f2937; border-bottom:2px solid #e5e7eb; padding-bottom:8px;">📱 Pisos Públicos (Creados en App)</h3>
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px;">
-        <asp:Repeater ID="rptPisosApp" runat="server">
+        <asp:Repeater ID="rptPisosApp" runat="server" OnItemCommand="rptPisosApp_ItemCommand">
             <ItemTemplate>
                 <div class="glass-card" style="padding:16px; border-left:4px solid var(--primary-light);">
                     <h4 style="margin-bottom:8px;"><%# Eval("Nombre") != null && !string.IsNullOrEmpty(Eval("Nombre").ToString()) ? Eval("Nombre") : "Comunidad #" + Eval("Id") %></h4>
@@ -118,7 +134,7 @@
                     </p>
                     <div style="display:flex; gap:8px;">
                         <a href="PisoDetail.aspx?id=<%# Eval("Id") %>" class="btn btn-sm btn-outline">Ver Detalle</a>
-                        <button type="button" class="btn btn-sm" style="background:#ef4444; color:white;">Suspender</button>
+                        <asp:LinkButton ID="btnBorrarPiso" runat="server" CommandName="Borrar" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm" style="background:#ef4444; color:white; text-decoration:none;" OnClientClick="return confirm('¿Seguro que deseas borrar este piso público?');">Borrar</asp:LinkButton>
                     </div>
                 </div>
             </ItemTemplate>
