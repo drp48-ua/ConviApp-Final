@@ -36,7 +36,7 @@
                                 <span class="badge" style="background:#d1fae5; color:#065f46; padding:4px 8px; border-radius:12px; font-size:0.75rem;"><%# Eval("Status") %></span>
                             </td>
                             <td style="padding:12px;">
-                                <%# !string.IsNullOrEmpty(Eval("ArchivoUrl")?.ToString()) 
+                                <%# Eval("ArchivoUrl") != null && !string.IsNullOrEmpty(Eval("ArchivoUrl").ToString()) 
                                     ? string.Format("<a href='{0}' target='_blank' class='btn btn-sm btn-outline'>Ver Contrato PDF</a>", ResolveUrl("~/" + Eval("ArchivoUrl")))
                                     : "<span style='color:#9ca3af; font-size:0.85rem;'>Sin adjunto</span>" %>
                             </td>
