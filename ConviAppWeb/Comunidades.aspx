@@ -63,6 +63,11 @@
                 <h2 style="font-size:1.5rem; font-weight:700; color:#111827; margin-bottom:1.5rem;">Crear Comunidad</h2>
                 
                 <div style="margin-bottom:1rem;">
+                    <label style="display:block; font-size:0.875rem; font-weight:600; color:#374151; margin-bottom:0.5rem;">Nombre de la comunidad</label>
+                    <asp:TextBox ID="txtNombreComunidad" runat="server" CssClass="form-control" style="width:100%; padding:0.75rem; border:1px solid #d1d5db; border-radius:8px;" placeholder="Ej: Piso Malasaña, Casa de la Playa..."></asp:TextBox>
+                </div>
+
+                <div style="margin-bottom:1rem;">
                     <label style="display:block; font-size:0.875rem; font-weight:600; color:#374151; margin-bottom:0.5rem;">Dirección del piso</label>
                     <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control" style="width:100%; padding:0.75rem; border:1px solid #d1d5db; border-radius:8px;" placeholder="Ej: Calle Principal 123"></asp:TextBox>
                 </div>

@@ -65,13 +65,15 @@ namespace ConviAppWeb
             var cadPiso = new CADPiso();
             int nuevoPisoId = cadPiso.CrearPiso(new ENPiso
             {
+                Nombre = !string.IsNullOrWhiteSpace(txtNombreComunidad.Text) ? txtNombreComunidad.Text.Trim() : txtDireccion.Text.Trim(),
                 Direccion = txtDireccion.Text.Trim(),
                 Ciudad = txtCiudad.Text.Trim(),
                 NumeroHabitaciones = hab > 0 ? hab : 1,
                 PrecioTotal = precio,
                 Descripcion = txtDescripcion.Text.Trim(),
                 CodigoComunidad = codigo,
-                Disponible = true
+                Disponible = true,
+                PropietarioId = userId
             });
 
             if (nuevoPisoId > 0)
@@ -79,7 +81,7 @@ namespace ConviAppWeb
                 var cadCu = new CADComunidadUsuario();
                 cadCu.UnirUsuarioAComunidad(nuevoPisoId, userId);
                 
-                txtDireccion.Text = ""; txtCiudad.Text = ""; txtHabitaciones.Text = ""; txtPrecio.Text = ""; txtDescripcion.Text = "";
+                txtNombreComunidad.Text = ""; txtDireccion.Text = ""; txtCiudad.Text = ""; txtHabitaciones.Text = ""; txtPrecio.Text = ""; txtDescripcion.Text = "";
                 lblMsg.Text = "✅ Comunidad creada con éxito. Código de invitación: <b>" + codigo + "</b>";
                 lblMsg.CssClass = "alert alert-success";
                 lblMsg.Visible = true;
