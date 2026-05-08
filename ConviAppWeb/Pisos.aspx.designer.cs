@@ -11,6 +11,11 @@ namespace ConviAppWeb {
         protected global::System.Web.UI.WebControls.Panel pnlForm;
         protected global::System.Web.UI.WebControls.TextBox txtDir;
         protected global::System.Web.UI.WebControls.TextBox txtCiudad;
+        protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
+        protected global::System.Web.UI.WebControls.TextBox txtHabitaciones;
+        protected global::System.Web.UI.WebControls.TextBox txtBanos;
+        protected global::System.Web.UI.WebControls.CheckBox chkCocina;
+        protected global::System.Web.UI.WebControls.CheckBox chkGaraje;
         protected global::System.Web.UI.WebControls.Button btnGuardar;
         protected global::System.Web.UI.WebControls.Button btnCancelar;
         protected global::System.Web.UI.WebControls.TextBox txtFiltroCiudad;

@@ -6,5 +6,8 @@ namespace ConviAppWeb {
         protected global::System.Web.UI.WebControls.Label lblCiudad;
         protected global::System.Web.UI.WebControls.Label lblHabitaciones;
         protected global::System.Web.UI.WebControls.Label lblPrecio;
+        protected global::System.Web.UI.WebControls.Label lblBanos;
+        protected global::System.Web.UI.WebControls.Label lblDescripcion;
+        protected global::System.Web.UI.WebControls.Label lblCaracteristicas;
     }
 }
