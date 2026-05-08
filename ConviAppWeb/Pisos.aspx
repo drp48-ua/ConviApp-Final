@@ -81,7 +81,7 @@
         <div class="listings-grid">
             <asp:Repeater ID="rptPisos" runat="server" OnItemCommand="rptPisos_ItemCommand">
                 <ItemTemplate>
-                    <a href="PisoDetail.aspx?id=<%# Eval("Id") %>" class="listing-card" style="display:flex; flex-direction:column; overflow:hidden;">
+                    <div onclick="window.location.href='PisoDetail.aspx?id=<%# Eval("Id") %>';" class="listing-card" style="display:flex; flex-direction:column; overflow:hidden; cursor:pointer;">
                         <div class="listing-img" style="position:relative; overflow:hidden; width:100%; height:220px; flex-shrink:0;">
                             <img src='<%# "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=600&q=80&sig=" + Eval("Id") %>'
                                 style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;"
@@ -89,7 +89,7 @@
                             <span class="listing-badge">
                                 <%# (bool)Eval("Disponible") ? "Disponible" : "Ocupado" %>
                             </span>
-                            <button class="wishlist-btn" onclick="event.preventDefault();">♡</button>
+                            <button class="wishlist-btn" onclick="event.stopPropagation(); event.preventDefault();">♡</button>
                         </div>
                         <div class="listing-body">
                             <div class="listing-price">
@@ -106,12 +106,14 @@
                                 <div>
                                     <span class="listing-tag listing-tag-arrow" style="margin-right:4px;">Ver detalles →</span>
                                     <% if (Session["UserId"] != null) { %>
-                                        <asp:LinkButton ID="btnUnirse" runat="server" CommandName="Unirse" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-outline btn-sm" style="padding:4px 8px; font-size:0.75rem;">🔑 Unirse</asp:LinkButton>
+                                        <div onclick="event.stopPropagation();" style="display:inline-block;">
+                                            <asp:LinkButton ID="btnUnirse" runat="server" CommandName="Unirse" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-outline btn-sm" style="padding:4px 8px; font-size:0.75rem;">🔑 Unirse</asp:LinkButton>
+                                        </div>
                                     <% } %>
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </ItemTemplate>
             </asp:Repeater>
         </div>
