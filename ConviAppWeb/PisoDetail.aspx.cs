@@ -39,21 +39,19 @@ namespace ConviAppWeb
             lblPrecio.Text = p.PrecioTotal.ToString("0.00");
             lblBanos.Text = p.NumeroBanos.ToString();
             lblDescripcion.Text = !string.IsNullOrWhiteSpace(p.Descripcion) ? p.Descripcion : "Piso compartido ideal para estudiantes y profesionales. Todas las zonas comunes incluidas. Precio total dividido entre los inquilinos.";
-            
+            lblCocinas.Text = "1";
+            lblGarajes.Text = "0";
+
             if (!string.IsNullOrWhiteSpace(p.Caracteristicas))
             {
                 string[] parts = p.Caracteristicas.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
-                string html = "";
                 foreach (var part in parts)
                 {
-                    html += string.Format("<span class=\"listing-tag\">✨ {0}</span>", part);
+                    if (part.Contains("Cocinas")) lblCocinas.Text = part.Replace("Cocinas", "").Trim();
+                    else if (part.Contains("Garajes")) lblGarajes.Text = part.Replace("Garajes", "").Trim();
                 }
-                lblCaracteristicas.Text = html;
             }
-            else
-            {
-                lblCaracteristicas.Text = "";
-            }
+            lblCaracteristicas.Text = "";
         }
 
         protected void btnUnirse_Click(object sender, EventArgs e)

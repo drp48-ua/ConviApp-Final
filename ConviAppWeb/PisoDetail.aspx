@@ -39,28 +39,41 @@
                                 <asp:Label ID="lblCiudad" runat="server" />
                             </div>
                             <hr style="border:1px solid var(--border); margin:20px 0;" />
-                            <div style="display:flex; gap:24px; margin-bottom:20px;">
-                                <div style="text-align:center;">
-                                    <div style="font-size:2rem;">🛏</div>
+                            <div style="display:flex; gap:20px; margin-bottom:20px; flex-wrap:wrap;">
+                                <div style="text-align:center; min-width:60px;">
+                                    <div style="font-size:2rem;">🛏️</div>
                                     <div style="font-weight:700; font-size:1.3rem;">
                                         <asp:Label ID="lblHabitaciones" runat="server" />
                                     </div>
-                                    <div style="color:var(--text-muted); font-size:0.85rem;">Habitaciones</div>
+                                    <div style="color:var(--text-muted); font-size:0.8rem;">Habitaciones</div>
                                 </div>
-                                <div style="text-align:center;">
+                                <div style="text-align:center; min-width:60px;">
                                     <div style="font-size:2rem;">🚿</div>
                                     <div style="font-weight:700; font-size:1.3rem;">
                                         <asp:Label ID="lblBanos" runat="server" />
                                     </div>
-                                    <div style="color:var(--text-muted); font-size:0.85rem;">Aseos</div>
+                                    <div style="color:var(--text-muted); font-size:0.8rem;">Aseos</div>
                                 </div>
-                            </div>
-                            <div style="margin-bottom:20px; color:var(--text-secondary); font-size:0.95rem; display:flex; flex-wrap:wrap; gap:8px;">
-                                <asp:Label ID="lblCaracteristicas" runat="server" />
+                                <div style="text-align:center; min-width:60px;">
+                                    <div style="font-size:2rem;">🍳</div>
+                                    <div style="font-weight:700; font-size:1.3rem;">
+                                        <asp:Label ID="lblCocinas" runat="server" />
+                                    </div>
+                                    <div style="color:var(--text-muted); font-size:0.8rem;">Cocinas</div>
+                                </div>
+                                <div style="text-align:center; min-width:60px;">
+                                    <div style="font-size:2rem;">🚗</div>
+                                    <div style="font-weight:700; font-size:1.3rem;">
+                                        <asp:Label ID="lblGarajes" runat="server" />
+                                    </div>
+                                    <div style="color:var(--text-muted); font-size:0.8rem;">Garajes</div>
+                                </div>
                             </div>
                             <p style="color:var(--text-secondary);">
                                 <asp:Label ID="lblDescripcion" runat="server" />
                             </p>
+                            <%-- lblCaracteristicas kept hidden for data only --%>
+                            <asp:Label ID="lblCaracteristicas" runat="server" Visible="false" />
                         </div>
                     </div>
                     <div>

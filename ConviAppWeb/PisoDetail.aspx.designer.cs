@@ -9,5 +9,7 @@ namespace ConviAppWeb {
         protected global::System.Web.UI.WebControls.Label lblBanos;
         protected global::System.Web.UI.WebControls.Label lblDescripcion;
         protected global::System.Web.UI.WebControls.Label lblCaracteristicas;
+        protected global::System.Web.UI.WebControls.Label lblCocinas;
+        protected global::System.Web.UI.WebControls.Label lblGarajes;
     }
 }
