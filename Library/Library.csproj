@@ -75,6 +75,8 @@
     <Compile Include="EN\ENZonaComun.cs" />
     <Compile Include="CAD\CADComunidadUsuario.cs" />
     <Compile Include="EN\ENComunidadUsuario.cs" />
+    <Compile Include="CAD\CADChatBloqueo.cs" />
+    <Compile Include="CAD\CADChatSilenciado.cs" />
   </ItemGroup>
 </Project>
 

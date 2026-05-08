@@ -125,15 +125,7 @@
                             </div>
                             <div class="listing-tags" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
                                 <span class="listing-tag">🛏️ <%# Eval("NumeroHabitaciones") %> hab.</span>
-                                
-                                <div>
-                                    <span class="listing-tag listing-tag-arrow" style="margin-right:4px;">Ver detalles →</span>
-                                    <% if (Session["UserId"] != null) { %>
-                                        <div onclick="event.stopPropagation();" style="display:inline-block;">
-                                            <asp:LinkButton ID="btnUnirse" runat="server" CommandName="Unirse" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-outline btn-sm" style="padding:4px 8px; font-size:0.75rem;">🔑 Unirse</asp:LinkButton>
-                                        </div>
-                                    <% } %>
-                                </div>
+                                <span class="listing-tag listing-tag-arrow">Ver detalles →</span>
                             </div>
                         </div>
                     </div>

@@ -44,6 +44,8 @@ namespace ConviAppWeb.DataAccess
                                     try { using (var cmd = new SQLiteCommand("ALTER TABLE Piso ADD COLUMN nombre TEXT;", c)) { cmd.ExecuteNonQuery(); } } catch { }
                                     try { using (var cmd = new SQLiteCommand("ALTER TABLE Contrato ADD COLUMN archivo_url TEXT;", c)) { cmd.ExecuteNonQuery(); } } catch { }
                                     try { using (var cmd = new SQLiteCommand("ALTER TABLE Usuario ADD COLUMN rol TEXT;", c)) { cmd.ExecuteNonQuery(); } } catch { }
+                                    try { using (var cmd = new SQLiteCommand("CREATE TABLE IF NOT EXISTS ChatBloqueo (id INTEGER PRIMARY KEY AUTOINCREMENT, bloqueante_id INTEGER NOT NULL, bloqueado_id INTEGER NOT NULL, fecha DATETIME DEFAULT CURRENT_TIMESTAMP);", c)) { cmd.ExecuteNonQuery(); } } catch { }
+                                    try { using (var cmd = new SQLiteCommand("CREATE TABLE IF NOT EXISTS ChatSilenciado (id INTEGER PRIMARY KEY AUTOINCREMENT, silenciante_id INTEGER NOT NULL, silenciado_id INTEGER NOT NULL, fecha DATETIME DEFAULT CURRENT_TIMESTAMP);", c)) { cmd.ExecuteNonQuery(); } } catch { }
                                 }
                             }
                             catch { }

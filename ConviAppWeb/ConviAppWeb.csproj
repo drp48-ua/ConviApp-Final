@@ -69,6 +69,8 @@
     <Content Include="AdminPublicidad.aspx" />
     <Content Include="AdminInformes.aspx" />
     <Content Include="SalirComunidad.aspx" />
+    <Content Include="Foro.aspx" />
+    <Content Include="Chat.aspx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">17.0</VisualStudioVersion>
@@ -272,6 +274,20 @@
     <Compile Include="SalirComunidad.aspx.cs">
       <DependentUpon>SalirComunidad.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Foro.aspx.cs">
+      <DependentUpon>Foro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Foro.aspx.designer.cs">
+      <DependentUpon>Foro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Chat.aspx.cs">
+      <DependentUpon>Chat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Chat.aspx.designer.cs">
+      <DependentUpon>Chat.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

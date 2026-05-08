@@ -81,18 +81,16 @@
                             <h4 style="margin-top:0; color:var(--primary-light);">¿Interesado?</h4>
                             <p style="color:var(--text-muted); font-size:0.9rem;">Regístrate para ver el contacto del
                                 propietario y gestionar tu reserva.</p>
-                            <% if (Session["UserEmail"]==null) { %>
-                                <a href="Registro.aspx" class="btn btn-primary"
-                                    style="width:100%; display:block; text-align:center; margin-bottom:12px;">Registrarse
-                                    gratis</a>
-                                <a href="Login.aspx" class="btn btn-outline"
-                                    style="width:100%; display:block; text-align:center;">Iniciar sesi&oacute;n</a>
-                                <% } else { %>
-                                    <asp:LinkButton ID="btnContactar" runat="server" OnClick="btnContactar_Click" CssClass="btn btn-primary"
-                                        style="width:100%; display:block; text-align:center; margin-bottom:12px;">💬 Contactar propietario</asp:LinkButton>
-                                    <asp:LinkButton ID="btnUnirse" runat="server" OnClick="btnUnirse_Click" CssClass="btn btn-outline"
-                                        style="width:100%; display:block; text-align:center;">🔑 Unirse a la comunidad</asp:LinkButton>
-                                <% } %>
+                                <% if (Session["UserEmail"]==null) { %>
+                                    <a href="Registro.aspx" class="btn btn-primary"
+                                        style="width:100%; display:block; text-align:center; margin-bottom:12px;">Registrarse
+                                        gratis</a>
+                                    <a href="Login.aspx" class="btn btn-outline"
+                                        style="width:100%; display:block; text-align:center;">Iniciar sesi&oacute;n</a>
+                                    <% } else { %>
+                                        <asp:LinkButton ID="btnContactar" runat="server" OnClick="btnContactar_Click" CssClass="btn btn-primary"
+                                            style="width:100%; display:block; text-align:center;">💬 Chatear con el propietario</asp:LinkButton>
+                                    <% } %>
                         </div>
                     </div>
                 </div>
