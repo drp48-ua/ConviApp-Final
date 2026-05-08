@@ -246,9 +246,15 @@
       <DependentUpon>AdminPisos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="AdminPisos.aspx.designer.cs">
+      <DependentUpon>AdminPisos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminPagos.aspx.cs">
       <DependentUpon>AdminPagos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPagos.aspx.designer.cs">
+      <DependentUpon>AdminPagos.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminIncidencias.aspx.cs">
       <DependentUpon>AdminIncidencias.aspx</DependentUpon>
