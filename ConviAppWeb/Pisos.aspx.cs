@@ -46,13 +46,15 @@ namespace ConviAppWeb
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
             if(!string.IsNullOrWhiteSpace(txtDir.Text)) {
-                int habs = 1; int banos = 1;
+                int habs = 1; int banos = 1; int cocinas = 1; int garajes = 0;
                 int.TryParse(txtHabitaciones.Text, out habs);
                 int.TryParse(txtBanos.Text, out banos);
+                int.TryParse(txtCocinas.Text, out cocinas);
+                int.TryParse(txtGarajes.Text, out garajes);
                 
                 string caracteristicas = "";
-                if (chkCocina.Checked) caracteristicas += "Cocina equipada, ";
-                if (chkGaraje.Checked) caracteristicas += "Garaje, ";
+                if (cocinas > 0) caracteristicas += string.Format("{0} Cocinas, ", cocinas);
+                if (garajes > 0) caracteristicas += string.Format("{0} Garajes, ", garajes);
                 if (caracteristicas.EndsWith(", ")) caracteristicas = caracteristicas.Substring(0, caracteristicas.Length - 2);
 
                 int userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
@@ -72,7 +74,7 @@ namespace ConviAppWeb
                 
                 txtDir.Text = ""; txtCiudad.Text = ""; txtDescripcion.Text = "";
                 txtHabitaciones.Text = "1"; txtBanos.Text = "1";
-                chkCocina.Checked = false; chkGaraje.Checked = false;
+                txtCocinas.Text = "1"; txtGarajes.Text = "0";
                 
                 pnlForm.Visible = false;
                 CargarPisos();

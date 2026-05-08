@@ -31,11 +31,13 @@
                     <label style="color:var(--text-secondary); font-size:0.9rem;">Aseos:</label>
                     <asp:TextBox ID="txtBanos" runat="server" CssClass="form-input" TextMode="Number" Text="1" style="width:70px; padding:8px;" />
                 </div>
-                <div style="display:flex; align-items:center; gap:8px; margin-left:10px;">
-                    <asp:CheckBox ID="chkCocina" runat="server" Text="Cocina equipada" ForeColor="Gray" />
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <label style="color:var(--text-secondary); font-size:0.9rem;">Cocinas:</label>
+                    <asp:TextBox ID="txtCocinas" runat="server" CssClass="form-input" TextMode="Number" Text="1" style="width:70px; padding:8px;" />
                 </div>
-                <div style="display:flex; align-items:center; gap:8px; margin-left:10px;">
-                    <asp:CheckBox ID="chkGaraje" runat="server" Text="Garaje" ForeColor="Gray" />
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <label style="color:var(--text-secondary); font-size:0.9rem;">Garajes:</label>
+                    <asp:TextBox ID="txtGarajes" runat="server" CssClass="form-input" TextMode="Number" Text="0" style="width:70px; padding:8px;" />
                 </div>
             </div>
             <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary"
