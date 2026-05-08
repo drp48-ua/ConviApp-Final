@@ -13,7 +13,7 @@
 
             <!-- Acciones -->
             <div style="display:flex; gap:16px; margin-bottom:2rem; flex-wrap:wrap;">
-                <button type="button" class="btn btn-primary" onclick="document.getElementById('modalCrear').style.display='flex'">+ Crear nueva comunidad</button>
+                <button type="button" class="btn btn-primary" onclick="window.location.href='Pisos.aspx?crear=1'">+ Crear nueva comunidad</button>
                 <button type="button" class="btn btn-outline" onclick="document.getElementById('modalUnir').style.display='flex'">🔑 Unirse con código</button>
             </div>
 

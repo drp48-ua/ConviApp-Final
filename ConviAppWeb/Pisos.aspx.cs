@@ -12,7 +12,13 @@ namespace ConviAppWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserEmail"] == null) { Response.Redirect("Login.aspx"); return; }
-            if (!IsPostBack) CargarPisos();
+            if (!IsPostBack)
+            {
+                CargarPisos();
+                // Si viene desde Comunidades.aspx con ?crear=1, abrir el formulario directamente
+                if (Request.QueryString["crear"] == "1")
+                    pnlForm.Visible = true;
+            }
         }
 
         private void CargarPisos()
