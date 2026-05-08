@@ -37,6 +37,9 @@ namespace ConviAppWeb.DataAccess
                                         cmd.ExecuteNonQuery();
                                     }
                                     try { using (var cmd = new SQLiteCommand("ALTER TABLE Piso ADD COLUMN codigo_comunidad TEXT;", c)) { cmd.ExecuteNonQuery(); } } catch { }
+                                    try { using (var cmd = new SQLiteCommand("ALTER TABLE Piso ADD COLUMN caracteristicas TEXT;", c)) { cmd.ExecuteNonQuery(); } } catch { }
+                                    try { using (var cmd = new SQLiteCommand("ALTER TABLE Piso ADD COLUMN propietario_id INTEGER;", c)) { cmd.ExecuteNonQuery(); } } catch { }
+                                    try { using (var cmd = new SQLiteCommand("ALTER TABLE Piso ADD COLUMN imagen_url TEXT;", c)) { cmd.ExecuteNonQuery(); } } catch { }
                                     try { using (var cmd = new SQLiteCommand("ALTER TABLE Usuario ADD COLUMN rol TEXT;", c)) { cmd.ExecuteNonQuery(); } } catch { }
                                 }
                             }

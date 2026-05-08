@@ -31,6 +31,9 @@ namespace ConviAppWeb.DataAccess
                 nueva["descripcion"]        = en.Descripcion ?? (object)DBNull.Value;
                 nueva["disponible"]         = en.Disponible ? 1 : 0;
                 nueva["codigo_comunidad"]   = en.CodigoComunidad ?? (object)DBNull.Value;
+                nueva["caracteristicas"]    = en.Caracteristicas ?? (object)DBNull.Value;
+                nueva["propietario_id"]     = en.PropietarioId > 0 ? (object)en.PropietarioId : DBNull.Value;
+                nueva["imagen_url"]         = en.ImagenUrl ?? (object)DBNull.Value;
                 t.Rows.Add(nueva);
                 SQLiteCommandBuilder cb = new SQLiteCommandBuilder(da);
                 da.Update(bdVirtual, "piso");
@@ -112,6 +115,9 @@ namespace ConviAppWeb.DataAccess
             Descripcion       = dr["descripcion"] != DBNull.Value ? dr["descripcion"].ToString() : null,
             Disponible        = dr["disponible"] != DBNull.Value && Convert.ToInt32(dr["disponible"]) == 1,
             CodigoComunidad   = dr["codigo_comunidad"] != DBNull.Value ? dr["codigo_comunidad"].ToString() : null,
+            Caracteristicas   = dr["caracteristicas"] != DBNull.Value ? dr["caracteristicas"].ToString() : null,
+            PropietarioId     = dr["propietario_id"] != DBNull.Value ? Convert.ToInt32(dr["propietario_id"]) : 0,
+            ImagenUrl         = dr["imagen_url"] != DBNull.Value ? dr["imagen_url"].ToString() : null,
         }; }
     }
 }

@@ -53,11 +53,29 @@ namespace ConviAppWeb
                 int.TryParse(txtGarajes.Text, out garajes);
                 
                 string caracteristicas = "";
+                if (banos > 0) caracteristicas += string.Format("{0} Aseos, ", banos);
                 if (cocinas > 0) caracteristicas += string.Format("{0} Cocinas, ", cocinas);
                 if (garajes > 0) caracteristicas += string.Format("{0} Garajes, ", garajes);
                 if (caracteristicas.EndsWith(", ")) caracteristicas = caracteristicas.Substring(0, caracteristicas.Length - 2);
 
                 int userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
+
+                // Subida de foto
+                string imagenUrl = null;
+                if (fuFoto.HasFile)
+                {
+                    string ext = System.IO.Path.GetExtension(fuFoto.FileName).ToLower();
+                    if (ext == ".jpg" || ext == ".jpeg" || ext == ".png" || ext == ".webp")
+                    {
+                        string fileName = string.Format("piso_{0}_{1}{2}", userId, DateTime.Now.Ticks, ext);
+                        string savePath = Server.MapPath("~/img/pisos/") + fileName;
+                        // Asegurar que el directorio existe
+                        if (!System.IO.Directory.Exists(Server.MapPath("~/img/pisos/")))
+                            System.IO.Directory.CreateDirectory(Server.MapPath("~/img/pisos/"));
+                        fuFoto.SaveAs(savePath);
+                        imagenUrl = "img/pisos/" + fileName;
+                    }
+                }
 
                 var p = new ENPiso { 
                     Direccion = txtDir.Text, 
@@ -67,7 +85,9 @@ namespace ConviAppWeb
                     NumeroBanos = banos,
                     Caracteristicas = caracteristicas,
                     PrecioTotal = 350.00m, 
-                    Disponible = true
+                    Disponible = true,
+                    PropietarioId = userId,
+                    ImagenUrl = imagenUrl
                 };
                 var cad = new CADPiso();
                 cad.CrearPiso(p);

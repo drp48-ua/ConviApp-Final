@@ -90,11 +90,12 @@ namespace ConviAppWeb
                 if (piso != null)
                 {
                     var cadN = new CADNotificacion();
-                    // ID 1 suele ser el Admin global
+                    // Notificar al creador de la comunidad (PropietarioId), o al admin si no hay propietario
+                    int destinatarioId = piso.PropietarioId > 0 ? piso.PropietarioId : 1;
                     cadN.CrearNotificacion(new ENNotificacion
                     {
-                        UsuarioId = 1,
-                        Titulo = "Nuevo interesado en comunidad",
+                        UsuarioId = destinatarioId,
+                        Titulo = "Nuevo interesado en tu comunidad",
                         Mensaje = string.Format("{0} está interesado en unirse a la comunidad de '{1}'.", myName, piso.Direccion),
                         FechaCreacion = DateTime.Now,
                         Leida = false,

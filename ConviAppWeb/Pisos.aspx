@@ -13,34 +13,51 @@
         </div>
 
         <asp:Panel ID="pnlForm" runat="server" Visible="false" CssClass="glass-card"
-            style="margin-bottom:20px; padding:20px;">
-            <h3 style="margin-bottom:12px; color:var(--primary);">Nuevo Piso / Comunidad</h3>
+            style="margin-bottom:20px; padding:24px;">
+            <h3 style="margin-bottom:16px; color:var(--primary);">🏘️ Crear nueva Comunidad</h3>
+            
+            <!-- Dirección y Ciudad -->
             <div style="display:flex; gap:12px; margin-bottom:12px; flex-wrap:wrap;">
-                <asp:TextBox ID="txtDir" runat="server" CssClass="form-input" placeholder="Dirección" style="flex:2; min-width:200px;" />
+                <asp:TextBox ID="txtDir" runat="server" CssClass="form-input" placeholder="Dirección completa" style="flex:2; min-width:200px;" />
                 <asp:TextBox ID="txtCiudad" runat="server" CssClass="form-input" placeholder="Ciudad" style="flex:1; min-width:150px;" />
             </div>
+            
+            <!-- Descripción -->
             <div style="margin-bottom:12px;">
-                <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-input" placeholder="Descripción de la comunidad" TextMode="MultiLine" Rows="3" style="width:100%;" />
+                <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-input" placeholder="Descripción de la comunidad (normas, ambiente, etc.)" TextMode="MultiLine" Rows="3" style="width:100%;" />
             </div>
-            <div style="display:flex; gap:12px; margin-bottom:16px; align-items:center; flex-wrap:wrap;">
+
+            <!-- Foto -->
+            <div style="margin-bottom:16px;">
+                <label style="color:var(--text-secondary); font-size:0.85rem; display:block; margin-bottom:6px;">📷 Foto de portada (opcional)</label>
+                <asp:FileUpload ID="fuFoto" runat="server" CssClass="form-input" style="padding:6px;" />
+            </div>
+
+            <!-- Contadores -->
+            <div style="display:flex; gap:16px; margin-bottom:16px; align-items:center; flex-wrap:wrap;">
                 <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:1.2rem;">🛏️</span>
                     <label style="color:var(--text-secondary); font-size:0.9rem;">Habitaciones:</label>
-                    <asp:TextBox ID="txtHabitaciones" runat="server" CssClass="form-input" TextMode="Number" Text="1" style="width:70px; padding:8px;" />
+                    <asp:TextBox ID="txtHabitaciones" runat="server" CssClass="form-input" TextMode="Number" Text="1" style="width:65px; padding:8px; text-align:center;" />
                 </div>
                 <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:1.2rem;">🚿</span>
                     <label style="color:var(--text-secondary); font-size:0.9rem;">Aseos:</label>
-                    <asp:TextBox ID="txtBanos" runat="server" CssClass="form-input" TextMode="Number" Text="1" style="width:70px; padding:8px;" />
+                    <asp:TextBox ID="txtBanos" runat="server" CssClass="form-input" TextMode="Number" Text="1" style="width:65px; padding:8px; text-align:center;" />
                 </div>
                 <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:1.2rem;">🍳</span>
                     <label style="color:var(--text-secondary); font-size:0.9rem;">Cocinas:</label>
-                    <asp:TextBox ID="txtCocinas" runat="server" CssClass="form-input" TextMode="Number" Text="1" style="width:70px; padding:8px;" />
+                    <asp:TextBox ID="txtCocinas" runat="server" CssClass="form-input" TextMode="Number" Text="1" style="width:65px; padding:8px; text-align:center;" />
                 </div>
                 <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:1.2rem;">🚗</span>
                     <label style="color:var(--text-secondary); font-size:0.9rem;">Garajes:</label>
-                    <asp:TextBox ID="txtGarajes" runat="server" CssClass="form-input" TextMode="Number" Text="0" style="width:70px; padding:8px;" />
+                    <asp:TextBox ID="txtGarajes" runat="server" CssClass="form-input" TextMode="Number" Text="0" style="width:65px; padding:8px; text-align:center;" />
                 </div>
             </div>
-            <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary"
+
+            <asp:Button ID="btnGuardar" runat="server" Text="✅ Crear Comunidad" CssClass="btn btn-primary"
                 OnClick="BtnGuardar_Click" />
             <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-outline"
                 OnClick="BtnCancelar_Click" CausesValidation="false" />

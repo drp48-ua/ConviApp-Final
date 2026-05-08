@@ -12,6 +12,7 @@ namespace ConviAppWeb {
         protected global::System.Web.UI.WebControls.TextBox txtDir;
         protected global::System.Web.UI.WebControls.TextBox txtCiudad;
         protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
+        protected global::System.Web.UI.WebControls.FileUpload fuFoto;
         protected global::System.Web.UI.WebControls.TextBox txtHabitaciones;
         protected global::System.Web.UI.WebControls.TextBox txtBanos;
         protected global::System.Web.UI.WebControls.TextBox txtCocinas;

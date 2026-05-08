@@ -22,7 +22,9 @@ namespace ConviAppWeb.Models
         private bool _disponible;
         private string _caracteristicas; // JSON o CSV de extras (parking, ascensor, etc.)
         private string _codigoComunidad;
-        // ─── Propiedades pÃºblicas ───
+        private int _propietarioId;
+        private string _imagenUrl;
+        // ─── Propiedades públicas ───
         [Key]
         public int Id { get { return _id; } set { _id = value; } }
 
@@ -55,6 +57,11 @@ namespace ConviAppWeb.Models
 
         [MaxLength(8)]
         public string CodigoComunidad { get { return _codigoComunidad; } set { _codigoComunidad = value; } }
+
+        public int PropietarioId { get { return _propietarioId; } set { _propietarioId = value; } }
+
+        [MaxLength(500)]
+        public string ImagenUrl { get { return _imagenUrl; } set { _imagenUrl = value; } }
 
         // ─── NavegaciÃ³n ───
         public ICollection<ENHabitacion> Habitaciones { get; set; }
