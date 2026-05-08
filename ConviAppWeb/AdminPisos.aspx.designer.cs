@@ -1,6 +1,7 @@
 namespace ConviAppWeb {
     public partial class AdminPisos {
         protected global::System.Web.UI.WebControls.Label lblMsg;
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
         protected global::System.Web.UI.WebControls.TextBox txtDir;
         protected global::System.Web.UI.WebControls.TextBox txtCiudad;
         protected global::System.Web.UI.WebControls.TextBox txtDescripcion;

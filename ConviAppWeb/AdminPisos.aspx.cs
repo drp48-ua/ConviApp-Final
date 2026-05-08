@@ -102,7 +102,8 @@ namespace ConviAppWeb
                 Disponible = true,
                 PropietarioId = userId,
                 ImagenUrl = imagenUrl,
-                EsPrivado = true // IMPORTANTE: Es un piso privado
+                EsPrivado = true, // IMPORTANTE: Es un piso privado
+                Nombre = txtNombre.Text.Trim()
             };
             var cadPiso = new CADPiso();
             int pisoId = cadPiso.CrearPiso(p);

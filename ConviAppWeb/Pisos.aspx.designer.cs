@@ -9,6 +9,7 @@ namespace ConviAppWeb {
         protected global::System.Web.UI.WebControls.Label lblSumaPisos;
         protected global::System.Web.UI.WebControls.Button btnNuevo;
         protected global::System.Web.UI.WebControls.Panel pnlForm;
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
         protected global::System.Web.UI.WebControls.TextBox txtDir;
         protected global::System.Web.UI.WebControls.TextBox txtCiudad;
         protected global::System.Web.UI.WebControls.TextBox txtDescripcion;

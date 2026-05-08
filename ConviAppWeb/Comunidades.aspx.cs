@@ -139,8 +139,19 @@ namespace ConviAppWeb
             if (e.CommandName == "Entrar")
             {
                 int pisoId = Convert.ToInt32(e.CommandArgument);
+                string nombre = e.CommandArgument.ToString(); // default
+
+                // Buscar el nombre real del piso
+                var cadPiso = new CADPiso();
+                var piso = cadPiso.LeerPiso(pisoId);
+                if (piso != null)
+                {
+                    nombre = !string.IsNullOrWhiteSpace(piso.Nombre) ? piso.Nombre : piso.Direccion;
+                }
+
                 Session["ComunidadActivaId"] = pisoId;
-                Response.Redirect("Index.aspx"); // O enviar a un Dashboard de Comunidad
+                Session["ComunidadActivaNombre"] = nombre;
+                Response.Redirect("Index.aspx");
             }
         }
 

@@ -93,7 +93,8 @@ namespace ConviAppWeb
                     PrecioTotal = 350.00m, 
                     Disponible = true,
                     PropietarioId = userId,
-                    ImagenUrl = imagenUrl
+                    ImagenUrl = imagenUrl,
+                    Nombre = txtNombre.Text.Trim()
                 };
                 var cad = new CADPiso();
                 cad.CrearPiso(p);

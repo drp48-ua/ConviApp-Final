@@ -26,13 +26,14 @@
                              onmouseout="this.style.boxShadow='none'">
                             
                             <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
-                                <h3 style="font-size:1.25rem; font-weight:700; color:#111827; margin:0;"><%# Eval("Direccion") %></h3>
+                                <h3 style="font-size:1.25rem; font-weight:700; color:#111827; margin:0;"><%# Eval("Nombre") != null && !string.IsNullOrEmpty(Eval("Nombre").ToString()) ? Eval("Nombre") : "Comunidad #" + Eval("Id") %></h3>
                                 <span style="background:#eff6ff; color:#1d4ed8; padding:4px 10px; border-radius:20px; font-size:0.75rem; font-weight:600; font-family:monospace;" title="Código de invitación">
                                     <%# Eval("CodigoComunidad") %>
                                 </span>
                             </div>
                             
-                            <p style="color:#6b7280; font-size:0.9rem; margin-bottom:8px;">📍 <%# Eval("Ciudad") %></p>
+                            <p style="color:#6b7280; font-size:0.9rem; margin-bottom:4px;">📍 <%# Eval("Ciudad") %></p>
+                            <p style="color:#9ca3af; font-size:0.8rem; margin-bottom:8px; margin-left:18px;"><%# Eval("Direccion") %></p>
                             
                             <p style="color:#4b5563; font-size:0.9rem; margin-bottom:16px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">
                                 <%# Eval("Descripcion") %>

@@ -19,6 +19,10 @@
     <div id="pnlCrearPisoPrivado" class="glass-card" style="display:none; padding: 24px; margin-bottom:24px; border:2px solid var(--primary-light);">
         <h3 style="margin-bottom:16px; color:var(--primary);">🏢 Crear Piso Privado (Con Contrato)</h3>
         
+        <div style="margin-bottom:12px;">
+            <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Nombre del Piso/Comunidad" style="width:100%; padding:10px; border-radius:6px; border:1px solid #ccc;" />
+        </div>
+
         <div style="display:flex; gap:12px; margin-bottom:12px; flex-wrap:wrap;">
             <asp:TextBox ID="txtDir" runat="server" CssClass="form-control" placeholder="Dirección completa" style="flex:2; min-width:200px; padding:10px; border-radius:6px; border:1px solid #ccc;" />
             <asp:TextBox ID="txtCiudad" runat="server" CssClass="form-control" placeholder="Ciudad" style="flex:1; min-width:150px; padding:10px; border-radius:6px; border:1px solid #ccc;" />
@@ -83,11 +87,12 @@
         <asp:Repeater ID="rptPisosPrivados" runat="server">
             <ItemTemplate>
                 <div class="glass-card" style="padding:16px; border-left:4px solid var(--accent);">
-                    <h4 style="margin-bottom:8px;"><%# Eval("Direccion") %> (<%# Eval("Ciudad") %>)</h4>
+                    <h4 style="margin-bottom:8px;"><%# Eval("Nombre") != null && !string.IsNullOrEmpty(Eval("Nombre").ToString()) ? Eval("Nombre") : "Piso #" + Eval("Id") %></h4>
                     <p style="font-size:0.85rem; color:#6b7280; margin-bottom:12px;">
+                        <strong>Ciudad:</strong> <%# Eval("Ciudad") %><br />
+                        <strong>Dirección:</strong> <%# Eval("Direccion") %><br />
                         <strong>Precio:</strong> <%# Eval("PrecioTotal") %>€/mes<br />
-                        <strong>Habitaciones:</strong> <%# Eval("NumeroHabitaciones") %><br />
-                        <strong>ID Piso:</strong> #<%# Eval("Id") %>
+                        <strong>Habitaciones:</strong> <%# Eval("NumeroHabitaciones") %>
                     </p>
                     <div style="display:flex; gap:8px;">
                         <a href="AdminPagos.aspx" class="btn btn-sm" style="background:#f3f4f6; color:#374151; border:1px solid #d1d5db;">Ver Contrato ➔</a>
@@ -104,8 +109,9 @@
         <asp:Repeater ID="rptPisosApp" runat="server">
             <ItemTemplate>
                 <div class="glass-card" style="padding:16px; border-left:4px solid var(--primary-light);">
-                    <h4 style="margin-bottom:8px;">Piso #<%# Eval("Id") %> - <%# Eval("Ciudad") %></h4>
+                    <h4 style="margin-bottom:8px;"><%# Eval("Nombre") != null && !string.IsNullOrEmpty(Eval("Nombre").ToString()) ? Eval("Nombre") : "Comunidad #" + Eval("Id") %></h4>
                     <p style="font-size:0.85rem; color:#6b7280; margin-bottom:12px;">
+                        <strong>Ciudad:</strong> <%# Eval("Ciudad") %><br />
                         <strong>Dirección:</strong> <%# Eval("Direccion") %><br />
                         <strong>Habitaciones:</strong> <%# Eval("NumeroHabitaciones") %><br />
                         <strong>Precio:</strong> <%# Eval("PrecioTotal") %>€

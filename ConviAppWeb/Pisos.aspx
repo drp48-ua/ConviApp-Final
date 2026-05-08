@@ -16,6 +16,10 @@
             style="margin-bottom:20px; padding:24px;">
             <h3 style="margin-bottom:16px; color:var(--primary);">🏘️ Crear nueva Comunidad</h3>
             
+            <div style="margin-bottom:12px;">
+                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-input" placeholder="Nombre de la comunidad (ej. Residencial Los Pinos)" style="width:100%;" />
+            </div>
+
             <!-- Dirección y Ciudad -->
             <div style="display:flex; gap:12px; margin-bottom:12px; flex-wrap:wrap;">
                 <asp:TextBox ID="txtDir" runat="server" CssClass="form-input" placeholder="Dirección completa" style="flex:2; min-width:200px;" />
@@ -115,9 +119,9 @@
                                 <%# Eval("PrecioTotal", "{0:0}" ) %>€ <span>/mes</span>
                             </div>
                             <div class="listing-title">
-                                <%# Eval("Direccion") ?? "Piso" %>
+                                <%# Eval("Nombre") != null && !string.IsNullOrEmpty(Eval("Nombre").ToString()) ? Eval("Nombre") : "Comunidad #" + Eval("Id") %>
                             </div>
-                            <div class="listing-location">📍 <%# Eval("Ciudad") ?? "Ciudad" %>
+                            <div class="listing-location">📍 <%# Eval("Ciudad") %><br/><span style="font-size:0.8rem; color:#9ca3af; margin-left:18px;"><%# Eval("Direccion") %></span>
                             </div>
                             <div class="listing-tags" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
                                 <span class="listing-tag">🛏️ <%# Eval("NumeroHabitaciones") %> hab.</span>

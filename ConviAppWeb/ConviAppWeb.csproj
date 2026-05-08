@@ -68,6 +68,7 @@
     <Content Include="AdminIncidencias.aspx" />
     <Content Include="AdminPublicidad.aspx" />
     <Content Include="AdminInformes.aspx" />
+    <Content Include="SalirComunidad.aspx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">17.0</VisualStudioVersion>
@@ -266,6 +267,10 @@
     </Compile>
     <Compile Include="AdminInformes.aspx.cs">
       <DependentUpon>AdminInformes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SalirComunidad.aspx.cs">
+      <DependentUpon>SalirComunidad.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
   </ItemGroup>
