@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Contratos y Pagos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+<%@ Page Title="Contratos y Pagos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeFile="ContratosYPagos.aspx.cs" Inherits="ConviAppWeb.ContratosYPagos" %>
     <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div class="dash-tabs">
@@ -41,8 +41,14 @@
                                 <select class="form-input" style="flex:1; min-width:150px;" disabled>
                                     <option>&#127968; Arrendamiento</option>
                                 </select>
-                                <input type="date" class="form-input" style="flex:1; min-width:140px;" disabled />
-                                <input type="date" class="form-input" style="flex:1; min-width:140px;" disabled />
+                                <div style="display:flex; align-items:center; gap:6px;">
+                                    <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Desde:</span>
+                                    <input type="date" class="form-input" style="min-width:140px;" disabled />
+                                </div>
+                                <div style="display:flex; align-items:center; gap:6px;">
+                                    <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Hasta:</span>
+                                    <input type="date" class="form-input" style="min-width:140px;" disabled />
+                                </div>
                                 <input type="number" class="form-input" placeholder="Renta/mes €"
                                     style="flex:1; min-width:120px;" disabled />
                                 <input type="number" class="form-input" placeholder="Fianza €"
@@ -94,10 +100,14 @@
                                 <asp:ListItem Value="temporal">?? Temporal</asp:ListItem>
                                 <asp:ListItem Value="subarriendo">?? Subarriendo</asp:ListItem>
                             </asp:DropDownList>
-                            <asp:TextBox ID="txtFechaInicio" runat="server" CssClass="form-input" TextMode="Date"
-                                style="flex:1; min-width:140px;" />
-                            <asp:TextBox ID="txtFechaFin" runat="server" CssClass="form-input" TextMode="Date"
-                                style="flex:1; min-width:140px;" />
+                            <div style="display:flex; align-items:center; gap:6px;">
+                                <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Desde:</span>
+                                <asp:TextBox ID="txtFechaInicio" runat="server" CssClass="form-input" TextMode="Date" style="min-width:140px;" />
+                            </div>
+                            <div style="display:flex; align-items:center; gap:6px;">
+                                <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Hasta:</span>
+                                <asp:TextBox ID="txtFechaFin" runat="server" CssClass="form-input" TextMode="Date" style="min-width:140px;" />
+                            </div>
                             <asp:TextBox ID="txtRenta" runat="server" CssClass="form-input" placeholder="Renta/mes €"
                                 TextMode="Number" style="flex:1; min-width:120px;" />
                             <asp:TextBox ID="txtFianza" runat="server" CssClass="form-input" placeholder="Fianza €"

@@ -18,19 +18,8 @@ namespace ConviAppWeb
 
             if (!IsPostBack)
             {
-                CargarUsuarios();
                 CargarPisos();
             }
-        }
-
-        private void CargarUsuarios()
-        {
-            var cad = new CADUsuario();
-            var usuarios = cad.ObtenerTodos();
-            ddlPropietarios.DataSource = usuarios;
-            ddlPropietarios.DataTextField = "Nombre";
-            ddlPropietarios.DataValueField = "Id";
-            ddlPropietarios.DataBind();
         }
 
         private void CargarPisos()
@@ -72,8 +61,7 @@ namespace ConviAppWeb
             if (garajes > 0) caracteristicas += string.Format("{0} Garajes, ", garajes);
             if (caracteristicas.EndsWith(", ")) caracteristicas = caracteristicas.Substring(0, caracteristicas.Length - 2);
 
-            int userId = 0;
-            int.TryParse(ddlPropietarios.SelectedValue, out userId);
+            int userId = 0; // Sin propietario específico
 
             // Subida de foto del piso
             string imagenUrl = null;
@@ -113,13 +101,6 @@ namespace ConviAppWeb
 
             if (pisoId > 0)
             {
-                // Unir al propietario directamente a la comunidad
-                if (userId > 0)
-                {
-                    var cadCu = new CADComunidadUsuario();
-                    cadCu.UnirUsuarioAComunidad(pisoId, userId);
-                }
-
                 // Guardar el contrato asociado
                 string contratoUrl = null;
                 if (fuContrato.HasFile)
@@ -183,7 +164,7 @@ namespace ConviAppWeb
             }
         }
 
-        protected void rptPisosPrivados_ItemCommand(object source, System.Web.UI.WebControls.RepeaterCommandEventArgs e)
+        protected void btnExpulsarAdmin_Command(object sender, System.Web.UI.WebControls.CommandEventArgs e)
         {
             if (e.CommandName == "Expulsar")
             {
@@ -202,6 +183,22 @@ namespace ConviAppWeb
                     
                     CargarPisos();
                 }
+            }
+        }
+
+        protected void rptPisosPrivados_ItemCommand(object source, System.Web.UI.WebControls.RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "Borrar")
+            {
+                int pId = Convert.ToInt32(e.CommandArgument);
+                var cadPiso = new CADPiso();
+                cadPiso.BorrarPiso(pId);
+                
+                lblMsg.Text = "Comunidad privada eliminada correctamente.";
+                lblMsg.CssClass = "alert alert-success";
+                lblMsg.Visible = true;
+                
+                CargarPisos();
             }
         }
 

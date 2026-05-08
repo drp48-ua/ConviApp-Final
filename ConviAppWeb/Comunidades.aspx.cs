@@ -164,7 +164,11 @@ namespace ConviAppWeb
                 Session["ComunidadActivaNombre"] = nombre;
                 Response.Redirect("Index.aspx");
             }
-            else if (e.CommandName == "Expulsar")
+        }
+
+        protected void btnExpulsar_Command(object sender, System.Web.UI.WebControls.CommandEventArgs e)
+        {
+            if (e.CommandName == "Expulsar")
             {
                 // Formato CommandArgument: "pisoId_usuarioId"
                 string[] args = e.CommandArgument.ToString().Split('_');

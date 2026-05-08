@@ -61,11 +61,6 @@
 
         <div style="display:flex; gap:20px; margin-bottom:16px; flex-wrap:wrap; background:#f9fafb; padding:16px; border-radius:8px; border:1px solid #e5e7eb;">
             <div style="flex:1; min-width:250px;">
-                <label style="color:var(--text-secondary); font-size:0.85rem; display:block; margin-bottom:6px; font-weight:bold;">👤 Propietario (Usuario asignado)</label>
-                <asp:DropDownList ID="ddlPropietarios" runat="server" CssClass="form-control" style="width:100%; padding:8px; border-radius:6px; border:1px solid #ccc;">
-                </asp:DropDownList>
-            </div>
-            <div style="flex:1; min-width:250px;">
                 <label style="color:var(--text-secondary); font-size:0.85rem; display:block; margin-bottom:6px; font-weight:bold;">📄 Documento Contrato (PDF/Img)</label>
                 <asp:FileUpload ID="fuContrato" runat="server" CssClass="form-control" style="padding:6px; width:100%; background:white; border-radius:6px; border:1px solid #ccc;" />
             </div>
@@ -102,7 +97,7 @@
                             <ItemTemplate>
                                 <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; margin-bottom:4px;">
                                     <span>👤 <%# Eval("Nombre") %> <%# Eval("Apellidos") %></span>
-                                    <asp:LinkButton ID="btnExpulsarAdmin" runat="server" CommandName="Expulsar" 
+                                    <asp:LinkButton ID="btnExpulsarAdmin" runat="server" OnCommand="btnExpulsarAdmin_Command"
                                         CommandArgument='<%# DataBinder.Eval(((RepeaterItem)Container.Parent.Parent).DataItem, "Id") + "_" + Eval("Id") %>' 
                                         style="color:#ef4444; text-decoration:none;" title="Expulsar" OnClientClick="return confirm('¿Seguro que deseas expulsar a este usuario de la comunidad?');">❌</asp:LinkButton>
                                 </div>
@@ -112,6 +107,7 @@
 
                     <div style="display:flex; gap:8px;">
                         <a href="AdminPagos.aspx" class="btn btn-sm" style="background:#f3f4f6; color:#374151; border:1px solid #d1d5db;">Ver Contrato ➔</a>
+                        <asp:LinkButton ID="btnBorrarPrivado" runat="server" CommandName="Borrar" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm" style="background:#ef4444; color:white; text-decoration:none;" OnClientClick="return confirm('¿Seguro que deseas borrar esta comunidad privada entera?');">Borrar</asp:LinkButton>
                     </div>
                 </div>
             </ItemTemplate>
