@@ -49,11 +49,15 @@ namespace ConviAppWeb
             }
 
             int habs = 1; int banos = 1; int cocinas = 1; int garajes = 0; decimal precio = 800;
-            if (int.TryParse(txtHabitaciones.Text, out int tempHabs) && tempHabs > 0) habs = tempHabs;
-            if (int.TryParse(txtBanos.Text, out int tempBanos) && tempBanos > 0) banos = tempBanos;
-            if (int.TryParse(txtCocinas.Text, out int tempCocinas) && tempCocinas > 0) cocinas = tempCocinas;
-            if (int.TryParse(txtGarajes.Text, out int tempGarajes) && tempGarajes >= 0) garajes = tempGarajes;
-            if (decimal.TryParse(txtPrecio.Text, out decimal tempPrecio) && tempPrecio > 0) precio = tempPrecio;
+            
+            int tempHabs, tempBanos, tempCocinas, tempGarajes;
+            decimal tempPrecio;
+
+            if (int.TryParse(txtHabitaciones.Text, out tempHabs) && tempHabs > 0) habs = tempHabs;
+            if (int.TryParse(txtBanos.Text, out tempBanos) && tempBanos > 0) banos = tempBanos;
+            if (int.TryParse(txtCocinas.Text, out tempCocinas) && tempCocinas > 0) cocinas = tempCocinas;
+            if (int.TryParse(txtGarajes.Text, out tempGarajes) && tempGarajes >= 0) garajes = tempGarajes;
+            if (decimal.TryParse(txtPrecio.Text, out tempPrecio) && tempPrecio > 0) precio = tempPrecio;
             
             string caracteristicas = "";
             if (banos > 0) caracteristicas += string.Format("{0} Aseos, ", banos);
