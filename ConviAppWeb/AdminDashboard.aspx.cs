@@ -50,12 +50,9 @@ namespace ConviAppWeb
                     }
 
                     var clientesPorRentabilidad = contratos
-                        .GroupBy(c => c.UserId == 0 ? (string.IsNullOrWhiteSpace(c.Notes) ? "Desconocido" : c.Notes) : c.UserId.ToString())
-                        .Select(g => new { 
-                            Identificador = g.Key, 
-                            UserId = g.First().UserId, 
-                            TotalInvertido = g.Sum(c => c.TotalContractValue()) 
-                        })
+                        .Where(c => c.UserId > 0)
+                        .GroupBy(c => c.UserId)
+                        .Select(g => new { UserId = g.Key, TotalInvertido = g.Sum(c => c.TotalContractValue()) })
                         .OrderByDescending(x => x.TotalInvertido).ToList();
 
                     if (clientesPorRentabilidad.Any())
@@ -66,16 +63,13 @@ namespace ConviAppWeb
                         var uTop = cadU.LeerUsuario(topCliente.UserId);
                         var uBottom = cadU.LeerUsuario(bottomCliente.UserId);
 
-                        string topName = topCliente.UserId == 0 
-                            ? topCliente.Identificador.Replace("Propietario:", "").Trim() 
-                            : (uTop != null ? uTop.Email : $"UID: {topCliente.UserId}");
-                            
-                        string bottomName = bottomCliente.UserId == 0 
-                            ? bottomCliente.Identificador.Replace("Propietario:", "").Trim() 
-                            : (uBottom != null ? uBottom.Email : $"UID: {bottomCliente.UserId}");
-
-                        lblTopCliente.Text = $"{topName} ({topCliente.TotalInvertido:C})";
-                        lblBottomCliente.Text = $"{bottomName} ({bottomCliente.TotalInvertido:C})";
+                        lblTopCliente.Text = uTop != null ? $"{uTop.Email} ({topCliente.TotalInvertido:C})" : $"UID: {topCliente.UserId} ({topCliente.TotalInvertido:C})";
+                        lblBottomCliente.Text = uBottom != null ? $"{uBottom.Email} ({bottomCliente.TotalInvertido:C})" : $"UID: {bottomCliente.UserId} ({bottomCliente.TotalInvertido:C})";
+                    }
+                    else
+                    {
+                        lblTopCliente.Text = "N/A";
+                        lblBottomCliente.Text = "N/A";
                     }
                 }
             }
