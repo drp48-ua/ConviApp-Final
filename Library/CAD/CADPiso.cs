@@ -105,6 +105,23 @@ namespace ConviAppWeb.DataAccess
             return total;
         }
 
+        // COUNT por propietario
+        public int ContarPisosDeUsuario(int usuarioId)
+        {
+            int total = 0;
+            SQLiteConnection c = new SQLiteConnection(constring);
+            try
+            {
+                c.Open();
+                SQLiteCommand com = new SQLiteCommand("SELECT COUNT(*) FROM Piso WHERE propietario_id=@u", c);
+                com.Parameters.AddWithValue("@u", usuarioId);
+                total = Convert.ToInt32(com.ExecuteScalar());
+            }
+            catch (Exception) { }
+            finally { c.Close(); }
+            return total;
+        }
+
         private ENPiso MapRow(SQLiteDataReader dr) { return new ENPiso
         {
             Id                = Convert.ToInt32(dr["id"]),

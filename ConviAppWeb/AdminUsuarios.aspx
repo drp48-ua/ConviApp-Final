@@ -60,7 +60,9 @@
                                         <asp:LinkButton ID="btnGuardarRol" runat="server" CommandName="GuardarRol" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm btn-primary" style="padding:4px 8px; margin-left:4px;">Guardar</asp:LinkButton>
                                     </asp:Panel>
                                 </td>
-                                <td style="padding:12px;">N/A</td>
+                                <td style="padding:12px;">
+                                    <asp:Label ID="lblNumPisos" runat="server"></asp:Label>
+                                </td>
                                 <td style="padding:12px; text-align:right;">
                                     <asp:LinkButton ID="btnEditar" runat="server" CommandName="Editar" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm btn-outline">Editar</asp:LinkButton>
                                     <asp:LinkButton ID="btnEliminar" runat="server" CommandName="Eliminar" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm" style="color:red; background:transparent; border:none; cursor:pointer;" OnClientClick="return confirm('¿Seguro que quieres eliminar este usuario permanentemente?');">❌</asp:LinkButton>

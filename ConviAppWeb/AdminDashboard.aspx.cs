@@ -49,8 +49,13 @@ namespace ConviAppWeb
                         lblTopPiso.Text = piso != null ? $"Piso #{piso.Id} ({topPisoGroup.Count()} contratos)" : $"Piso #{topPisoGroup.Key}";
                     }
 
-                    var clientesPorRentabilidad = contratos.GroupBy(c => c.UserId)
-                        .Select(g => new { UserId = g.Key, TotalInvertido = g.Sum(c => c.TotalContractValue()) })
+                    var clientesPorRentabilidad = contratos
+                        .GroupBy(c => c.UserId == 0 ? (string.IsNullOrWhiteSpace(c.Notes) ? "Desconocido" : c.Notes) : c.UserId.ToString())
+                        .Select(g => new { 
+                            Identificador = g.Key, 
+                            UserId = g.First().UserId, 
+                            TotalInvertido = g.Sum(c => c.TotalContractValue()) 
+                        })
                         .OrderByDescending(x => x.TotalInvertido).ToList();
 
                     if (clientesPorRentabilidad.Any())
@@ -61,8 +66,16 @@ namespace ConviAppWeb
                         var uTop = cadU.LeerUsuario(topCliente.UserId);
                         var uBottom = cadU.LeerUsuario(bottomCliente.UserId);
 
-                        lblTopCliente.Text = uTop != null ? $"{uTop.Email} ({topCliente.TotalInvertido:C})" : $"UID: {topCliente.UserId}";
-                        lblBottomCliente.Text = uBottom != null ? $"{uBottom.Email} ({bottomCliente.TotalInvertido:C})" : $"UID: {bottomCliente.UserId}";
+                        string topName = topCliente.UserId == 0 
+                            ? topCliente.Identificador.Replace("Propietario:", "").Trim() 
+                            : (uTop != null ? uTop.Email : $"UID: {topCliente.UserId}");
+                            
+                        string bottomName = bottomCliente.UserId == 0 
+                            ? bottomCliente.Identificador.Replace("Propietario:", "").Trim() 
+                            : (uBottom != null ? uBottom.Email : $"UID: {bottomCliente.UserId}");
+
+                        lblTopCliente.Text = $"{topName} ({topCliente.TotalInvertido:C})";
+                        lblBottomCliente.Text = $"{bottomName} ({bottomCliente.TotalInvertido:C})";
                     }
                 }
             }

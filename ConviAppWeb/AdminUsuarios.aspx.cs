@@ -76,6 +76,13 @@ namespace ConviAppWeb
                 {
                     ddlRol.SelectedValue = usuario.Rol.Nombre;
                 }
+
+                var lblNumPisos = (System.Web.UI.WebControls.Label)e.Item.FindControl("lblNumPisos");
+                if (lblNumPisos != null)
+                {
+                    var cadP = new CADPiso();
+                    lblNumPisos.Text = cadP.ContarPisosDeUsuario(usuario.Id).ToString();
+                }
             }
         }
     }
