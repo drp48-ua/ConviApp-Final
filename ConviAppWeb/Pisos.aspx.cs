@@ -53,10 +53,10 @@ namespace ConviAppWeb
         {
             if(!string.IsNullOrWhiteSpace(txtDir.Text)) {
                 int habs = 1; int banos = 1; int cocinas = 1; int garajes = 0;
-                int.TryParse(txtHabitaciones.Text, out habs);
-                int.TryParse(txtBanos.Text, out banos);
-                int.TryParse(txtCocinas.Text, out cocinas);
-                int.TryParse(txtGarajes.Text, out garajes);
+                if (int.TryParse(txtHabitaciones.Text, out int tempHabs) && tempHabs > 0) habs = tempHabs;
+                if (int.TryParse(txtBanos.Text, out int tempBanos) && tempBanos > 0) banos = tempBanos;
+                if (int.TryParse(txtCocinas.Text, out int tempCocinas) && tempCocinas > 0) cocinas = tempCocinas;
+                if (int.TryParse(txtGarajes.Text, out int tempGarajes) && tempGarajes >= 0) garajes = tempGarajes;
                 
                 string caracteristicas = "";
                 if (banos > 0) caracteristicas += string.Format("{0} Aseos, ", banos);
