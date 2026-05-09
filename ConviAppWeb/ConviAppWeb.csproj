@@ -307,9 +307,9 @@
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>
-      xcopy /y /d "$(SolutionDir)lib\SQLite\x86\SQLite.Interop.dll" "$(TargetDir)x86\"
-      xcopy /y /d "$(SolutionDir)lib\SQLite\x64\SQLite.Interop.dll" "$(TargetDir)x64\"
-      xcopy /y /d "$(SolutionDir)lib\SQLite\x64\SQLite.Interop.dll" "$(TargetDir)"
+      xcopy /y /d "$(ProjectDir)..\lib\SQLite\x86\SQLite.Interop.dll" "$(TargetDir)x86\"
+      xcopy /y /d "$(ProjectDir)..\lib\SQLite\x64\SQLite.Interop.dll" "$(TargetDir)x64\"
+      xcopy /y /d "$(ProjectDir)..\lib\SQLite\x64\SQLite.Interop.dll" "$(TargetDir)"
     </PostBuildEvent>
   </PropertyGroup>
 </Project>
