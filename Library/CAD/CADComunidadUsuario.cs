@@ -116,7 +116,8 @@ namespace ConviAppWeb.DataAccess
                                 en.PrecioTotal = dr["precio_total"] != DBNull.Value ? Convert.ToDecimal(dr["precio_total"]) : 0;
                                 en.Nombre = dr["nombre"] != DBNull.Value ? dr["nombre"].ToString() : null;
                                 en.PropietarioId = dr["propietario_id"] != DBNull.Value ? Convert.ToInt32(dr["propietario_id"]) : 0;
-                                en.EsPrivado = dr["es_privado"] != DBNull.Value ? Convert.ToInt32(dr["es_privado"]) == 1 : false;
+                                en.EsPrivado = dr.GetSchemaTable().Select("ColumnName = 'es_privado'").Length > 0 && dr["es_privado"] != DBNull.Value && Convert.ToInt32(dr["es_privado"]) == 1;
+                                en.NumeroHabitaciones = dr.GetSchemaTable().Select("ColumnName = 'numero_habitaciones'").Length > 0 && dr["numero_habitaciones"] != DBNull.Value ? Convert.ToInt32(dr["numero_habitaciones"]) : 0;
                                 lista.Add(en);
                             }
                         }
@@ -148,6 +149,11 @@ namespace ConviAppWeb.DataAccess
                                 en.Ciudad = dr["ciudad"] != DBNull.Value ? dr["ciudad"].ToString() : null;
                                 en.CodigoComunidad = dr["codigo_comunidad"] != DBNull.Value ? dr["codigo_comunidad"].ToString() : null;
                                 en.Descripcion = dr["descripcion"] != DBNull.Value ? dr["descripcion"].ToString() : null;
+                                en.PrecioTotal = dr.GetSchemaTable().Select("ColumnName = 'precio_total'").Length > 0 && dr["precio_total"] != DBNull.Value ? Convert.ToDecimal(dr["precio_total"]) : 0;
+                                en.Nombre = dr.GetSchemaTable().Select("ColumnName = 'nombre'").Length > 0 && dr["nombre"] != DBNull.Value ? dr["nombre"].ToString() : null;
+                                en.PropietarioId = dr.GetSchemaTable().Select("ColumnName = 'propietario_id'").Length > 0 && dr["propietario_id"] != DBNull.Value ? Convert.ToInt32(dr["propietario_id"]) : 0;
+                                en.EsPrivado = dr.GetSchemaTable().Select("ColumnName = 'es_privado'").Length > 0 && dr["es_privado"] != DBNull.Value && Convert.ToInt32(dr["es_privado"]) == 1;
+                                en.NumeroHabitaciones = dr.GetSchemaTable().Select("ColumnName = 'numero_habitaciones'").Length > 0 && dr["numero_habitaciones"] != DBNull.Value ? Convert.ToInt32(dr["numero_habitaciones"]) : 0;
                             }
                         }
                     }
