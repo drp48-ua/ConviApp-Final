@@ -141,15 +141,13 @@ namespace ConviAppWeb
             if (e.CommandName == "Entrar")
             {
                 int pisoId = Convert.ToInt32(e.CommandArgument);
-                string nombre = e.CommandArgument.ToString(); // default
+                string nombre = e.CommandArgument.ToString();
 
                 var cadPiso = new CADPiso();
                 var piso = cadPiso.LeerPiso(pisoId);
                 if (piso != null)
                 {
                     nombre = !string.IsNullOrWhiteSpace(piso.Nombre) ? piso.Nombre : piso.Direccion;
-                    
-                    // Lógica de Roles Dinámicos
                     if (piso.EsPrivado)
                     {
                         if (Session["UserRole"] != null && Session["UserRole"].ToString() == "Basico")
@@ -164,26 +162,47 @@ namespace ConviAppWeb
                 Session["ComunidadActivaNombre"] = nombre;
                 Response.Redirect("Index.aspx");
             }
-        }
-
-        protected void btnExpulsar_Command(object sender, System.Web.UI.WebControls.CommandEventArgs e)
-        {
-            if (e.CommandName == "Expulsar")
+            else if (e.CommandName == "Expulsar")
             {
-                // Formato CommandArgument: "pisoId_usuarioId"
                 string[] args = e.CommandArgument.ToString().Split('_');
                 if (args.Length == 2)
                 {
                     int pId = Convert.ToInt32(args[0]);
                     int uId = Convert.ToInt32(args[1]);
-                    
+
                     var cadCu = new CADComunidadUsuario();
-                    cadCu.ExpulsarUsuario(pId, uId);
-                    
-                    lblMsg.Text = "✅ Usuario expulsado de la comunidad.";
-                    lblMsg.CssClass = "alert alert-success";
-                    lblMsg.Visible = true;
-                    
+                    bool exito = cadCu.ExpulsarUsuario(pId, uId);
+
+                    if (exito)
+                    {
+                        // Obtener nombre de la comunidad para la notificacion
+                        var cadPiso = new CADPiso();
+                        var piso = cadPiso.LeerPiso(pId);
+                        string nombreComunidad = piso != null ? (!string.IsNullOrWhiteSpace(piso.Nombre) ? piso.Nombre : piso.Direccion) : "la comunidad";
+
+                        // Enviar notificacion al usuario expulsado
+                        var cadNot = new CADNotificacion();
+                        cadNot.CrearNotificacion(new ENNotificacion
+                        {
+                            Titulo = "Has sido expulsado de una comunidad",
+                            Mensaje = "El administrador de \"" + nombreComunidad + "\" te ha expulsado de la comunidad.",
+                            Tipo = "expulsion",
+                            Leida = false,
+                            FechaCreacion = DateTime.Now,
+                            UsuarioId = uId
+                        });
+
+                        lblMsg.Text = "✅ Usuario expulsado correctamente.";
+                        lblMsg.CssClass = "alert alert-success";
+                        lblMsg.Visible = true;
+                    }
+                    else
+                    {
+                        lblMsg.Text = "❌ No se pudo expulsar al usuario.";
+                        lblMsg.CssClass = "alert alert-danger";
+                        lblMsg.Visible = true;
+                    }
+
                     CargarComunidades();
                 }
             }

@@ -60,8 +60,8 @@
                                                     </div>
                                                     <span><%# Eval("Nombre") %> <%# Eval("Apellidos") %></span>
                                                 </div>
-                                                <asp:LinkButton ID="btnExpulsar" runat="server" OnCommand="btnExpulsar_Command" 
-                                                    CommandArgument='<%# DataBinder.Eval(((RepeaterItem)Container.Parent.Parent).DataItem, "Id") + "_" + Eval("Id") %>' 
+                                                <asp:LinkButton ID="btnExpulsar" runat="server" CommandName="Expulsar" 
+                                                    CommandArgument='<%# DataBinder.Eval(((RepeaterItem)Container.Parent.Parent).DataItem, "Id") + "_" + Eval("Id") %>'
                                                     Visible="false"
                                                     style="color:#ef4444; font-size:1rem; text-decoration:none; transition:transform 0.1s;" 
                                                     onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"

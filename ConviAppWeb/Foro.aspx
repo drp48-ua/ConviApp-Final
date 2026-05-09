@@ -9,6 +9,7 @@
     .foro-sidebar-header h2 { margin:0 0 12px; font-size:1.2rem; color:#111827; }
     .foro-search-box { display:flex; align-items:center; gap:8px; background:#f9fafb; border:1px solid #e5e7eb; border-radius:10px; padding:8px 12px; }
     .foro-search-box input { border:none; background:transparent; outline:none; width:100%; font-size:0.9rem; color:#111827; }
+    .foro-search-box input[type="submit"] { width:auto !important; flex-shrink:0; padding:4px 10px; font-size:0.8rem; }
     .foro-list { flex:1; overflow-y:auto; }
     .foro-section-title { padding: 12px 20px 6px; font-size:0.7rem; font-weight:700; color:#9ca3af; text-transform:uppercase; letter-spacing:.08em; }
     .foro-user-item { display:flex; align-items:center; gap:12px; padding:12px 20px; cursor:pointer; transition:background 0.15s; border-bottom:1px solid #f9fafb; text-decoration:none; }
@@ -50,7 +51,7 @@
                 <div class="foro-search-box">
                     <span>🔍</span>
                     <asp:TextBox ID="txtBuscar" runat="server" placeholder="Buscar por nombre o email..." style="border:none; background:transparent; outline:none; flex:1; min-width:0; font-size:0.9rem;" />
-                    <asp:Button ID="btnBuscar" runat="server" Text="↵" CssClass="btn btn-sm btn-primary" OnClick="BtnBuscar_Click" style="padding:4px 8px; font-size:1rem; border-radius:8px;" />
+                    <asp:Button ID="btnBuscar" runat="server" Text="🔍" CssClass="btn btn-sm btn-primary" OnClick="BtnBuscar_Click" style="padding:4px 8px; font-size:0.85rem; border-radius:8px; flex-shrink:0; width:auto; min-width:0;" />
                 </div>
             </div>
 
