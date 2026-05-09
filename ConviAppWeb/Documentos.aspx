@@ -105,7 +105,6 @@
                                 placeholder="Nombre del documento" style="flex:2; min-width:200px;" />
                             <asp:DropDownList ID="ddlTipo" runat="server" CssClass="form-input"
                                 style="flex:1; min-width:150px;">
-                                <asp:ListItem Value="contrato">&#128196; Contrato</asp:ListItem>
                                 <asp:ListItem Value="recibo">&#129534; Recibo</asp:ListItem>
                                 <asp:ListItem Value="factura">&#129534; Factura</asp:ListItem>
                                 <asp:ListItem Value="dni">&#128195; DNI/NIE</asp:ListItem>

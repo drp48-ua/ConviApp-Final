@@ -143,7 +143,7 @@
                                                 ((decimal)Eval("MonthlyRent")).ToString("C") %>/mes
                                     </div>
                                     <div class="task-meta">
-                                        <%# ((DateTime)Eval("StartDate")).ToShortDateString() %> ? <%#
+                                        <%# ((DateTime)Eval("StartDate")).ToShortDateString() %> → <%#
                                                 ((DateTime)Eval("EndDate")).ToShortDateString() %>
                                     </div>
                                 </div>
@@ -151,10 +151,13 @@
                                     class='status-badge <%# (string)Eval("Status") == "activo" ? "active" : (string)Eval("Status") == "vencido" ? "pending" : "done" %>'>
                                     <%# Eval("Status") %>
                                 </span>
+                                <asp:LinkButton ID="btnVerContrato" runat="server" CommandName="Ver"
+                                    CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm"
+                                    style="background:rgba(59,130,246,0.1); color:#3b82f6; border:1px solid rgba(59,130,246,0.3); margin-right:4px;">👁️</asp:LinkButton>
                                 <asp:LinkButton ID="btnEliminar" runat="server" CommandName="Eliminar"
                                     CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm"
                                     style="background:rgba(248,113,113,0.1); color:#f87171; border:1px solid rgba(248,113,113,0.3);"
-                                    OnClientClick="return confirm('¿Eliminar contrato?')">&#128196;</asp:LinkButton>
+                                    OnClientClick="return confirm('¿Eliminar contrato?')">❌</asp:LinkButton>
                             </li>
                         </ItemTemplate>
                         <FooterTemplate>

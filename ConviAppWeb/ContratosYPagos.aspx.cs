@@ -116,6 +116,22 @@ namespace ConviAppWeb
                 cad.BorrarContrato(new ENContrato { Id = id });
                 CargarDatos();
             }
+            else if (e.CommandName == "Ver")
+            {
+                int contratoId = Convert.ToInt32(e.CommandArgument);
+                var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
+                var cadDoc = new CADDocumento();
+                var docs = cadDoc.ListarPorUsuario(userId);
+                // Find the most recent doc of type "contrato" linked to this property
+                var doc = docs != null ? docs.Find(d => d.Type == "contrato") : null;
+                if (doc != null)
+                    Response.Redirect("VerDocumento.aspx?id=" + doc.Id);
+                else
+                {
+                    lblError.Text = "No hay PDF adjunto para este contrato.";
+                    lblError.Visible = true;
+                }
+            }
         }
     }
 }
