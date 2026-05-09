@@ -77,6 +77,24 @@ namespace ConviAppWeb
                 });
                 
                 if (!result) throw new Exception("Error al insertar el contrato en la base de datos.");
+
+                // Guardar como documento si hay archivo
+                if (fuContratoPDF.HasFile)
+                {
+                    var cadDoc = new CADDocumento();
+                    cadDoc.CrearDocumento(new ENDocumento
+                    {
+                        FileName = fuContratoPDF.FileName,
+                        FileData = fuContratoPDF.FileBytes,
+                        ContentType = fuContratoPDF.PostedFile.ContentType,
+                        FileSize = fuContratoPDF.PostedFile.ContentLength,
+                        Type = "contrato",
+                        Description = "Contrato de " + ddlTipo.SelectedItem.Text + " - Autogenerado",
+                        UploadDate = DateTime.Now,
+                        UserId = userId,
+                        PropertyId = Convert.ToInt32(Session["ComunidadActivaId"])
+                    });
+                }
                 
                 txtFechaInicio.Text = ""; txtFechaFin.Text = ""; txtRenta.Text = ""; txtFianza.Text = "";
                 lblError.Visible = false;

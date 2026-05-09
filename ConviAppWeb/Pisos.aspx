@@ -106,7 +106,7 @@
                 <ItemTemplate>
                     <div onclick="window.location.href='PisoDetail.aspx?id=<%# Eval("Id") %>';" class="listing-card" style="display:flex; flex-direction:column; overflow:hidden; cursor:pointer;">
                         <div class="listing-img" style="position:relative; overflow:hidden; width:100%; height:220px; flex-shrink:0;">
-                            <img src='<%# "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=600&q=80&sig=" + Eval("Id") %>'
+                            <img src='<%# !string.IsNullOrEmpty(Eval("ImagenUrl") as string) ? Eval("ImagenUrl") : "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=600&q=80&sig=" + Eval("Id") %>'
                                 style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;"
                                 alt="Portada Piso" />
                             <span class="listing-badge">

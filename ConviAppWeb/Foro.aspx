@@ -49,8 +49,8 @@
                 <h2>Mensajes</h2>
                 <div class="foro-search-box">
                     <span>🔍</span>
-                    <asp:TextBox ID="txtBuscar" runat="server" placeholder="Buscar por nombre o email..." style="border:none; background:transparent; outline:none; width:100%; font-size:0.9rem;" />
-                    <asp:Button ID="btnBuscar" runat="server" Text="↵" CssClass="btn btn-sm btn-primary" OnClick="BtnBuscar_Click" style="padding:4px 10px; font-size:0.85rem;" />
+                    <asp:TextBox ID="txtBuscar" runat="server" placeholder="Buscar por nombre o email..." style="border:none; background:transparent; outline:none; flex:1; min-width:0; font-size:0.9rem;" />
+                    <asp:Button ID="btnBuscar" runat="server" Text="↵" CssClass="btn btn-sm btn-primary" OnClick="BtnBuscar_Click" style="padding:4px 8px; font-size:1rem; border-radius:8px;" />
                 </div>
             </div>
 

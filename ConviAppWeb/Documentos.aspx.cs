@@ -36,19 +36,23 @@ namespace ConviAppWeb
         protected void BtnSubir_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtNombre.Text)) { lblError.Text = "El nombre es obligatorio."; lblError.Visible = true; return; }
+            if (!fuDocumento.HasFile) { lblError.Text = "Debes seleccionar un archivo."; lblError.Visible = true; return; }
+
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
             var cad = new CADDocumento();
             try
             {
                 bool result = cad.CrearDocumento(new ENDocumento
                 {
-                    FileName = txtNombre.Text.Trim(),
+                    FileName = txtNombre.Text.Trim() + System.IO.Path.GetExtension(fuDocumento.FileName),
                     Type = ddlTipo.SelectedValue,
                     Description = txtDescripcion.Text.Trim(),
                     UploadDate = DateTime.Now,
                     UserId = userId,
-                    FileSize = 0,
-                    ContentType = "application/octet-stream"
+                    PropertyId = Session["ComunidadActivaId"] != null ? (int?)Convert.ToInt32(Session["ComunidadActivaId"]) : null,
+                    FileSize = fuDocumento.PostedFile.ContentLength,
+                    ContentType = fuDocumento.PostedFile.ContentType,
+                    FileData = fuDocumento.FileBytes
                 });
 
                 if (!result) throw new Exception("Error al insertar el documento en la base de datos.");
@@ -72,6 +76,12 @@ namespace ConviAppWeb
                 var cad = new CADDocumento();
                 cad.BorrarDocumento(new ENDocumento { Id = id });
                 CargarDocumentos();
+            }
+            else if (e.CommandName == "Ver")
+            {
+                int id = Convert.ToInt32(e.CommandArgument);
+                // Redirect to a handler or just download it using Response
+                Response.Redirect("VerDocumento.aspx?id=" + id);
             }
         }
     }

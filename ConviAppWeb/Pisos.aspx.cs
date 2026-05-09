@@ -94,7 +94,8 @@ namespace ConviAppWeb
                     Disponible = true,
                     PropietarioId = userId,
                     ImagenUrl = imagenUrl,
-                    Nombre = txtNombre.Text.Trim()
+                    Nombre = txtNombre.Text.Trim(),
+                    CodigoComunidad = GenerarCodigo(8)
                 };
                 var cad = new CADPiso();
                 int nuevoPisoId = cad.CrearPiso(p);
@@ -143,6 +144,14 @@ namespace ConviAppWeb
                     ClientScript.RegisterStartupScript(this.GetType(), "errorUnir", "alert('Ya eres miembro de esta comunidad o hubo un error.');", true);
                 }
             }
+        }
+
+        private string GenerarCodigo(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            return new string(System.Linq.Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

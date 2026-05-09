@@ -36,7 +36,7 @@
                 <asp:Panel ID="pnlDemo" runat="server" Visible="false">
                     <div style="position:relative;">
                         <div class="glass-card" style="margin-bottom:24px; position:relative; pointer-events:none;">
-                            <h4 style="margin-top:0; color:var(--primary-light);">? Nuevo contrato</h4>
+                            <h4 style="margin-top:0; color:var(--primary-light);">➕ Nuevo contrato</h4>
                             <div style="display:flex; gap:12px; flex-wrap:wrap;">
                                 <select class="form-input" style="flex:1; min-width:150px;" disabled>
                                     <option>&#127968; Arrendamiento</option>
@@ -65,7 +65,7 @@
                             <li class="task-item">
                                 <div class="task-info">
                                     <div class="task-name">ARRENDAMIENTO — 850,00 €/mes</div>
-                                    <div class="task-meta">01/01/2026 ? 31/12/2026</div>
+                                    <div class="task-meta">01/01/2026 → 31/12/2026</div>
                                 </div>
                                 <span class="status-badge active">activo</span>
                                 <a href="Registro.aspx" class="btn btn-sm"
@@ -92,13 +92,14 @@
                 <asp:Panel ID="pnlApp" runat="server">
 
                     <div class="glass-card" style="margin-bottom:24px;">
-                        <h4 style="margin-top:0; color:var(--primary-light);">? Nuevo contrato</h4>
+                        <h4 style="margin-top:0; color:var(--primary-light);">➕ Nuevo contrato</h4>
                         <div style="display:flex; gap:12px; flex-wrap:wrap;">
                             <asp:DropDownList ID="ddlTipo" runat="server" CssClass="form-input"
                                 style="flex:1; min-width:150px;">
                                 <asp:ListItem Value="arrendamiento">&#127968; Arrendamiento</asp:ListItem>
-                                <asp:ListItem Value="temporal">?? Temporal</asp:ListItem>
-                                <asp:ListItem Value="subarriendo">?? Subarriendo</asp:ListItem>
+                                <asp:ListItem Value="temporal">📅 Temporal</asp:ListItem>
+                                <asp:ListItem Value="habitacion">🛏️ Habitacion</asp:ListItem>
+                                <asp:ListItem Value="garaje">🚗 Garaje</asp:ListItem>
                             </asp:DropDownList>
                             <div style="display:flex; align-items:center; gap:6px;">
                                 <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Desde:</span>
@@ -112,6 +113,7 @@
                                 TextMode="Number" style="flex:1; min-width:120px;" />
                             <asp:TextBox ID="txtFianza" runat="server" CssClass="form-input" placeholder="Fianza €"
                                 TextMode="Number" style="flex:1; min-width:120px;" />
+                            <asp:FileUpload ID="fuContratoPDF" runat="server" CssClass="form-input" style="flex:1; min-width:200px; padding:6px;" accept=".pdf" />
                             <asp:Button ID="btnCrear" runat="server" Text="Crear" CssClass="btn btn-primary btn-sm"
                                 OnClick="BtnCrear_Click" />
                         </div>

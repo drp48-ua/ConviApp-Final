@@ -54,6 +54,7 @@
     <Content Include="Incidencias.aspx" />
     <Content Include="ContratosYPagos.aspx" />
     <Content Include="Documentos.aspx" />
+    <Content Include="VerDocumento.aspx" />
     <Content Include="Comunidades.aspx" />
     <Content Include="Upgrade.aspx" />
     <Content Include="Contacto.aspx" />
@@ -183,6 +184,10 @@
     </Compile>
     <Compile Include="Documentos.aspx.cs">
       <DependentUpon>Documentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VerDocumento.aspx.cs">
+      <DependentUpon>VerDocumento.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Documentos.aspx.designer.cs">

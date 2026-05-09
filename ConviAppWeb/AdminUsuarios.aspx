@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Gestión de Usuarios" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+<%@ Page Title="Gestión de Usuarios" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="AdminUsuarios.aspx.cs" Inherits="ConviAppWeb.AdminUsuarios" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -38,7 +38,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <asp:Repeater ID="rptUsuarios" runat="server">
+                    <asp:Repeater ID="rptUsuarios" runat="server" OnItemCommand="rptUsuarios_ItemCommand" OnItemDataBound="rptUsuarios_ItemDataBound">
                         <ItemTemplate>
                             <tr style="border-bottom:1px solid #f3f4f6;">
                                 <td style="padding:12px;">
@@ -46,14 +46,25 @@
                                     <small style="color:#6b7280"><%# Eval("Email") %></small>
                                 </td>
                                 <td style="padding:12px;">
-                                    <span class="badge" style="background:#eff6ff; color:#3b82f6; padding:4px 8px; border-radius:12px; font-size:0.75rem;">
-                                        <%# Eval("Rol.Nombre") %>
-                                    </span>
+                                    <asp:Panel ID="pnlViewRole" runat="server">
+                                        <span class="badge" style="background:#eff6ff; color:#3b82f6; padding:4px 8px; border-radius:12px; font-size:0.75rem;">
+                                            <%# Eval("Rol.Nombre") %>
+                                        </span>
+                                    </asp:Panel>
+                                    <asp:Panel ID="pnlEditRole" runat="server" Visible="false">
+                                        <asp:DropDownList ID="ddlRol" runat="server" CssClass="form-input" style="padding:4px; font-size:0.8rem; border-radius:4px;">
+                                            <asp:ListItem Value="Basico">Básico</asp:ListItem>
+                                            <asp:ListItem Value="Profesional">Profesional</asp:ListItem>
+                                            <asp:ListItem Value="Enterprise">Enterprise</asp:ListItem>
+                                            <asp:ListItem Value="Admin">Admin</asp:ListItem>
+                                        </asp:DropDownList>
+                                        <asp:LinkButton ID="btnGuardarRol" runat="server" CommandName="GuardarRol" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm btn-primary" style="padding:4px 8px; margin-left:4px;">Guardar</asp:LinkButton>
+                                    </asp:Panel>
                                 </td>
                                 <td style="padding:12px;">N/A</td>
                                 <td style="padding:12px; text-align:right;">
-                                    <button class="btn btn-sm btn-outline" type="button">Editar</button>
-                                    <button class="btn btn-sm" type="button" style="color:red; background:transparent; border:none; cursor:pointer;">❌</button>
+                                    <asp:LinkButton ID="btnEditar" runat="server" CommandName="Editar" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm btn-outline">Editar</asp:LinkButton>
+                                    <asp:LinkButton ID="btnEliminar" runat="server" CommandName="Eliminar" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm" style="color:red; background:transparent; border:none; cursor:pointer;" OnClientClick="return confirm('¿Seguro que quieres eliminar este usuario permanentemente?');">❌</asp:LinkButton>
                                 </td>
                             </tr>
                         </ItemTemplate>

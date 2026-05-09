@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Documentos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+<%@ Page Title="Documentos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeFile="Documentos.aspx.cs" Inherits="ConviAppWeb.Documentos" %>
     <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div class="dash-tabs">
@@ -113,6 +113,7 @@
                             </asp:DropDownList>
                             <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-input"
                                 placeholder="Descripción (opcional)" style="flex:1; min-width:150px;" />
+                            <asp:FileUpload ID="fuDocumento" runat="server" CssClass="form-input" style="flex:1; min-width:200px; padding:6px;" accept=".pdf,.jpg,.png" />
                             <asp:Button ID="btnSubir" runat="server" Text="Registrar" CssClass="btn btn-primary btn-sm"
                                 OnClick="BtnSubir_Click" />
                         </div>
@@ -140,6 +141,9 @@
                                         DataFormatString="{0:d}" />
                                     <asp:TemplateField HeaderText="Acciones">
                                         <ItemTemplate>
+                                            <asp:LinkButton runat="server" CommandName="Ver"
+                                                CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm"
+                                                style="background:rgba(59,130,246,0.1); color:#3b82f6; border:1px solid rgba(59,130,246,0.3); margin-right:4px;">👁️</asp:LinkButton>
                                             <asp:LinkButton runat="server" CommandName="Eliminar"
                                                 CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm"
                                                 style="background:rgba(248,113,113,0.1); color:#f87171; border:1px solid rgba(248,113,113,0.3);"
