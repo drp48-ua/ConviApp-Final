@@ -1,5 +1,5 @@
 <%@ Page Title="Gestión de Pisos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeFile="AdminPisos.aspx.cs" Inherits="ConviAppWeb.AdminPisos" %>
+    CodeFile="AdminPisos.aspx.cs" Inherits="ConviAppWeb.AdminPisos" ValidateRequest="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
