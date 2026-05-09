@@ -74,6 +74,31 @@ namespace ConviAppWeb.DataAccess
             return lista;
         }
 
+        // READ ALL por comunidad (todos los inquilinos) — excluye contratos (privados)
+        public List<ENDocumento> ListarPorComunidad(int pisoId)
+        {
+            var lista = new List<ENDocumento>();
+            SQLiteConnection c = new SQLiteConnection(constring);
+            try
+            {
+                c.Open();
+                // Trae documentos de todos los usuarios que pertenecen a la comunidad, excluyendo tipo "contrato"
+                SQLiteCommand com = new SQLiteCommand(
+                    "SELECT d.id, d.file_name, d.content_type, d.file_size, d.type, d.description, d.upload_date, d.property_id, d.user_id " +
+                    "FROM Documento d " +
+                    "INNER JOIN ComunidadUsuario cu ON cu.usuario_id = d.user_id " +
+                    "WHERE cu.piso_id = @p AND d.type != 'contrato' " +
+                    "ORDER BY d.upload_date DESC", c);
+                com.Parameters.AddWithValue("@p", pisoId);
+                SQLiteDataReader dr = com.ExecuteReader();
+                while (dr.Read()) lista.Add(MapRow(dr, skipData: true));
+                dr.Close();
+            }
+            catch (Exception) { lista = new List<ENDocumento>(); }
+            finally { c.Close(); }
+            return lista;
+        }
+
         // DELETE — método desconectado
         public bool BorrarDocumento(ENDocumento en)
         {

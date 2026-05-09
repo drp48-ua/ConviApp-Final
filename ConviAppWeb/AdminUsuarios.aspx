@@ -56,7 +56,6 @@
                                             <asp:ListItem Value="Basico">Básico</asp:ListItem>
                                             <asp:ListItem Value="Profesional">Profesional</asp:ListItem>
                                             <asp:ListItem Value="Enterprise">Enterprise</asp:ListItem>
-                                            <asp:ListItem Value="Admin">Admin</asp:ListItem>
                                         </asp:DropDownList>
                                         <asp:LinkButton ID="btnGuardarRol" runat="server" CommandName="GuardarRol" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm btn-primary" style="padding:4px 8px; margin-left:4px;">Guardar</asp:LinkButton>
                                     </asp:Panel>

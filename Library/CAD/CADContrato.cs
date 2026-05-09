@@ -122,6 +122,24 @@ namespace ConviAppWeb.DataAccess
             return borrado;
         }
 
+        // DELETE por comunidad (cascada al borrar piso)
+        public void BorrarContratosPorPiso(int pisoId)
+        {
+            using (SQLiteConnection c = new SQLiteConnection(constring))
+            {
+                try
+                {
+                    c.Open();
+                    using (SQLiteCommand com = new SQLiteCommand("DELETE FROM Contrato WHERE property_id=@p", c))
+                    {
+                        com.Parameters.AddWithValue("@p", pisoId);
+                        com.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception) { }
+            }
+        }
+
         private ENContrato MapRow(SQLiteDataReader dr) { return new ENContrato
         {
             Id             = Convert.ToInt32(dr["id"]),

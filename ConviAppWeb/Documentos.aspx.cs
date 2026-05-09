@@ -18,7 +18,20 @@ namespace ConviAppWeb
         {
             var userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0;
             var cad = new CADDocumento();
-            var lista = cad.ListarPorUsuario(userId);
+
+            // Si hay una comunidad activa, mostrar documentos de todos los miembros (excepto contratos)
+            // Si no, mostrar solo los del usuario actual
+            System.Collections.Generic.List<ENDocumento> lista;
+            if (Session["ComunidadActivaId"] != null)
+            {
+                int pisoId = Convert.ToInt32(Session["ComunidadActivaId"]);
+                lista = cad.ListarPorComunidad(pisoId);
+            }
+            else
+            {
+                lista = cad.ListarPorUsuario(userId);
+            }
+
             if (lista == null || lista.Count == 0)
             {
                 pnlVacio.Visible = true;

@@ -191,10 +191,15 @@ namespace ConviAppWeb
             if (e.CommandName == "Borrar")
             {
                 int pId = Convert.ToInt32(e.CommandArgument);
+
+                // Borrar contratos asociados primero
+                var cadContrato = new CADContrato();
+                cadContrato.BorrarContratosPorPiso(pId);
+
                 var cadPiso = new CADPiso();
                 cadPiso.BorrarPiso(pId);
                 
-                lblMsg.Text = "Comunidad privada eliminada correctamente.";
+                lblMsg.Text = "Comunidad privada y sus contratos eliminados correctamente.";
                 lblMsg.CssClass = "alert alert-success";
                 lblMsg.Visible = true;
                 
