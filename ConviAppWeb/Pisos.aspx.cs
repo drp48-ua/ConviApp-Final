@@ -142,7 +142,7 @@ namespace ConviAppWeb
                     var miembros = cadCu.ObtenerUsuariosDeComunidad(pisoId);
                     if (miembros.Count >= piso.NumeroHabitaciones)
                     {
-                        ClientScript.RegisterStartupScript(this.GetType(), "errorCapacidad", $"alert('La comunidad ya ha alcanzado su límite máximo de inquilinos ({piso.NumeroHabitaciones} habitaciones).');", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "errorCapacidad", string.Format("alert('La comunidad ya ha alcanzado su límite máximo de inquilinos ({0} habitaciones).');", piso.NumeroHabitaciones), true);
                         return;
                     }
                 }

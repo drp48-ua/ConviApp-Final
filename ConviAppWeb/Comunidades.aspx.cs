@@ -116,7 +116,7 @@ namespace ConviAppWeb
                 var miembros = cadCu.ObtenerUsuariosDeComunidad(piso.Id);
                 if (miembros.Count >= piso.NumeroHabitaciones)
                 {
-                    lblMsg.Text = $"⚠️ La comunidad ya ha alcanzado su límite máximo de inquilinos ({piso.NumeroHabitaciones} habitaciones).";
+                    lblMsg.Text = string.Format("⚠️ La comunidad ya ha alcanzado su límite máximo de inquilinos ({0} habitaciones).", piso.NumeroHabitaciones);
                     lblMsg.CssClass = "alert alert-danger";
                     lblMsg.Visible = true;
                     return;
