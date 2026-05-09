@@ -185,6 +185,63 @@ namespace ConviAppWeb
                 Session["ComunidadActivaNombre"] = nombre;
                 Response.Redirect("Index.aspx");
             }
+            else if (e.CommandName == "Abandonar")
+            {
+                int pisoId = Convert.ToInt32(e.CommandArgument);
+                int userId = Convert.ToInt32(Session["UserId"]);
+
+                var cadCu = new CADComunidadUsuario();
+                bool exito = cadCu.ExpulsarUsuario(pisoId, userId);
+
+                if (exito)
+                {
+                    if (Session["ComunidadActivaId"] != null && Convert.ToInt32(Session["ComunidadActivaId"]) == pisoId)
+                    {
+                        Session.Remove("ComunidadActivaId");
+                        Session.Remove("ComunidadActivaNombre");
+                    }
+                    lblMsg.Text = "✅ Has abandonado la comunidad con éxito.";
+                    lblMsg.CssClass = "alert alert-success";
+                    lblMsg.Visible = true;
+                    CargarComunidades();
+                }
+                else
+                {
+                    lblMsg.Text = "❌ Hubo un error al intentar abandonar la comunidad.";
+                    lblMsg.CssClass = "alert alert-danger";
+                    lblMsg.Visible = true;
+                }
+            }
+            else if (e.CommandName == "Borrar")
+            {
+                int pisoId = Convert.ToInt32(e.CommandArgument);
+
+                // Borrar contratos en cascada primero (como en Admin)
+                var cadC = new CADContrato();
+                cadC.BorrarContratosPorPiso(pisoId);
+
+                var cadPiso = new CADPiso();
+                bool exito = cadPiso.BorrarPiso(pisoId);
+
+                if (exito)
+                {
+                    if (Session["ComunidadActivaId"] != null && Convert.ToInt32(Session["ComunidadActivaId"]) == pisoId)
+                    {
+                        Session.Remove("ComunidadActivaId");
+                        Session.Remove("ComunidadActivaNombre");
+                    }
+                    lblMsg.Text = "✅ La comunidad ha sido borrada permanentemente.";
+                    lblMsg.CssClass = "alert alert-success";
+                    lblMsg.Visible = true;
+                    CargarComunidades();
+                }
+                else
+                {
+                    lblMsg.Text = "❌ Hubo un error al borrar la comunidad.";
+                    lblMsg.CssClass = "alert alert-danger";
+                    lblMsg.Visible = true;
+                }
+            }
             else if (e.CommandName == "Expulsar")
             {
                 string[] args = e.CommandArgument.ToString().Split('_');

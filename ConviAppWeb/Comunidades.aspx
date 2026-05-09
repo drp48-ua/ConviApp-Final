@@ -74,10 +74,26 @@
                                 </div>
                             </div>
 
-                            <asp:LinkButton ID="btnEntrar" runat="server" CommandName="Entrar" CommandArgument='<%# Eval("Id") %>' 
-                                CssClass="btn btn-primary" style="width:100%; display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; font-weight:600; border-radius:8px; box-shadow:0 4px 6px -1px rgba(var(--primary-rgb), 0.2);">
-                                Entrar a la comunidad <span style="font-size:1.1rem;">➔</span>
-                            </asp:LinkButton>
+                            <div style="display:flex; gap:8px;">
+                                <asp:LinkButton ID="btnEntrar" runat="server" CommandName="Entrar" CommandArgument='<%# Eval("Id") %>' 
+                                    CssClass="btn btn-primary" style="flex:1.5; display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; font-weight:600; border-radius:8px; box-shadow:0 4px 6px -1px rgba(var(--primary-rgb), 0.2);">
+                                    Entrar <span style="font-size:1.1rem;">➔</span>
+                                </asp:LinkButton>
+                                
+                                <asp:LinkButton ID="btnAbandonar" runat="server" CommandName="Abandonar" CommandArgument='<%# Eval("Id") %>'
+                                    Visible='<%# Convert.ToInt32(Eval("PropietarioId")) != Convert.ToInt32(Session["UserId"]) %>'
+                                    CssClass="btn btn-outline" style="flex:1; display:flex; align-items:center; justify-content:center; padding:12px; font-weight:600; border-radius:8px; color:#ef4444; border-color:#ef4444; background:white;"
+                                    OnClientClick="return confirm('¿Seguro que deseas abandonar esta comunidad?');" ToolTip="Abandonar Comunidad">
+                                    🚪 Salir
+                                </asp:LinkButton>
+
+                                <asp:LinkButton ID="btnBorrar" runat="server" CommandName="Borrar" CommandArgument='<%# Eval("Id") %>'
+                                    Visible='<%# Convert.ToInt32(Eval("PropietarioId")) == Convert.ToInt32(Session["UserId"]) %>'
+                                    CssClass="btn btn-outline" style="flex:1; display:flex; align-items:center; justify-content:center; padding:12px; font-weight:600; border-radius:8px; color:#ef4444; border-color:#ef4444; background:white;"
+                                    OnClientClick="return confirm('¿Seguro que deseas BORRAR toda la comunidad?');" ToolTip="Borrar Comunidad">
+                                    🗑️ Borrar
+                                </asp:LinkButton>
+                            </div>
                         </div>
                     </ItemTemplate>
                 </asp:Repeater>
