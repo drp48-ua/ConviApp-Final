@@ -129,7 +129,7 @@
                     </asp:Panel>
 
                     <h3 id="hContratos" runat="server" visible="false"
-                        style="color:var(--primary-light); margin-bottom:12px;">??
+                        style="color:var(--primary-light); margin-bottom:12px;">&#128196;
                         Mis Contratos</h3>
                     <asp:Repeater ID="rptContratos" runat="server" OnItemCommand="RptContratos_ItemCommand">
                         <HeaderTemplate>
@@ -165,7 +165,7 @@
                         </FooterTemplate>
                     </asp:Repeater>
 
-                    <h3 id="hPagos" runat="server" visible="false" style="color:var(--accent); margin-bottom:12px;">??
+                    <h3 id="hPagos" runat="server" visible="false" style="color:var(--accent); margin-bottom:12px;">&#128200;
                         Historial de
                         Pagos</h3>
                     <asp:Panel ID="pnlPagos" runat="server" Visible="false">

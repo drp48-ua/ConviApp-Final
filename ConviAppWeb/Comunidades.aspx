@@ -51,7 +51,7 @@
                             <div style="margin-bottom:16px; background:#f1f5f9; border-radius:8px; padding:12px; border:1px solid #e2e8f0;">
                                 <h4 style="font-size:0.8rem; font-weight:700; color:#64748b; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.05em;">👥 Integrantes</h4>
                                 <div style="display:flex; flex-direction:column; gap:6px;">
-                                    <asp:Repeater ID="rptMiembros" runat="server">
+                                    <asp:Repeater ID="rptMiembros" runat="server" OnItemCommand="rptMiembros_ItemCommand">
                                         <ItemTemplate>
                                             <div style="display:flex; justify-content:space-between; align-items:center; background:white; padding:6px 10px; border-radius:6px; border:1px solid #e2e8f0; font-size:0.85rem; color:#334155;">
                                                 <div style="display:flex; align-items:center; gap:6px;">

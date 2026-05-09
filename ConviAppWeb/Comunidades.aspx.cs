@@ -243,6 +243,51 @@ namespace ConviAppWeb
             }
         }
 
+        protected void rptMiembros_ItemCommand(object source, System.Web.UI.WebControls.RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "Expulsar")
+            {
+                string[] args = e.CommandArgument.ToString().Split('_');
+                if (args.Length == 2)
+                {
+                    int pId = Convert.ToInt32(args[0]);
+                    int uId = Convert.ToInt32(args[1]);
+
+                    var cadCu = new CADComunidadUsuario();
+                    bool exito = cadCu.ExpulsarUsuario(pId, uId);
+
+                    if (exito)
+                    {
+                        var cadPiso = new CADPiso();
+                        var piso = cadPiso.LeerPiso(pId);
+                        string nombreComunidad = piso != null ? (!string.IsNullOrWhiteSpace(piso.Nombre) ? piso.Nombre : piso.Direccion) : "la comunidad";
+
+                        var cadNot = new CADNotificacion();
+                        cadNot.CrearNotificacion(new ENNotificacion
+                        {
+                            Titulo = "Has sido expulsado de una comunidad",
+                            Mensaje = "El administrador de \"" + nombreComunidad + "\" te ha expulsado de la comunidad.",
+                            Tipo = "expulsion",
+                            Leida = false,
+                            FechaCreacion = DateTime.Now,
+                            UsuarioId = uId
+                        });
+
+                        lblMsg.Text = "✅ Usuario expulsado correctamente.";
+                        lblMsg.CssClass = "alert alert-success";
+                        lblMsg.Visible = true;
+                        CargarComunidades();
+                    }
+                    else
+                    {
+                        lblMsg.Text = "❌ No se pudo expulsar al usuario.";
+                        lblMsg.CssClass = "alert alert-danger";
+                        lblMsg.Visible = true;
+                    }
+                }
+            }
+        }
+
         private string GenerarCodigo(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
