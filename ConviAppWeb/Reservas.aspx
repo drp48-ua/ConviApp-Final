@@ -40,10 +40,14 @@
                             <div style="display:flex; gap:12px; flex-wrap:wrap;">
                                 <input type="text" class="form-input" placeholder="Zona o motivo (ej: Lavadora, Salón)"
                                     style="flex:1; min-width:150px;" disabled />
-                                <input type="datetime-local" class="form-input" style="flex:1; min-width:180px;"
-                                    disabled />
-                                <input type="datetime-local" class="form-input" style="flex:1; min-width:180px;"
-                                    disabled />
+                                <div style="display:flex; align-items:center; gap:6px;">
+                                    <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Desde:</span>
+                                    <input type="datetime-local" class="form-input" style="min-width:180px;" disabled />
+                                </div>
+                                <div style="display:flex; align-items:center; gap:6px;">
+                                    <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Hasta:</span>
+                                    <input type="datetime-local" class="form-input" style="min-width:180px;" disabled />
+                                </div>
                                 <div class="btn btn-primary btn-sm">Reservar</div>
                             </div>
                         </div>
@@ -96,10 +100,14 @@
                         <div style="display:flex; gap:12px; flex-wrap:wrap;">
                             <asp:TextBox ID="txtMotivo" runat="server" CssClass="form-input"
                                 placeholder="Zona o motivo (ej: Lavadora, Salón)" style="flex:1; min-width:150px;" />
-                            <asp:TextBox ID="txtFechaInicio" runat="server" CssClass="form-input"
-                                TextMode="DateTimeLocal" style="flex:1; min-width:180px;" />
-                            <asp:TextBox ID="txtFechaFin" runat="server" CssClass="form-input" TextMode="DateTimeLocal"
-                                style="flex:1; min-width:180px;" />
+                            <div style="display:flex; align-items:center; gap:6px;">
+                                <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Desde:</span>
+                                <asp:TextBox ID="txtFechaInicio" runat="server" CssClass="form-input" TextMode="DateTimeLocal" style="min-width:180px;" />
+                            </div>
+                            <div style="display:flex; align-items:center; gap:6px;">
+                                <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Hasta:</span>
+                                <asp:TextBox ID="txtFechaFin" runat="server" CssClass="form-input" TextMode="DateTimeLocal" style="min-width:180px;" />
+                            </div>
                             <asp:Button ID="btnReservar" runat="server" Text="Reservar"
                                 CssClass="btn btn-primary btn-sm" OnClick="BtnReservar_Click" />
                         </div>

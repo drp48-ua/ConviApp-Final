@@ -66,7 +66,7 @@
                                                     style="color:#ef4444; font-size:1rem; text-decoration:none; transition:transform 0.1s;" 
                                                     onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"
                                                     title="Expulsar usuario" OnClientClick="return confirm('¿Seguro que deseas expulsar a este usuario de la comunidad?');">
-                                                    🗑️
+                                                    ❌
                                                 </asp:LinkButton>
                                             </div>
                                         </ItemTemplate>
