@@ -112,9 +112,32 @@ namespace ConviAppWeb
 
             if (piso != null)
             {
+                // Validación de capacidad máxima
+                var miembros = cadCu.ObtenerUsuariosDeComunidad(piso.Id);
+                if (miembros.Count >= piso.NumeroHabitaciones)
+                {
+                    lblMsg.Text = $"⚠️ La comunidad ya ha alcanzado su límite máximo de inquilinos ({piso.NumeroHabitaciones} habitaciones).";
+                    lblMsg.CssClass = "alert alert-danger";
+                    lblMsg.Visible = true;
+                    return;
+                }
+
                 bool unido = cadCu.UnirUsuarioAComunidad(piso.Id, userId);
                 if (unido)
                 {
+                    // Auto-ascender a Profesional si es comunidad privada y el usuario es Básico
+                    if (piso.EsPrivado && Session["UserRole"] != null && Session["UserRole"].ToString() == "Basico")
+                    {
+                        var cadU = new CADUsuario();
+                        var usuario = cadU.LeerUsuario(userId);
+                        if (usuario != null)
+                        {
+                            usuario.Rol = new ENRol { Nombre = "Profesional" };
+                            cadU.ActualizarUsuario(usuario);
+                            Session["UserRole"] = "Profesional";
+                        }
+                    }
+
                     lblMsg.Text = "✅ ¡Te has unido a la comunidad en " + piso.Direccion + "!";
                     lblMsg.CssClass = "alert alert-success";
                     lblMsg.Visible = true;

@@ -132,7 +132,21 @@ namespace ConviAppWeb
                 int pisoId = Convert.ToInt32(e.CommandArgument);
                 int userId = Convert.ToInt32(Session["UserId"]);
                 
+                var cadPiso = new CADPiso();
+                var piso = cadPiso.LeerPiso(pisoId);
                 var cadCu = new CADComunidadUsuario();
+
+                if (piso != null)
+                {
+                    // Validación de capacidad máxima
+                    var miembros = cadCu.ObtenerUsuariosDeComunidad(pisoId);
+                    if (miembros.Count >= piso.NumeroHabitaciones)
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "errorCapacidad", $"alert('La comunidad ya ha alcanzado su límite máximo de inquilinos ({piso.NumeroHabitaciones} habitaciones).');", true);
+                        return;
+                    }
+                }
+                
                 bool exito = cadCu.UnirUsuarioAComunidad(pisoId, userId);
                 
                 if (exito)
