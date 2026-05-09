@@ -13,6 +13,7 @@ namespace ConviAppWeb
         public DateTime FechaEnvio { get; set; }
         public int EmisorId { get; set; }
         public bool EsMio { get; set; }
+        public string NombreEmisor { get; set; }
     }
 
     public partial class Mensajes : System.Web.UI.Page
@@ -33,9 +34,14 @@ namespace ConviAppWeb
 
             var cad = new CADMensaje();
             var raw = cad.ListarTodos(pisoId).Where(m => m.PisoId == pisoId).ToList();
+            var cadU = new CADUsuario();
             var lista = new List<MensajeVM>();
             foreach (var m in raw)
-                lista.Add(new MensajeVM { Id = m.Id, Contenido = m.Contenido, FechaEnvio = m.FechaEnvio, EmisorId = m.EmisorId, EsMio = m.EmisorId == userId });
+            {
+                var emisor = cadU.LeerUsuario(m.EmisorId);
+                string nombre = emisor != null ? (emisor.Nombre + (string.IsNullOrWhiteSpace(emisor.Apellidos) ? "" : " " + emisor.Apellidos)).Trim() : "Usuario #" + m.EmisorId;
+                lista.Add(new MensajeVM { Id = m.Id, Contenido = m.Contenido, FechaEnvio = m.FechaEnvio, EmisorId = m.EmisorId, EsMio = m.EmisorId == userId, NombreEmisor = nombre });
+            }
 
             if (lista.Count == 0)
             {

@@ -38,6 +38,27 @@ namespace ConviAppWeb.DataAccess
             return creado;
         }
 
+        // READ ALL — contratos de pisos privados únicamente (AdminPagos)
+        public List<ENContrato> ListarDePisosPrivados()
+        {
+            var lista = new List<ENContrato>();
+            SQLiteConnection c = new SQLiteConnection(constring);
+            try
+            {
+                c.Open();
+                string sql = "SELECT ct.* FROM Contrato ct " +
+                             "INNER JOIN Piso p ON p.id = ct.property_id " +
+                             "WHERE p.es_privado = 1 ORDER BY ct.id DESC";
+                SQLiteCommand com = new SQLiteCommand(sql, c);
+                SQLiteDataReader dr = com.ExecuteReader();
+                while (dr.Read()) lista.Add(MapRow(dr));
+                dr.Close();
+            }
+            catch (Exception) { lista = new List<ENContrato>(); }
+            finally { c.Close(); }
+            return lista;
+        }
+
         // READ por id — método conectado
         public ENContrato LeerContrato(int id)
         {

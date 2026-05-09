@@ -23,7 +23,7 @@ namespace ConviAppWeb
         private void CargarContratos()
         {
             var cad = new CADContrato();
-            var contratos = cad.ListarTodos();
+            var contratos = cad.ListarDePisosPrivados();
             
             rptContratos.DataSource = contratos;
             rptContratos.DataBind();

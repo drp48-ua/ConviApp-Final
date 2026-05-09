@@ -123,7 +123,7 @@ namespace ConviAppWeb
                     MonthlyRent = precio,
                     DepositAmount = precio * 2,
                     Status = "activo",
-                    Notes = "Contrato de piso privado generado por administrador.",
+                    Notes = "Propietario: " + (string.IsNullOrWhiteSpace(txtPropietario.Text) ? "Desconocido" : txtPropietario.Text.Trim()),
                     CommissionRate = 5.0m,
                     ArchivoUrl = contratoUrl
                 };

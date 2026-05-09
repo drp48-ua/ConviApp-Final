@@ -28,9 +28,8 @@
                 <asp:Repeater ID="rptContratos" runat="server">
                     <ItemTemplate>
                         <tr style="border-bottom:1px solid #f3f4f6;">
-                            <td style="padding:12px; font-weight:bold;">#<%# Eval("Id") %></td>
-                            <td style="padding:12px;">Piso #<%# Eval("PropertyId") %></td>
-                            <td style="padding:12px;">Usuario #<%# Eval("UserId") %></td>
+                            <td style="padding:12px; font-weight:bold;">Piso #<%# Eval("PropertyId") %></td>
+                            <td style="padding:12px;"><%# !string.IsNullOrEmpty(Eval("Notes").ToString()) && Eval("Notes").ToString().StartsWith("Propietario:") ? Eval("Notes").ToString().Replace("Propietario:","").Trim() : Eval("Notes") %></td>
                             <td style="padding:12px; font-weight:bold; color:var(--success);"><%# Eval("MonthlyRent") %> €</td>
                             <td style="padding:12px;">
                                 <span class="badge" style="background:#d1fae5; color:#065f46; padding:4px 8px; border-radius:12px; font-size:0.75rem;"><%# Eval("Status") %></span>

@@ -106,7 +106,7 @@
                                     <div
                                         style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
                                         <span style="font-weight:700; color:var(--primary-light);">
-                                            <%# (bool)Eval("EsMio") ? "Tú" : "Usuario #" + Eval("EmisorId") %>
+                                            <%# (bool)Eval("EsMio") ? "Tú" : Eval("NombreEmisor") %>
                                         </span>
                                         <span style="color:var(--text-muted); font-size:0.8rem;">
                                             <%# ((DateTime)Eval("FechaEnvio")).ToString("g") %>

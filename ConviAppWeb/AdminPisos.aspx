@@ -23,6 +23,10 @@
             <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Nombre del Piso/Comunidad" style="width:100%; padding:10px; border-radius:6px; border:1px solid #ccc;" />
         </div>
 
+        <div style="margin-bottom:12px;">
+            <asp:TextBox ID="txtPropietario" runat="server" CssClass="form-control" placeholder="Nombre del propietario o empresa contratante" style="width:100%; padding:10px; border-radius:6px; border:1px solid #ccc;" />
+        </div>
+
         <div style="display:flex; gap:12px; margin-bottom:12px; flex-wrap:wrap;">
             <asp:TextBox ID="txtDir" runat="server" CssClass="form-control" placeholder="Dirección completa" style="flex:2; min-width:200px; padding:10px; border-radius:6px; border:1px solid #ccc;" />
             <asp:TextBox ID="txtCiudad" runat="server" CssClass="form-control" placeholder="Ciudad" style="flex:1; min-width:150px; padding:10px; border-radius:6px; border:1px solid #ccc;" />
