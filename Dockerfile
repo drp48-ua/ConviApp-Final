@@ -3,9 +3,9 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # Copia el archivo de la solución y del proyecto, y restaura dependencias
-COPY ["ConviAppVS.sln", "./"]
+COPY ["ConviApp.sln", "./"]
 COPY ["ConviAppWeb/ConviAppWeb.csproj", "ConviAppWeb/"]
-RUN dotnet restore "ConviAppVS.sln"
+RUN dotnet restore "ConviApp.sln"
 
 # Copia el resto del código y compila la publicación
 COPY . .
