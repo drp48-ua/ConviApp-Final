@@ -5,6 +5,7 @@ WORKDIR /app
 # Copia el archivo de la solución y del proyecto, y restaura dependencias
 COPY ["ConviApp.sln", "./"]
 COPY ["ConviAppWeb/ConviAppWeb.csproj", "ConviAppWeb/"]
+COPY ["Library/Library.csproj", "Library/"]
 RUN dotnet restore "ConviApp.sln"
 
 # Copia el resto del código y compila la publicación
